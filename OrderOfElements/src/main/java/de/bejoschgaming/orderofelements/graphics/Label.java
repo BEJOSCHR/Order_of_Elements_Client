@@ -10,6 +10,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JLabel;
 
+import de.bejoschgaming.orderofelements.objects.map.MapData;
+
 
 @SuppressWarnings("serial")
 public class Label extends JLabel {
@@ -24,7 +26,7 @@ public class Label extends JLabel {
 
     public Label() {
 
-		this.setBounds(0, 0, 1200, 800);
+		this.setBounds(0, 0, GraphicsHandler.width, GraphicsHandler.height);
 		this.setVisible(true);
 		GraphicsHandler.frame.add(this, BorderLayout.CENTER);
 
@@ -36,22 +38,21 @@ public class Label extends JLabel {
 		// MAX FPS GRENZE SCHAFFEN
 		long now = System.currentTimeMillis();
 		try {
-			if (nextRepaintDelay > now) {
+			if(nextRepaintDelay > now) {
 				Thread.sleep(nextRepaintDelay - now);
 		    }
 		    nextRepaintDelay = now + 1000 / (maxFPS - 41);
-		} catch (InterruptedException e) {
-		}
+		}catch (InterruptedException e) {}
 		
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
-		
+		MapData.map.draw(g);
 		
 		// DRAW FPS
-		if (showFPS == true) {
-		    g.setColor(Color.DARK_GRAY);
+		if(showFPS == true) {
+		    g.setColor(Color.WHITE);
 		    g.setFont(new Font("Arial", Font.BOLD, (int) (12)));
 		    g.drawString("" + getCurrentFPSValue(), 0 + 2, 0 + 13);
 		}

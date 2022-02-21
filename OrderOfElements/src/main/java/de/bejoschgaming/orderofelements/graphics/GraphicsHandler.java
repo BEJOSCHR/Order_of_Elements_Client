@@ -1,5 +1,9 @@
 package de.bejoschgaming.orderofelements.graphics;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.JFrame;
 
 public class GraphicsHandler {
@@ -49,6 +53,29 @@ public class GraphicsHandler {
 
 //		ConsoleHandler.print("Initialised Visuals!", MessageType.BACKEND);
 
-	    }
+	}
+	
+	/**
+	 * Allgemeine Methode um einen beliebigen Text mit Parametern relativ zu einem
+	 * Punkt (x,y) mittig darzustellen
+	 * 
+	 * @param g,        das Graphics object
+	 * @param color,    die Textfarbe
+	 * @param textSize, die Textgr��e
+	 * @param text,     der eigentliche Text
+	 * @param x,        die X-Koordinate (Links-Rechts-Verschiebung) zu der der Text
+	 *                  mittig dargestellt wird
+	 * @param y,        die Y-Koordinate (Oben-Unten-Verschiebung) zu der der Text
+	 *                  mittig dargestellt wird
+	 */
+	public static void drawCentralisedText(Graphics g, Color color, int textSize, String text, int x, int y) {
+	
+		g.setColor(color);
+		g.setFont(new Font("Arial", Font.BOLD, textSize));
+		int width = g.getFontMetrics().stringWidth(" "+text);
+		int height = g.getFontMetrics().getHeight() * 2 / 3;
+		g.drawString(" "+text, x - width / 2, y + height / 2);
+	
+	}
 	
 }

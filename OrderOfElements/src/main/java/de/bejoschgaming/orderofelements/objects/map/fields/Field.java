@@ -28,12 +28,15 @@ public class Field {
 	}
 	
 	public void draw(Graphics g) {
+		this.draw(g, Color.BLACK);
+	}
+	public void draw(Graphics g, Color color) {
 		
 		//This size is the length of one part of the 6-Eck as well as the distance from the center to each point
 		int masterLength = MapData.FIELD_SIZE;
 		
-		int centerX = this.x * masterLength;
-		int centerY = this.y * (int) (masterLength*3.0/2.0);
+		int centerX = getCenterX();
+		int centerY = getCenterY();
 		
 		//Start Top-Center Point then to the right in order
 		int p1_x = centerX, p1_y = centerY-masterLength;
@@ -51,7 +54,7 @@ public class Field {
 		g.setColor(FieldType.getColor(this.type));
 		g.fillPolygon(polygon);
 		
-		g.setColor(Color.BLACK);
+		g.setColor(color);
 		g.drawPolygon(polygon);
 		
 		//MACH WÜRFEL DRAUß:
@@ -63,7 +66,9 @@ public class Field {
 //		g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
 		
 		//CORDS
-//		GraphicsHandler.drawCentralisedText(g, Color.WHITE, 11, this.x+":"+this.y, p4_x, p4_y-12);
+		if(this.isMoveable() == true) {
+//			GraphicsHandler.drawCentralisedText(g, Color.WHITE, 11, this.x+":"+this.y, p4_x, p4_y-12);
+		}
 		
 	}
 	
@@ -72,6 +77,12 @@ public class Field {
 	}
 	public int getY() {
 		return y;
+	}
+	public int getCenterX() {
+		return this.x * MapData.FIELD_SIZE;
+	}
+	public int getCenterY() {
+		return this.y * (int) (MapData.FIELD_SIZE*3.0/2.0);
 	}
 	public FieldType getType() {
 		return type;

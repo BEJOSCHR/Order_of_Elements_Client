@@ -23,7 +23,7 @@ public enum FieldType {
 		case DEFAULT:
 			return Color.LIGHT_GRAY;
 		case FIRE:
-			return Color.DARK_GRAY;
+			return Color.RED;
 		case EARTH:
 			return new Color(101, 67, 48);
 		case OBSTRUCTION:

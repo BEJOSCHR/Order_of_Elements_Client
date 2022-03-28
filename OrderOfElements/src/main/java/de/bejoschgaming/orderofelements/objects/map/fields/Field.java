@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
+import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class Field {
@@ -63,11 +64,11 @@ public class Field {
 //		g.drawLine(p4_x, p4_y, centerX, centerY);
 		
 		//MITTELPUNKT
-//		g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
+		g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
 		
 		//CORDS
 		if(this.isMoveable() == true) {
-//			GraphicsHandler.drawCentralisedText(g, Color.WHITE, 11, this.x+":"+this.y, p4_x, p4_y-12);
+			GraphicsHandler.drawCentralisedText(g, Color.WHITE, 11, this.x+":"+this.y, p4_x, p4_y-12);
 		}
 		
 	}

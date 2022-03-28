@@ -4,7 +4,7 @@ import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.objects.map.Map;
 import de.bejoschgaming.orderofelements.objects.map.MapData;
 
-public class OOE_Main {
+public class OOE_Main_Client {
 	
 	//BENNI KANN COMMITEN !!!
 	

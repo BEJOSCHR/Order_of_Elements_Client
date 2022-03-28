@@ -48,7 +48,11 @@ public class Label extends JLabel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
-		MapData.map.draw(g);
+		//CONTENT
+		
+		if(MapData.map != null) {
+			MapData.map.draw(g);
+		}
 		
 		// DRAW FPS
 		if(showFPS == true) {

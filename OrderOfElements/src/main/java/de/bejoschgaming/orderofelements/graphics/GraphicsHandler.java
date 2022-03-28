@@ -6,6 +6,11 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
+import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
+import de.bejoschgaming.orderofelements.graphics.handler.WindowHandler;
+import de.bejoschgaming.orderofelements.objects.map.MapData;
+
 public class GraphicsHandler {
 
 	public static JFrame frame = null;
@@ -25,11 +30,11 @@ public class GraphicsHandler {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-//		frame.addKeyListener(new KeyHandler());
-//		frame.addMouseListener(new MouseHandler());
-//		frame.addMouseMotionListener(new MouseHandler());
-//		frame.addMouseWheelListener(new MouseHandler());
-//		frame.addWindowListener(new WindowHandler());
+		frame.addKeyListener(new KeyHandler());
+		frame.addMouseListener(new MouseHandler());
+		frame.addMouseMotionListener(new MouseHandler());
+		frame.addMouseWheelListener(new MouseHandler());
+		frame.addWindowListener(new WindowHandler());
 
 //		try {
 //		    frame.setIconImage(ImageIO.read(BomberfrauMain.class.getClassLoader()
@@ -39,13 +44,13 @@ public class GraphicsHandler {
 //		}
 
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		frame.setSize(1920, 1080);
+//		frame.setSize(1280, 720);
 		
 		width = frame.getWidth();
 		height = frame.getHeight();
 
 		// TODO CALCULATE DIMENSIONS RELATIVE TO WIDTH AND HEIGHT
-//		GameData.FIELD_DIMENSION = (int) (height - GameData.MAP_SIDE_BORDER) / GameData.MAP_DIMENSION;
+		MapData.FIELD_SIZE = (int) (width/MapData.MAP_WIDTH);
 		label = new Label();
 		label.requestFocus();
 

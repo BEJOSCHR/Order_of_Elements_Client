@@ -5,7 +5,9 @@ import de.bejoschgaming.orderofelements.objects.map.Map;
 import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class OOE_Main {
-
+	
+	//BENNI KANN COMMITEN !!!
+	
 	public static void main(String[] args) {
 		
 		System.out.println("Starting Order of Elements - OOE");

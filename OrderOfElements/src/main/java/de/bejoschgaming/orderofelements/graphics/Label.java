@@ -7,9 +7,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ConcurrentModificationException;
 
 import javax.swing.JLabel;
 
+import de.bejoschgaming.orderofelements.maa.MouseActionArea;
+import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
 import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 
@@ -52,6 +55,16 @@ public class Label extends JLabel {
 		
 		if(MapData.map != null) {
 			MapData.map.draw(g);
+		}
+		
+		// MAA
+		try {
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv()) {
+					maa.draw(g);
+					}
+				}
+			} catch (ConcurrentModificationException error) {
 		}
 		
 		// DRAW FPS

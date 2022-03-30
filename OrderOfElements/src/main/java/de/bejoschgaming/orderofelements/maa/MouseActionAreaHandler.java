@@ -25,8 +25,8 @@ public class MouseActionAreaHandler {
 		// Hier entweder einzelne MAA Objekte erstellen oder entsprechende Methoden
 		// jeweiliger Module aufrufen.
 
-		getMAAs().add(new MouseActionArea(50, 50, 20, 20, MouseActionAreaType.MAA_TEST, "TEST", 20, Color.BLACK,
-				Color.YELLOW));
+		//getMAAs().add(new MouseActionArea(40, 40, 20, 20, MouseActionAreaType.MAA_TEST, "TEST", 20, Color.BLACK,
+		//		Color.YELLOW));
 
 	}
 

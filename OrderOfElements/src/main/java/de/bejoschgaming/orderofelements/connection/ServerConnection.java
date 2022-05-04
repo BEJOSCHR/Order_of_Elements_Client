@@ -20,8 +20,12 @@ public class ServerConnection {
 	private static int maxConnectionTries = 3;
 	
 	private static NioSocketConnector socketConnector;
-	public static IoSession serverConnection = null;
+	private static IoSession serverConnection = null;
 	public static boolean connectedToServer = false;
+	
+	public static final String packetDivider = "_:_";
+	
+//	https://mina.apache.org/mina-project/userguide/ch2-basics/ch2.2-sample-tcp-server.html
 	
 	public static void connectToServer() {
 		
@@ -42,7 +46,7 @@ public class ServerConnection {
 				break;
 			}catch (RuntimeIoException error) {
 //				error.printStackTrace();
-				ConsoleHandler.printMessageInConsole("Connecting to server failed! (Try: "+tries+"/"+maxConnectionTries+")", true);
+				ConsoleHandler.printMessageInConsole("Connecting to server failed! (Try: "+tries+"/"+maxConnectionTries+") [\"+error.getMessage()+\"]", true);
 				try {
 					Thread.sleep(1000*5);
 				} catch (InterruptedException error1) {

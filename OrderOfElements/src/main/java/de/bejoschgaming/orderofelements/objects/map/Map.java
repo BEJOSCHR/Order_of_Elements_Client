@@ -68,7 +68,6 @@ public class Map {
 		
 		for(Field field : this.fields) {
 			double distanceToCoords = Math.sqrt( Math.pow(field.getCenterX()-x, 2) + Math.pow(field.getCenterY()-y, 2) );
-			System.out.println(distanceToCoords+" vs "+closestDistance);
 			if(distanceToCoords < closestDistance) {
 				closestDistance = distanceToCoords;
 				closestField = field;

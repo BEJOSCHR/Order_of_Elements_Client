@@ -78,14 +78,13 @@ public class MouseActionArea {
 		else
 			this.relHeight = relHeight;
 
-		this.refreshPosition();
-
 		this.type = type;
 		this.displayText = displayText;
-		// TODO Textgroesse an Aufloesung aendern
 		this.textSize = textSize;
 		this.standardColor = standardColor;
 		this.hoverColor = hoverColor;
+		
+		this.refreshPosition();
 
 		// SICHERSTELLEN, DASS KEINE NEBENLAEUFIGE FEHLER DAS HINZUFUEGEN VERHINDERN
 		while (!MouseActionAreaHandler.getMAAs().contains(this)) {
@@ -101,11 +100,20 @@ public class MouseActionArea {
 	 * und der Bildschirmaufloesung.
 	 */
 	public void refreshPosition() {
+		// TODO: Ueberarbeiten
+		if (GraphicsHandler.frame.getWidth() > GraphicsHandler.frame.getHeight()) {
+			x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+			y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+			width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+			height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		} else {
+			x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+			y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+			width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+			height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		}
 
-		x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-		width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		
 		// TODO Textgroesse auffrischen
 	}
 
@@ -230,6 +238,12 @@ public class MouseActionArea {
 		}
 	}
 
+	// SETTER
+	
+	public void setStandardColor(Color c) {
+		standardColor = c;
+	}
+	
 	// GETTER
 
 	public int getX() {

@@ -18,7 +18,7 @@ public class OOE_Main_Client {
 		MouseActionAreaHandler.initMAAs();
 		
 		System.out.println("FieldSize: "+MapData.FIELD_SIZE);
-		MapData.map = new Map();
+//		MapData.map = new Map();
 		
 	}
 

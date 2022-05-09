@@ -19,10 +19,11 @@ import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 public class MouseActionArea {
 
 	// Variablen
-	private int x, y, width, height, relX, relY, relWidth, relHeight, textSize;
+	private int x, y, width, height, relX, relY, relWidth, relHeight, textSize, relTextSize;
 	private MouseActionAreaType type;
 	private String displayText;
 	private Color standardColor, hoverColor;
+	private boolean showBox;
 
 	/**
 	 * Konstruktor fuer MouseActionArea. Erstellt ein MAA Objekt.
@@ -41,14 +42,17 @@ public class MouseActionArea {
 	 *                      Objekts.
 	 * @param displayText   - String - Text, welcher in dem MAA angezeigt werden
 	 *                      soll.
-	 * @param textSize      - int - Schriftgroesse des Textes
+	 * @param relTextSize   - int - Schriftgroesse des Textes relativ zur
+	 *                      Bildschirmaufloesung.
 	 * @param standardColor - Color - Farbe der MAA, welche standardmaessig zu sehen
 	 *                      ist.
 	 * @param hoverColor    - Color - Farbe der MAA, welche zu sehen ist, wenn die
 	 *                      Maus ueber das MAA schwebt.
+	 * @param showBox       - Boolean - Bestimmt, ob das Standard-Rechteck der MAA
+	 *                      angezeigt werden soll.
 	 */
 	public MouseActionArea(int relX, int relY, int relWidth, int relHeight, MouseActionAreaType type,
-			String displayText, int textSize, Color standardColor, Color hoverColor) {
+			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox) {
 
 		if (relX < 0)
 			this.relX = 0;
@@ -80,10 +84,11 @@ public class MouseActionArea {
 
 		this.type = type;
 		this.displayText = displayText;
-		this.textSize = textSize;
+		this.relTextSize = relTextSize;
 		this.standardColor = standardColor;
 		this.hoverColor = hoverColor;
-		
+		this.showBox = showBox;
+
 		this.refreshPosition();
 
 		// SICHERSTELLEN, DASS KEINE NEBENLAEUFIGE FEHLER DAS HINZUFUEGEN VERHINDERN
@@ -100,21 +105,12 @@ public class MouseActionArea {
 	 * und der Bildschirmaufloesung.
 	 */
 	public void refreshPosition() {
-		// TODO: Ueberarbeiten
-		if (GraphicsHandler.frame.getWidth() > GraphicsHandler.frame.getHeight()) {
-			x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-			y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-			width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-			height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		} else {
-			x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-			y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-			width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-			height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-		}
+		x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
 
-		
-		// TODO Textgroesse auffrischen
+		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.frame.getHeight() + 0.5);
 	}
 
 	/**
@@ -204,11 +200,13 @@ public class MouseActionArea {
 
 		if (isHovered()) {
 			g.setColor(hoverColor);
-			g.drawRect(x, y, width, height);
+			if (showBox)
+				g.drawRect(x, y, width, height);
 			GraphicsHandler.drawCentralisedText(g, hoverColor, textSize, displayText, x + width / 2, y + height / 2);
 		} else {
 			g.setColor(standardColor);
-			g.drawRect(x, y, width, height);
+			if (showBox)
+				g.drawRect(x, y, width, height);
 			GraphicsHandler.drawCentralisedText(g, standardColor, textSize, displayText, x + width / 2, y + height / 2);
 		}
 		drawCustomParts(g);
@@ -239,11 +237,11 @@ public class MouseActionArea {
 	}
 
 	// SETTER
-	
+
 	public void setStandardColor(Color c) {
 		standardColor = c;
 	}
-	
+
 	// GETTER
 
 	public int getX() {
@@ -280,6 +278,10 @@ public class MouseActionArea {
 
 	public int getTextSize() {
 		return textSize;
+	}
+
+	public int getRelTextSize() {
+		return relTextSize;
 	}
 
 	public MouseActionAreaType getType() {

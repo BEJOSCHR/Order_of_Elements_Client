@@ -27,30 +27,6 @@ public class MouseActionAreaHandler {
 		// Hier entweder einzelne MAA Objekte erstellen oder entsprechende Methoden
 		// jeweiliger Module aufrufen.
 
-		MouseActionArea button1 = new MouseActionArea(20, 20, 10, 10, MouseActionAreaType.MAA_TEST, "1080p", 30,
-				Color.BLACK, Color.RED) {
-			@Override
-			public void performAction_LEFT_RELEASE() {
-				GraphicsHandler.width = 1920;
-				GraphicsHandler.height = 1080;
-				GraphicsHandler.frame.setSize(GraphicsHandler.width, GraphicsHandler.height);
-				MouseActionAreaHandler.refreshAllPositions();
-				GraphicsHandler.label.repaint();
-			}
-		};
-		MouseActionArea button2 = new MouseActionArea(60, 20, 10, 10, MouseActionAreaType.MAA_TEST, "720p", 30,
-				Color.BLACK, Color.RED) {
-			@Override
-			public void performAction_LEFT_RELEASE() {
-				GraphicsHandler.width = 1280;
-				GraphicsHandler.height = 720;
-				GraphicsHandler.frame.setSize(GraphicsHandler.width, GraphicsHandler.height);
-				MouseActionAreaHandler.refreshAllPositions();
-				GraphicsHandler.label.repaint();
-			}
-		};
-		mouseActionAreas.add(button1);
-		mouseActionAreas.add(button2);
 	}
 
 	/**

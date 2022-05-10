@@ -9,11 +9,8 @@
  */
 package de.bejoschgaming.orderofelements.maa;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-
-import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 
 public class MouseActionAreaHandler {
 

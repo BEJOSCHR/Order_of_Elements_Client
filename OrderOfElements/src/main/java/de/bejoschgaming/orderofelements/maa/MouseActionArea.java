@@ -91,6 +91,8 @@ public class MouseActionArea {
 
 		this.refreshPosition();
 
+		MouseActionAreaHandler.getMAAs().add(this);
+
 		// SICHERSTELLEN, DASS KEINE NEBENLAEUFIGE FEHLER DAS HINZUFUEGEN VERHINDERN
 		while (!MouseActionAreaHandler.getMAAs().contains(this)) {
 			try {
@@ -226,6 +228,8 @@ public class MouseActionArea {
 	 * Loescht diese MAA.
 	 **/
 	public void remove() {
+
+		MouseActionAreaHandler.getMAAs().remove(this);
 
 		// SICHERSTELLEN, DASS KEINE NEBENLAEUFIGE FEHLER DAS LOESCHEN VERHINDERN
 		while (MouseActionAreaHandler.getMAAs().contains(this)) {

@@ -9,7 +9,6 @@
  */
 package de.bejoschgaming.orderofelements.maa;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +23,6 @@ public class MouseActionAreaHandler {
 
 		// Hier entweder einzelne MAA Objekte erstellen oder entsprechende Methoden
 		// jeweiliger Module aufrufen.
-
-		//getMAAs().add(new MouseActionArea(40, 40, 20, 20, MouseActionAreaType.MAA_TEST, "TEST", 20, Color.BLACK,
-		//		Color.YELLOW));
 
 	}
 
@@ -46,6 +42,18 @@ public class MouseActionAreaHandler {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Aktualisiert die Position aller MAAs, die sich in der Liste mouseActionAreas
+	 * befinden, mit Hilfe der Daten zur relativen Position und der
+	 * Bildschirmaufloesung.
+	 */
+	public static void refreshAllPositions() {
+
+		for (MouseActionArea i : mouseActionAreas) {
+			i.refreshPosition();
+		}
 	}
 
 	// GETTER

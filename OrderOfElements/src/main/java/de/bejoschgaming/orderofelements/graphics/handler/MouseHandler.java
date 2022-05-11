@@ -5,7 +5,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import de.bejoschgaming.orderofelements.maa.MouseActionArea;
+import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
 import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener {
@@ -50,14 +54,58 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		int buttonCode = e.getButton();
+		if (buttonCode == MouseEvent.BUTTON1) {
+			// LEFT
+			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isHovered()) {
+					clickedMAAs.add(maa);
+				}
+			}
+			for (MouseActionArea clickedMAA : clickedMAAs) {
+				clickedMAA.performAction_LEFT_PRESS();
+			}
+		} else if (buttonCode == MouseEvent.BUTTON3) {
+			// RIGHT
+			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isHovered()) {
+					clickedMAAs.add(maa);
+				}
+			}
+			for (MouseActionArea clickedMAA : clickedMAAs) {
+				clickedMAA.performAction_RIGHT_PRESS();
+			}
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		int buttonCode = e.getButton();
+		if (buttonCode == MouseEvent.BUTTON1) {
+			// LEFT
+			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isHovered()) {
+					clickedMAAs.add(maa);
+				}
+			}
+			for (MouseActionArea clickedMAA : clickedMAAs) {
+				clickedMAA.performAction_LEFT_RELEASE();
+			}
+		} else if (buttonCode == MouseEvent.BUTTON3) {
+			// RIGHT
+			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isHovered()) {
+					clickedMAAs.add(maa);
+				}
+			}
+			for (MouseActionArea clickedMAA : clickedMAAs) {
+				clickedMAA.performAction_RIGHT_RELEASE();
+			}
+		}
 	}
 
 	@Override

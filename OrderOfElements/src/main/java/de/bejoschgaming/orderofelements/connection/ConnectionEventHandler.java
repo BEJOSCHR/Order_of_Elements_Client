@@ -34,9 +34,12 @@ public class ConnectionEventHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object messageReceived) throws Exception {
         
-    	String message = messageReceived.toString();
+    	String rawMessage = messageReceived.toString();
+    	String[] splitMessage = rawMessage.split(ServerConnection.packetDivider);
+        int signal = Integer.parseInt(splitMessage[0]);
+        String message = splitMessage[1];
         
-    	ConsoleHandler.printMessageInConsole("Message received: "+message, true);
+        ServerConnection.handlePacketFromServer(signal, message);
         
     }
     

@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
+import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.objects.map.Map;
 import de.bejoschgaming.orderofelements.objects.map.MapData;
@@ -14,6 +15,8 @@ public class OOE_Main_Client {
 	public static void main(String[] args) {
 		
 		ConsoleHandler.printMessageInConsole("Starting OrderOfElements_Client [OOE_C]", true);
+		
+		FileHandler.firstWrite();
 		
 		ConsoleHandler.startUserInputScanner();
 		

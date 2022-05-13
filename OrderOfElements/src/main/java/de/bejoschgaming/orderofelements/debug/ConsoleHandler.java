@@ -6,7 +6,9 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
+import de.bejoschgaming.orderofelements.profile.ClientData;
 
 public class ConsoleHandler {
 
@@ -85,32 +87,14 @@ public class ConsoleHandler {
 							case "/help":
 								sendCommand_help(inputs);
 								break;
-							/*case "/game":
-								sendCommand_game(inputs);
-								break;
-							case "/games":
-								sendCommand_games(inputs);
-								break;
-							case "/player":
-								sendCommand_player(inputs);
-								break;
-							case "/players":
-								sendCommand_players(inputs);
-								break;
-							case "/groups":
-								sendCommand_groups(inputs);
-								break;
 							case "/packets":
 								sendCommand_packets(inputs);
 								break;
 							case "/overview":
 								sendCommand_overview(inputs);
 								break;
-							case "/update":
-								sendCommand_update(inputs);
-								break;*/
-							case "/stop":
-								sendCommand_stop(inputs);
+							case "/exit":
+								sendCommand_exit(inputs);
 								break;
 							default:
 								printMessageInConsole("Unknown input! Use '/help' for details...", true);
@@ -162,19 +146,32 @@ public class ConsoleHandler {
 	private static void sendCommand_help(List<String> inputs) {
 		
 		printMessageInConsole("Choose one of these commands:", true);
-		/*printMessageInConsole("'/game [id] ' - Join the game session so you see the log of the game", true);
-		printMessageInConsole("'/games [quantity] ' - Shows the list of running games", true);
-		printMessageInConsole("'/player [id|name] ' - Gives info about the player", true);
-		printMessageInConsole("'/players [quantity] ' - Shows the list of online player", true);
-		printMessageInConsole("'/groups [quantity] ' - Shows the list of active groups", true);
 		printMessageInConsole("'/packets ' - Join the packet session so you see the traffic of packets", true);
 		printMessageInConsole("'/overview ' - Gives a general overview about everything interesting", true);
-		printMessageInConsole("'/update [units|upgrades] ' - Reloads the units or the upgrades from the DB", true); */
-		printMessageInConsole("'/stop ' - Stoppes the whole server", true);
+		printMessageInConsole("'/exit ' - Stoppes the whole program", true);
 		
 	}
 	
-	private static void sendCommand_stop(List<String> inputs) {
+	private static void sendCommand_overview(List<String> inputs) {
+		
+		printMessageInConsole("Running OrderOfElements-Client", true);
+		printMessageInConsole("Logged in as "+ClientData.getClientID()+" - "+ClientData.getClientName(), true);
+		printMessageInConsole("Connected to server: "+ServerConnection.connectedToServer, true);
+		printMessageInConsole("Send packets: "+ServerConnection.sendPackets.size(), true);
+		printMessageInConsole("Running game: "+-1, true);
+		
+	}
+	
+	private static void sendCommand_packets(List<String> inputs) {
+		
+		printBlankLineInConsole();
+		printMessageInConsole("Joined packets session", true);
+		printBlankLineInConsole();
+		focusDebugID = 0;
+		
+	}
+	
+	private static void sendCommand_exit(List<String> inputs) {
 		
 		OOE_Main_Client.terminateProgramm();
 		

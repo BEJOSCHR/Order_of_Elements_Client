@@ -30,14 +30,14 @@ public class MouseActionArea {
 	 * 
 	 * @param relX          - int - Startpunkt auf der x-Achse relativ zur
 	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      100 an.
+	 *                      10000 an.
 	 * @param relY          - int - Startpunkt auf der y-Achse relativ zur
 	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      100 an.
+	 *                      10000 an.
 	 * @param relWidth      - int - Breite der MAA relativ zur Bildschirmaufloesung.
-	 *                      Nimmt einen Wert zwischen 0 und 100 an.
+	 *                      Nimmt einen Wert zwischen 0 und 10000 an.
 	 * @param relHeight     - int - Hoehe der MAA relativ zur Bildschirmaufloesung.
-	 *                      Nimmt einen Wert zwischen 0 und 100 an.
+	 *                      Nimmt einen Wert zwischen 0 und 10000 an.
 	 * @param type          - MouseActionAreaType - Zuordnung des MAA-Typen dieses
 	 *                      Objekts.
 	 * @param displayText   - String - Text, welcher in dem MAA angezeigt werden
@@ -56,29 +56,29 @@ public class MouseActionArea {
 
 		if (relX < 0)
 			this.relX = 0;
-		else if (relX > 100)
-			this.relX = 100;
+		else if (relX > 10000)
+			this.relX = 10000;
 		else
 			this.relX = relX;
 
 		if (relY < 0)
 			this.relY = 0;
-		else if (relY > 100)
-			this.relY = 100;
+		else if (relY > 10000)
+			this.relY = 10000;
 		else
 			this.relY = relY;
 
 		if (relWidth < 0)
 			this.relWidth = 0;
-		else if (relWidth > 100)
-			this.relWidth = 100;
+		else if (relWidth > 10000)
+			this.relWidth = 10000;
 		else
 			this.relWidth = relWidth;
 
 		if (relHeight < 0)
 			this.relHeight = 0;
-		else if (relHeight > 100)
-			this.relHeight = 100;
+		else if (relHeight > 10000)
+			this.relHeight = 10000;
 		else
 			this.relHeight = relHeight;
 
@@ -107,11 +107,12 @@ public class MouseActionArea {
 	 * und der Bildschirmaufloesung.
 	 */
 	public void refreshPosition() {
-		x = (int) ((((double) relX / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		y = (int) ((((double) relY / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-		width = (int) ((((double) relWidth / 100.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		height = (int) ((((double) relHeight / 100.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		x = (int) ((((double) relX / 10000.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		y = (int) ((((double) relY / 10000.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		width = (int) ((((double) relWidth / 10000.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		height = (int) ((((double) relHeight / 10000.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
 
+		// TODO: Allgemeinere Schreibweise. Weg von der 1080 Basis.
 		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.frame.getHeight() + 0.5);
 	}
 

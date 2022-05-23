@@ -6,16 +6,18 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.WindowHandler;
-import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class GraphicsHandler {
 
-	public static JFrame frame = null;
-	public static Label label = null;
-	public static int width, height;
+	private static DrawState drawState = DrawState.LOADINGSCREEN;
+	
+	private static JFrame frame = null;
+	private static Label label = null;
+	private static int width, height;
 	
 	public static void initVisuals() {
 
@@ -73,14 +75,92 @@ public class GraphicsHandler {
 	 * @param y,        die Y-Koordinate (Oben-Unten-Verschiebung) zu der der Text
 	 *                  mittig dargestellt wird
 	 */
-	public static void drawCentralisedText(Graphics g, Color color, int textSize, String text, int x, int y) {
+	public static void drawCentralisedText(Graphics g, Color color, int relTextSize, String text, int x, int y) {
 	
 		g.setColor(color);
+		int textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
 		g.setFont(new Font("Arial", Font.BOLD, textSize));
 		int width = g.getFontMetrics().stringWidth(" "+text);
 		int height = g.getFontMetrics().getHeight() * 2 / 3;
 		g.drawString(" "+text, x - width / 2, y + height / 2);
 	
+	}
+	
+	public static DrawState getDrawState() {
+		return drawState;
+	}
+	
+	public static void switchTo(DrawState newDrawState) {
+		
+		leaveState(getDrawState());
+		
+		switch (newDrawState) {
+		case PROGRAMMSTART:
+			//WILL NEVER HAPPEN!
+			break;
+		case LOADINGSCREEN:
+			
+			break;
+		case LOGIN:
+			
+			break;
+		case MENU:
+			
+			break;
+		case DECKBUILDER:
+			
+			break;
+		case INGAME:
+			
+			break;
+		case AFTERGAME:
+			
+			break;
+		}
+		drawState = newDrawState;
+		
+	}
+	
+	private static void leaveState(DrawState oldDrawState) {
+		//PERFORM EXIT CALLS IF LEAVING A STATE
+		
+		switch (oldDrawState) {
+		case PROGRAMMSTART:
+			
+			break;
+		case LOADINGSCREEN:
+			
+			break;
+		case LOGIN:
+			
+			break;
+		case MENU:
+			
+			break;
+		case DECKBUILDER:
+			
+			break;
+		case INGAME:
+			
+			break;
+		case AFTERGAME:
+			
+			break;
+		}
+		
+	}
+	
+	public static JFrame getFrame() {
+		return frame;
+	}
+	public static Label getLabel() {
+		return label;
+	}
+	public static int getWidth() {
+		return width;
+	}
+	public static int getHeight() {
+		return height;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package de.bejoschgaming.orderofelements.objects.map;
+package de.bejoschgaming.orderofelements.gamesystem.map;
 
 public class MapData {
 

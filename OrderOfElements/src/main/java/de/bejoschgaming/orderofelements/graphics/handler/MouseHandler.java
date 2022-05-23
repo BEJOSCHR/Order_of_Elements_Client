@@ -8,9 +8,9 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
-import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener {
 

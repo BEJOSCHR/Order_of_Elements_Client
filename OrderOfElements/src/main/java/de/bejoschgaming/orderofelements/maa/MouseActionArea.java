@@ -107,13 +107,13 @@ public class MouseActionArea {
 	 * und der Bildschirmaufloesung.
 	 */
 	public void refreshPosition() {
-		x = (int) ((((double) relX / 10000.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		y = (int) ((((double) relY / 10000.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-		width = (int) ((((double) relWidth / 10000.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		height = (int) ((((double) relHeight / 10000.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-
+		x = (int) ((((double) relX / 10000.0) * (double) GraphicsHandler.getWidth()) + 0.5);
+		y = (int) ((((double) relY / 10000.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+		width = (int) ((((double) relWidth / 10000.0) * (double) GraphicsHandler.getWidth()) + 0.5);
+		height = (int) ((((double) relHeight / 10000.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+	
 		// TODO: Allgemeinere Schreibweise. Weg von der 1080 Basis.
-		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.frame.getHeight() + 0.5);
+		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
 	}
 
 	/**

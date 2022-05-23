@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
+import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
-import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class Field {
 

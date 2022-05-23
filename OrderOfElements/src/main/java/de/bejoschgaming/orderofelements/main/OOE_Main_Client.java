@@ -6,10 +6,9 @@ import java.util.TimerTask;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
+import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
-import de.bejoschgaming.orderofelements.objects.map.Map;
-import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 public class OOE_Main_Client {
 	
@@ -24,8 +23,7 @@ public class OOE_Main_Client {
 		GraphicsHandler.initVisuals();
 		MouseActionAreaHandler.initMAAs();
 		
-		ConsoleHandler.printMessageInConsole("FieldSize: "+MapData.FIELD_SIZE, true);
-		MapData.map = new Map();
+		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		
 		ServerConnection.connectToServer();
 		

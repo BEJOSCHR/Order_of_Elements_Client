@@ -11,9 +11,14 @@ import java.util.ConcurrentModificationException;
 
 import javax.swing.JLabel;
 
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_1Loadingscreen;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Ingame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Aftergame;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
-import de.bejoschgaming.orderofelements.objects.map.MapData;
 
 
 @SuppressWarnings("serial")
@@ -29,9 +34,9 @@ public class Label extends JLabel {
 
     public Label() {
 
-		this.setBounds(0, 0, GraphicsHandler.width, GraphicsHandler.height);
+		this.setBounds(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
 		this.setVisible(true);
-		GraphicsHandler.frame.add(this, BorderLayout.CENTER);
+		GraphicsHandler.getFrame().add(this, BorderLayout.CENTER);
 
     }
     
@@ -53,8 +58,29 @@ public class Label extends JLabel {
 		
 		//CONTENT
 		
-		if(MapData.map != null) {
-			MapData.map.draw(g);
+		switch (GraphicsHandler.getDrawState()) {
+		case PROGRAMMSTART:
+			g.setColor(Color.DARK_GRAY);
+			g.fillRect(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
+			break;
+		case LOADINGSCREEN:
+			Draw_1Loadingscreen.draw(g);
+			break;
+		case LOGIN:
+			Draw_2Login.draw(g);
+			break;
+		case MENU:
+			Draw_3Menu.draw(g);
+			break;
+		case DECKBUILDER:
+			Draw_4Deckbuilder.draw(g);
+			break;
+		case INGAME:
+			Draw_5Ingame.draw(g);
+			break;
+		case AFTERGAME:
+			Draw_6Aftergame.draw(g);
+			break;
 		}
 		
 		// MAA

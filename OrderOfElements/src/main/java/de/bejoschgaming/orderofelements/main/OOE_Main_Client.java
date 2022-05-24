@@ -8,6 +8,7 @@ import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
 
 public class OOE_Main_Client {
@@ -21,10 +22,16 @@ public class OOE_Main_Client {
 		ConsoleHandler.startUserInputScanner();
 		
 		GraphicsHandler.initVisuals();
+		
+		ImageHandler.loadPreUsedImages();
+		
 		MouseActionAreaHandler.initMAAs();
 		
 		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		
+		ImageHandler.loadImages();
+		
+		//THIS FREEZES THE THREAD SO NO LOADING BEHIND THIS
 		ServerConnection.connectToServer();
 		
 		ConsoleHandler.printMessageInConsole("Startup finished!", true);

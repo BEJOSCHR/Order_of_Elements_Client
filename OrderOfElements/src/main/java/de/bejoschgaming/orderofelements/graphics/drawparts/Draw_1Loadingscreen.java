@@ -4,15 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 
 public class Draw_1Loadingscreen {
 
 	public static void draw(Graphics g) {
 		
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
 		
-		GraphicsHandler.drawCentralisedText(g, Color.WHITE, 200, "OrderOfElements", GraphicsHandler.getWidth()/2, GraphicsHandler.getHeight()/2);
+		g.drawImage(ImageHandler.loadingscreen_bgLogo, 0, (GraphicsHandler.getHeight()/3)/2, null);
 		
 	}
 	

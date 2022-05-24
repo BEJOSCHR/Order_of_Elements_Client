@@ -35,6 +35,7 @@ public class ServerConnection {
 	
 	public static void connectToServer() {
 		
+		ConsoleHandler.printMessageInConsole("Connecting to server... (Max. tries: "+maxConnectionTries+")", true);
 		connectedToServer = false;
 		
 		socketConnector = new NioSocketConnector();

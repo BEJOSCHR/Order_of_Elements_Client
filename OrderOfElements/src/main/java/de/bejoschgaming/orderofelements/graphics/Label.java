@@ -60,7 +60,7 @@ public class Label extends JLabel {
 		
 		switch (GraphicsHandler.getDrawState()) {
 		case PROGRAMMSTART:
-			g.setColor(Color.DARK_GRAY);
+			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
 			break;
 		case LOADINGSCREEN:

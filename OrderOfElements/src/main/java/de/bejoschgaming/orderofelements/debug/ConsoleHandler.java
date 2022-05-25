@@ -112,7 +112,7 @@ public class ConsoleHandler {
 			}
 		}, 0, 60);
 		
-		printMessageInConsole("ConsoleInputScanner started", true);
+		printMessageInConsole("ConsoleInputScanner started!", true);
 		
 	}
 
@@ -139,7 +139,7 @@ public class ConsoleHandler {
 		consoleInputScanner.cancel();
 		consoleInputScanner.purge();
 		
-		printMessageInConsole("ConsoleInputScanner stopped", true);
+		printMessageInConsole("ConsoleInputScanner stopped!", true);
 		
 	}
 	

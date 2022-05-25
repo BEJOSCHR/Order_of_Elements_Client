@@ -1,4 +1,4 @@
-package de.bejoschgaming.orderofelements.objects.map.fields;
+package de.bejoschgaming.orderofelements.gamesystem.map.fields;
 
 import java.awt.Color;
 

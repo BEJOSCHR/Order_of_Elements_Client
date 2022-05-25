@@ -11,6 +11,8 @@ import java.util.ConcurrentModificationException;
 
 import javax.swing.JLabel;
 
+import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
+import de.bejoschgaming.orderofelements.animationsystem.animations.Animation;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_1Loadingscreen;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
@@ -91,6 +93,11 @@ public class Label extends JLabel {
 					}
 				}
 			} catch (ConcurrentModificationException error) {
+		}
+		
+		// ANIMATIONS
+		for(Animation animation : AnimationHandler.getRunningAnimations()) {
+			animation.draw(g);
 		}
 		
 		// DRAW FPS

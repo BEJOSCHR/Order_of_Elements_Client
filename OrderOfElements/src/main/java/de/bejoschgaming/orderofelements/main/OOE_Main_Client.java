@@ -3,6 +3,9 @@ package de.bejoschgaming.orderofelements.main;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
+import de.bejoschgaming.orderofelements.animationsystem.TickHandler;
+import de.bejoschgaming.orderofelements.animationsystem.animations.FadeAnimation;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
@@ -23,10 +26,13 @@ public class OOE_Main_Client {
 		
 		GraphicsHandler.initVisuals();
 		
+		TickHandler.startTickTimer();
+		
 		ImageHandler.loadPreUsedImages();
 		
 		MouseActionAreaHandler.initMAAs();
 		
+		AnimationHandler.startAnimation(new FadeAnimation(20, 3, true));
 		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		
 		ImageHandler.loadImages();
@@ -41,6 +47,8 @@ public class OOE_Main_Client {
 	public static void terminateProgramm() {
 		
 		ConsoleHandler.printMessageInConsole("Stopping OrderOfElements_Client [OOE_C]...", true);
+		
+		TickHandler.stopTickTimer();
 		
 		ConsoleHandler.stopUserInputScanner();
 		

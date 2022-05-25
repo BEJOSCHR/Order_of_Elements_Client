@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
-import de.bejoschgaming.orderofelements.objects.map.fields.Field;
-import de.bejoschgaming.orderofelements.objects.map.fields.FieldType;
+import de.bejoschgaming.orderofelements.gamesystem.map.fields.Field;
+import de.bejoschgaming.orderofelements.gamesystem.map.fields.FieldType;
 
 public class Map {
 

@@ -10,6 +10,7 @@
 package de.bejoschgaming.orderofelements.maa;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ConcurrentModificationException;
 
@@ -205,12 +206,12 @@ public class MouseActionArea {
 			g.setColor(hoverColor);
 			if (showBox)
 				g.drawRect(x, y, width, height);
-			GraphicsHandler.drawCentralisedText(g, hoverColor, textSize, displayText, x + width / 2, y + height / 2);
+			GraphicsHandler.drawCentralisedText(g, hoverColor, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(textSize)), displayText, x + width / 2, y + height / 2);
 		} else {
 			g.setColor(standardColor);
 			if (showBox)
 				g.drawRect(x, y, width, height);
-			GraphicsHandler.drawCentralisedText(g, standardColor, textSize, displayText, x + width / 2, y + height / 2);
+			GraphicsHandler.drawCentralisedText(g, standardColor, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(textSize)), displayText, x + width / 2, y + height / 2);
 		}
 		drawCustomParts(g);
 	}

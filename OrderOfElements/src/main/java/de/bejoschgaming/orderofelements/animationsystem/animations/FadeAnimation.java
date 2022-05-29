@@ -11,6 +11,9 @@ public class FadeAnimation extends Animation {
 	protected int darkingPerStep = 10;
 	protected boolean onlyFadeIn = false;
 	
+	/**
+	 * 60 for totalsteps and 5 for darking with onlyFadeIn true as example
+	 */
 	public FadeAnimation(int totalSteps, int darkingPerStep, boolean onlyFadeIn) {
 		super(3, totalSteps);
 		

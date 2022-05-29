@@ -1,5 +1,6 @@
 package de.bejoschgaming.orderofelements.animationsystem;
 
+import java.util.ConcurrentModificationException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,9 +20,11 @@ public class TickHandler {
 				@Override
 				public void run() {
 					
-					for(Animation animation : AnimationHandler.getRunningAnimations()) {
-						animation.tick();
-					}
+					try {
+						for(Animation animation : AnimationHandler.getRunningAnimations()) {
+							animation.tick();
+						}
+					}catch(ConcurrentModificationException error) {} //SOME TIMES HAPPEN JUST SKIP ONE TICK
 					
 				}
 			}, 0, 10);

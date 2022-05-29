@@ -47,6 +47,7 @@ public class GraphicsHandler {
 
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //		frame.setSize(1280, 720);
+//		frame.setSize(2480, 1080);
 		
 		width = frame.getWidth();
 		height = frame.getHeight();
@@ -65,25 +66,31 @@ public class GraphicsHandler {
 	/**
 	 * Allgemeine Methode um einen beliebigen Text mit Parametern relativ zu einem
 	 * Punkt (x,y) mittig darzustellen
+	 * EXAMPLE: GraphicsHandler.drawCentralisedText(g, Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(11)), "Beispiel", x, y);
 	 * 
 	 * @param g,        das Graphics object
 	 * @param color,    die Textfarbe
-	 * @param textSize, die Textgr��e
+	 * @param font, 	die Font in der der Text dargestellt werden soll
 	 * @param text,     der eigentliche Text
 	 * @param x,        die X-Koordinate (Links-Rechts-Verschiebung) zu der der Text
 	 *                  mittig dargestellt wird
 	 * @param y,        die Y-Koordinate (Oben-Unten-Verschiebung) zu der der Text
 	 *                  mittig dargestellt wird
 	 */
-	public static void drawCentralisedText(Graphics g, Color color, int relTextSize, String text, int x, int y) {
+	public static void drawCentralisedText(Graphics g, Color color, Font font, String text, int x, int y) {
 	
 		g.setColor(color);
-		int textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
-		g.setFont(new Font("Arial", Font.BOLD, textSize));
+		g.setFont(font);
 		int width = g.getFontMetrics().stringWidth(" "+text);
 		int height = g.getFontMetrics().getHeight() * 2 / 3;
 		g.drawString(" "+text, x - width / 2, y + height / 2);
 	
+	}
+	
+	public static int getRelativTextSize(int textSize) {
+		
+		return (int) (((double) textSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
+		
 	}
 	
 	public static DrawState getDrawState() {

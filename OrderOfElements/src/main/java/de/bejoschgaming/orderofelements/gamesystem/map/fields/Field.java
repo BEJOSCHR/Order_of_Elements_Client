@@ -1,6 +1,7 @@
 package de.bejoschgaming.orderofelements.gamesystem.map.fields;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
@@ -68,7 +69,7 @@ public class Field {
 		
 		//CORDS
 		if(this.isMoveable() == true) {
-			GraphicsHandler.drawCentralisedText(g, Color.WHITE, 11, this.x+":"+this.y, p4_x, p4_y-12);
+			GraphicsHandler.drawCentralisedText(g, Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(11)), this.x+":"+this.y, p4_x, p4_y-12);
 		}
 		
 	}

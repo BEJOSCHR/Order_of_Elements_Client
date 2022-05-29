@@ -41,6 +41,10 @@ public class Animation {
 		
 		this.stepAction();
 		
+		if(this.totalSteps != -1 && this.currentStep == (int) (this.totalSteps/2.0) ) {
+			this.halfTimeAction();
+		}
+		
 		if(this.totalSteps != -1 && this.currentStep == this.totalSteps) {
 			this.finish(true);
 		}
@@ -48,6 +52,8 @@ public class Animation {
 	}
 	
 	protected void stepAction() {}
+	
+	protected void halfTimeAction() {}
 	
 	public void finish(boolean stepLimitReached) {
 		

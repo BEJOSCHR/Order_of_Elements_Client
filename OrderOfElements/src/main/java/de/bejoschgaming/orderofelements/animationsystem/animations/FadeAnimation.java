@@ -9,26 +9,32 @@ public class FadeAnimation extends Animation {
 
 	protected int alpha = 0;
 	protected int darkingPerStep = 10;
-	protected boolean onlyFadeIn = false;
+	protected FadeType fadeType = FadeType.FADEINANDOUT;
 	
 	/**
 	 * 60 for totalsteps and 5 for darking with onlyFadeIn true as example
 	 */
-	public FadeAnimation(int totalSteps, int darkingPerStep, boolean onlyFadeIn) {
+	public FadeAnimation(int totalSteps, int darkingPerStep, FadeType fadeType) {
 		super(3, totalSteps);
 		
 		this.darkingPerStep = darkingPerStep;
-		this.onlyFadeIn = onlyFadeIn;
+		this.fadeType = fadeType;
 		
 	}
 
 	@Override
 	protected void startAction() {
 		
-		if(onlyFadeIn == true) {
-			alpha = 255;
-		}else { 
+		switch (this.fadeType) {
+		case FADEIN:
 			alpha = 0;
+			break;
+		case FADEOUT:
+			alpha = 255;
+			break;
+		case FADEINANDOUT:
+			alpha = 0;
+			break;
 		}
 		
 	}
@@ -36,9 +42,9 @@ public class FadeAnimation extends Animation {
 	@Override
 	protected void stepAction() {
 		
-		if(this.getCurrentStep() > getTotalSteps()-(255.0/this.darkingPerStep)) {
+		if(this.fadeType != FadeType.FADEIN && this.getCurrentStep() > getTotalSteps()-(255.0/this.darkingPerStep)) {
 			alpha -= darkingPerStep+1;
-		}else if(onlyFadeIn == false && this.getCurrentStep() < (255.0/this.darkingPerStep)) {
+		}else if(this.fadeType != FadeType.FADEOUT && this.getCurrentStep() < (255.0/this.darkingPerStep)) {
 			alpha += darkingPerStep+1;
 		}
 		
@@ -50,7 +56,17 @@ public class FadeAnimation extends Animation {
 	@Override
 	protected void finishAction(boolean stepLimitReached) {
 		
-		alpha = 0;
+		switch (this.fadeType) {
+		case FADEIN:
+			alpha = 255;
+			break;
+		case FADEOUT:
+			alpha = 0;
+			break;
+		case FADEINANDOUT:
+			alpha = 0;
+			break;
+		}
 		
 	}
 	

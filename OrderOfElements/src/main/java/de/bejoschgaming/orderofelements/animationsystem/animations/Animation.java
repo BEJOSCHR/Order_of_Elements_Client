@@ -2,6 +2,8 @@ package de.bejoschgaming.orderofelements.animationsystem.animations;
 
 import java.awt.Graphics;
 
+import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
+
 public class Animation {
 
 	private int ticksPerStep;
@@ -58,6 +60,7 @@ public class Animation {
 	public void finish(boolean stepLimitReached) {
 		
 		this.finishAction(stepLimitReached);
+		AnimationHandler.stopAnimation(this, true);
 		
 	}
 	

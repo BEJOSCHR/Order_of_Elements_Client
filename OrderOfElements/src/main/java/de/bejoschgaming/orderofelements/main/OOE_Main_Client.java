@@ -1,14 +1,12 @@
 package de.bejoschgaming.orderofelements.main;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.TickHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.FadeAnimation;
-import de.bejoschgaming.orderofelements.animationsystem.animations.TextAnimation;
+import de.bejoschgaming.orderofelements.animationsystem.animations.FadeType;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
@@ -35,31 +33,18 @@ public class OOE_Main_Client {
 		
 		MouseActionAreaHandler.initMAAs();
 		
-		AnimationHandler.startAnimation(new FadeAnimation(60, 5, true));
+		//TODO remove text animation and instead show loading animation while connecting to server after init logo bild+animation
+		AnimationHandler.startAnimation(new FadeAnimation(60, 5, FadeType.FADEOUT));
 		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				AnimationHandler.startAnimation(new TextAnimation(110, 7, false, GraphicsHandler.getWidth()/2, (int) (GraphicsHandler.getHeight()*0.90), "Order Of Elements", Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(80))) {
-					@Override
-					protected void finishAction(boolean stepLimitReached) {
-						super.finishAction(stepLimitReached);
-						AnimationHandler.startAnimation(new FadeAnimation(110, 5, false) {
-							@Override
-							protected void halfTimeAction() {
-								super.halfTimeAction();
-								GraphicsHandler.switchTo(DrawState.LOGIN);
-							}
-						});
-					}
-				});
+				AnimationHandler.startLoadingAnimation("Connecting to server", 22, true);
+				ServerConnection.connectToServer();
 			}
-		}, 1000);
+		}, (int) (1000*2.7));
 		
 		ImageHandler.loadImages();
-		
-		//THIS FREEZES THE THREAD SO NO LOADING BEHIND THIS
-		ServerConnection.connectToServer();
 		
 		ConsoleHandler.printMessageInConsole("Startup finished!", true);
 		

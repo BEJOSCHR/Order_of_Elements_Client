@@ -12,6 +12,13 @@ package de.bejoschgaming.orderofelements.maa;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_1Loadingscreen;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Ingame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Aftergame;
+
 public class MouseActionAreaHandler {
 
 	private static List<MouseActionArea> mouseActionAreas = new ArrayList<MouseActionArea>();
@@ -24,6 +31,13 @@ public class MouseActionAreaHandler {
 		// Hier entweder einzelne MAA Objekte erstellen oder entsprechende Methoden
 		// jeweiliger Module aufrufen.
 
+		Draw_1Loadingscreen.initMAAs();
+		Draw_2Login.initMAAs();
+		Draw_3Menu.initMAAs();
+		Draw_4Deckbuilder.initMAAs();
+		Draw_5Ingame.initMAAs();
+		Draw_6Aftergame.initMAAs();
+		
 	}
 
 	/**

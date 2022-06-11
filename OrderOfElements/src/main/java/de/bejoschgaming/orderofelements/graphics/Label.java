@@ -90,15 +90,16 @@ public class Label extends JLabel {
 			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
 				if (maa.isActiv()) {
 					maa.draw(g);
-					}
 				}
-			} catch (ConcurrentModificationException error) {
-		}
+			}
+		} catch (ConcurrentModificationException error) {}
 		
 		// ANIMATIONS
-		for(Animation animation : AnimationHandler.getRunningAnimations()) {
-			animation.draw(g);
-		}
+		try {
+			for(Animation animation : AnimationHandler.getRunningAnimations()) {
+				animation.draw(g);
+			}
+		} catch (ConcurrentModificationException error) {}
 		
 		// DRAW FPS
 		if(showFPS == true) {

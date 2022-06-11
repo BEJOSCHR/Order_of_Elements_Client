@@ -40,7 +40,12 @@ public class OOE_Main_Client {
 			@Override
 			public void run() {
 				AnimationHandler.startLoadingAnimation("Connecting to server", 22, true);
-				ServerConnection.connectToServer();
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						ServerConnection.connectToServer();
+					}
+				}, (int) (1000*3.0));
 			}
 		}, (int) (1000*2.7));
 		

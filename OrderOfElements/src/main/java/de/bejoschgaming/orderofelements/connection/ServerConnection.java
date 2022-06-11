@@ -12,6 +12,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
+import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.profile.ClientData;
@@ -49,13 +50,13 @@ public class ServerConnection {
 	        	ConnectFuture future = socketConnector.connect(new InetSocketAddress(hostname, port));
 	            future.awaitUninterruptibly();
 	            serverConnection = future.getSession();
-//				ConsoleHandler.printMessageInConsole("Connected to server!", true);
 				break;
 			}catch (RuntimeIoException error) {
 //				error.printStackTrace();
 				ConsoleHandler.printMessageInConsole("Connecting to server failed! (Try: "+tries+"/"+maxConnectionTries+") ["+error.getMessage()+"]", true);
+				AnimationHandler.updateLoadingMessage("Connection failed! (Try: "+tries+"/"+maxConnectionTries+")");
 				try {
-					Thread.sleep(1000*5);
+					Thread.sleep(1000*2);
 				} catch (InterruptedException error1) {
 					error1.printStackTrace();
 					ConsoleHandler.printMessageInConsole("Thread interruped failed!", true);
@@ -66,6 +67,9 @@ public class ServerConnection {
 		if(connectedToServer == false) {
 			//NOT CONNECTED
 			ConsoleHandler.printMessageInConsole("Connecting to server ended with no result! (Try: "+maxConnectionTries+"/"+maxConnectionTries+" failed)", true);
+			AnimationHandler.updateLoadingMessage("Connection ended with no result!");
+			AnimationHandler.freezeLoadingAnimation();
+			//TODO SHOW EXIT/CANCLE BUTTON
 		}
 		
         

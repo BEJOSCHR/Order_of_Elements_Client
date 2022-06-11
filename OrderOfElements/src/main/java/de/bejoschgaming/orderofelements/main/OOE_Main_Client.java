@@ -35,11 +35,20 @@ public class OOE_Main_Client {
 		
 		//TODO remove text animation and instead show loading animation while connecting to server after init logo bild+animation
 		AnimationHandler.startAnimation(new FadeAnimation(60, 5, FadeType.FADEOUT));
-		GraphicsHandler.switchTo(DrawState.LOGIN);
-//		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
+		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
+				AnimationHandler.startAnimation(new FadeAnimation(108, 5, FadeType.FADEINANDOUT) {
+					
+					@Override
+					protected void halfTimeAction() {
+						
+						GraphicsHandler.switchTo(DrawState.LOGIN);
+						
+					}
+					
+				});
 //				AnimationHandler.startLoadingAnimation("Connecting to server", 22, true);
 //				new Timer().schedule(new TimerTask() {
 //					@Override
@@ -48,7 +57,7 @@ public class OOE_Main_Client {
 //					}
 //				}, (int) (1000*3.0));
 			}
-		}, (int) (1000*2.7));
+		}, (int) (1000*2.3));
 		
 		ImageHandler.loadImages();
 		

@@ -9,7 +9,7 @@ public class MenuBookAnimation extends Animation {
 	protected boolean forwards;
 	
 	public MenuBookAnimation(boolean forwards) {
-		super(20, 6);
+		super(20, 5);
 		
 		this.forwards = forwards;
 		
@@ -18,11 +18,18 @@ public class MenuBookAnimation extends Animation {
 	@Override
 	public void draw(Graphics g) {
 		
+		int frame;
+		
 		if(this.forwards == true) {
-			g.drawImage(ImageHandler.menu_book[this.getCurrentStep()+1], 0, 0, null);
+			frame = this.getCurrentStep()+1;
 		}else {
-			g.drawImage(ImageHandler.menu_book[6-this.getCurrentStep()], 0, 0, null);
+			frame = 6-this.getCurrentStep();
 		}
+		
+		if(frame < 0) { frame = 0; }
+		else if(frame > 6) { frame = 6; }
+		
+		g.drawImage(ImageHandler.menu_book[frame], 0, 0, null);
 		
 	}
 	

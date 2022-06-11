@@ -15,6 +15,10 @@ public class ImageHandler {
 	public static Image loadingscreen_ooeLogo;
 	public static Image loadingscreen_bgLogo;
 	
+	//MENU
+	public static Image menu_book[] = new Image[7];
+	public static Image menu_natur[] = new Image[7];
+	
 	public static void loadPreUsedImages() {
 		
 		loadingscreen_bgLogo = loadImageFromName("loadingscreen/BejoschGamingLogo.png", GraphicsHandler.getWidth(), (GraphicsHandler.getHeight()/3)*2);
@@ -23,7 +27,15 @@ public class ImageHandler {
 	
 	public static void loadImages() {
 		
+		//BOOK GIF ANIMATION
+		for(int i = 0 ; i < 7 ; i++) {
+			menu_book[i] = loadImageFromName("menu/book_"+i+".png", GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
+		}
 		
+		//NATUR BACKGROUND ANIMATION
+		for(int i = 0 ; i < 7 ; i++) {
+			menu_natur[i] = loadImageFromName("menu/natur_"+i+".png", GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
+		}
 		
 	}
 	

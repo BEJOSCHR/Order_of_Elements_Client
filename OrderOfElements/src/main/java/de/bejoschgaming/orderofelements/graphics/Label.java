@@ -87,7 +87,7 @@ public class Label extends JLabel {
 		
 		// MAA - before animation
 		try {
-			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+			for(MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
 				if (maa.isActiv() && maa.isOverlapAnimations() == false) {;
 					maa.draw(g);
 				}
@@ -103,7 +103,7 @@ public class Label extends JLabel {
 		
 		// MAA - after animation
 		try {
-			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+			for(MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
 				if (maa.isActiv() && maa.isOverlapAnimations() == true) {;
 					maa.draw(g);
 				}

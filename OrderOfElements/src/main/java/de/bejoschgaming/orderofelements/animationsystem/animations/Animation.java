@@ -41,14 +41,14 @@ public class Animation {
 		
 		this.currentStep++;
 		
-		this.stepAction();
+		if(this.totalSteps != -1 && this.currentStep == this.totalSteps) {
+			this.finish(true);
+		}else {
+			this.stepAction();
+		}
 		
 		if(this.totalSteps != -1 && this.currentStep == (int) (this.totalSteps/2.0) ) {
 			this.halfTimeAction();
-		}
-		
-		if(this.totalSteps != -1 && this.currentStep == this.totalSteps) {
-			this.finish(true);
 		}
 		
 	}
@@ -59,8 +59,8 @@ public class Animation {
 	
 	public void finish(boolean stepLimitReached) {
 		
-		this.finishAction(stepLimitReached);
 		AnimationHandler.stopAnimation(this, true);
+		this.finishAction(stepLimitReached);
 		
 	}
 	

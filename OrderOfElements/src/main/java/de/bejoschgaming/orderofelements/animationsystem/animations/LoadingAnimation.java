@@ -109,11 +109,6 @@ public class LoadingAnimation extends Animation {
 	}
 	
 	@Override
-	protected void finishAction(boolean stepLimitReached) {
-		
-	}
-	
-	@Override
 	public void draw(Graphics g) {
 		
 		if(this.darkBackground == true) {

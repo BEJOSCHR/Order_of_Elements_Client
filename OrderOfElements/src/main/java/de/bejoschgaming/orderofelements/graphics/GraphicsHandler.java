@@ -6,7 +6,10 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
+import de.bejoschgaming.orderofelements.animationsystem.animations.DynamicInteger;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.WindowHandler;
@@ -99,8 +102,9 @@ public class GraphicsHandler {
 	
 	public static void switchTo(DrawState newDrawState) {
 		
-		leaveState(getDrawState());
+		leaveState(getDrawState(), newDrawState);
 		
+		int backgroundAnimationTempo = 15;
 		switch (newDrawState) {
 		case PROGRAMMSTART:
 			//WILL NEVER HAPPEN!
@@ -109,13 +113,58 @@ public class GraphicsHandler {
 			
 			break;
 		case LOGIN:
-			
+			if(Draw_3Menu.backGroundAnimationFrame == null) {
+				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
+					
+					@Override
+					protected void stepAction() {
+						
+						this.value += this.addPerStep;
+						
+						if(this.value > this.endValue) {
+							this.value = this.startValue;
+						}
+						
+					}
+					
+				};
+			}
 			break;
 		case MENU:
-			
+			if(Draw_3Menu.backGroundAnimationFrame == null) {
+				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
+					
+					@Override
+					protected void stepAction() {
+						
+						this.value += this.addPerStep;
+						
+						if(this.value > this.endValue) {
+							this.value = this.startValue;
+						}
+						
+					}
+					
+				};
+			}
 			break;
 		case DECKBUILDER:
-			
+			if(Draw_3Menu.backGroundAnimationFrame == null) {
+				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
+					
+					@Override
+					protected void stepAction() {
+						
+						this.value += this.addPerStep;
+						
+						if(this.value > this.endValue) {
+							this.value = this.startValue;
+						}
+						
+					}
+					
+				};
+			}
 			break;
 		case INGAME:
 			
@@ -124,11 +173,12 @@ public class GraphicsHandler {
 			
 			break;
 		}
+		
 		drawState = newDrawState;
 		
 	}
 	
-	private static void leaveState(DrawState oldDrawState) {
+	private static void leaveState(DrawState oldDrawState, DrawState newDrawState) {
 		//PERFORM EXIT CALLS IF LEAVING A STATE
 		
 		switch (oldDrawState) {
@@ -139,13 +189,22 @@ public class GraphicsHandler {
 			
 			break;
 		case LOGIN:
-			
+			if(newDrawState != DrawState.MENU) {
+				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
+				Draw_3Menu.backGroundAnimationFrame = null;
+			}
 			break;
 		case MENU:
-			
+			if(newDrawState != DrawState.DECKBUILDER) {
+				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
+				Draw_3Menu.backGroundAnimationFrame = null;
+			}
 			break;
 		case DECKBUILDER:
-			
+			if(newDrawState != DrawState.MENU) {
+				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
+				Draw_3Menu.backGroundAnimationFrame = null;
+			}
 			break;
 		case INGAME:
 			

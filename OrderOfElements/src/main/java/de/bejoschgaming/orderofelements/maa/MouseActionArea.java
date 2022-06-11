@@ -24,36 +24,38 @@ public class MouseActionArea {
 	private MouseActionAreaType type;
 	private String displayText;
 	private Color standardColor, hoverColor;
-	private boolean showBox;
+	private boolean showBox, overlapAnimations;
 
 	/**
 	 * Konstruktor fuer MouseActionArea. Erstellt ein MAA Objekt.
 	 * 
-	 * @param relX          - int - Startpunkt auf der x-Achse relativ zur
-	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      10000 an.
-	 * @param relY          - int - Startpunkt auf der y-Achse relativ zur
-	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      10000 an.
-	 * @param relWidth      - int - Breite der MAA relativ zur Bildschirmaufloesung.
-	 *                      Nimmt einen Wert zwischen 0 und 10000 an.
-	 * @param relHeight     - int - Hoehe der MAA relativ zur Bildschirmaufloesung.
-	 *                      Nimmt einen Wert zwischen 0 und 10000 an.
-	 * @param type          - MouseActionAreaType - Zuordnung des MAA-Typen dieses
-	 *                      Objekts.
-	 * @param displayText   - String - Text, welcher in dem MAA angezeigt werden
-	 *                      soll.
-	 * @param relTextSize   - int - Schriftgroesse des Textes relativ zur
-	 *                      Bildschirmaufloesung.
-	 * @param standardColor - Color - Farbe der MAA, welche standardmaessig zu sehen
-	 *                      ist.
-	 * @param hoverColor    - Color - Farbe der MAA, welche zu sehen ist, wenn die
-	 *                      Maus ueber das MAA schwebt.
-	 * @param showBox       - Boolean - Bestimmt, ob das Standard-Rechteck der MAA
-	 *                      angezeigt werden soll.
+	 * @param relX              - int - Startpunkt auf der x-Achse relativ zur
+	 *                          Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
+	 *                          10000 an.
+	 * @param relY              - int - Startpunkt auf der y-Achse relativ zur
+	 *                          Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
+	 *                          10000 an.
+	 * @param relWidth          - int - Breite der MAA relativ zur Bildschirmaufloesung.
+	 *                          Nimmt einen Wert zwischen 0 und 10000 an.
+	 * @param relHeight         - int - Hoehe der MAA relativ zur Bildschirmaufloesung.
+	 *                          Nimmt einen Wert zwischen 0 und 10000 an.
+	 * @param type              - MouseActionAreaType - Zuordnung des MAA-Typen dieses
+	 *                          Objekts.
+	 * @param displayText       - String - Text, welcher in dem MAA angezeigt werden
+	 *                          soll.
+	 * @param relTextSize       - int - Schriftgroesse des Textes relativ zur
+	 *                          Bildschirmaufloesung.
+	 * @param standardColor     - Color - Farbe der MAA, welche standardmaessig zu sehen
+	 *                          ist.
+	 * @param hoverColor        - Color - Farbe der MAA, welche zu sehen ist, wenn die
+	 *                          Maus ueber das MAA schwebt.
+	 * @param showBox           - Boolean - Bestimmt, ob das Standard-Rechteck der MAA
+	 *                          angezeigt werden soll.
+	 * @param overlapAnimations - Boolean - Bestimmt, ob diese MAA Animations überlagern
+	 *                          bzw verdecken soll
 	 */
 	public MouseActionArea(int relX, int relY, int relWidth, int relHeight, MouseActionAreaType type,
-			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox) {
+			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox, boolean overlapAnimations) {
 
 		if (relX < 0)
 			this.relX = 0;
@@ -89,7 +91,8 @@ public class MouseActionArea {
 		this.standardColor = standardColor;
 		this.hoverColor = hoverColor;
 		this.showBox = showBox;
-
+		this.overlapAnimations = overlapAnimations;
+		
 		this.refreshPosition();
 
 		MouseActionAreaHandler.getMAAs().add(this);
@@ -306,5 +309,13 @@ public class MouseActionArea {
 
 	public Color getHoverColor() {
 		return hoverColor;
+	}
+	
+	public boolean isShowBox() {
+		return showBox;
+	}
+	
+	public boolean isOverlapAnimations() {
+		return overlapAnimations;
 	}
 }

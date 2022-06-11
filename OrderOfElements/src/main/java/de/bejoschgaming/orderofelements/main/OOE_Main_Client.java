@@ -55,7 +55,7 @@ public class OOE_Main_Client {
 		
 	}
 
-	public static void terminateProgramm() {
+	public static void terminateProgramm(boolean instant) {
 		
 		ConsoleHandler.printMessageInConsole("Stopping OrderOfElements_Client [OOE_C]...", true);
 		
@@ -68,13 +68,18 @@ public class OOE_Main_Client {
 		ConsoleHandler.printMessageInConsole("Stopping finished!", true);
 		
 		//CLOSE DLEAY
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				ConsoleHandler.printMessageInConsole("Terminating...", true);
-				System.exit(0);
-			}
-		}, 1000*3);
+		if(instant == true) {
+			ConsoleHandler.printMessageInConsole("Terminating...", true);
+			System.exit(0);
+		}else {
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					ConsoleHandler.printMessageInConsole("Terminating...", true);
+					System.exit(0);
+				}
+			}, 1000*3);
+		}
 		
 	}
 	

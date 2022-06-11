@@ -76,6 +76,13 @@ public class AnimationHandler {
 		loadingAnimation.freezeAnimation();
 		
 	}
+	public static boolean isLoadingAnimationFrozen() {
+		
+		if(loadingAnimation == null) { return false; }
+		
+		return loadingAnimation.isFrozen();
+		
+	}
 	public static void stopLoadingAnimation() {
 		
 		if(loadingAnimation == null) { return; };

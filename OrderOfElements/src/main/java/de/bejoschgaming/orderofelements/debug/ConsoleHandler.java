@@ -173,7 +173,7 @@ public class ConsoleHandler {
 	
 	private static void sendCommand_exit(List<String> inputs) {
 		
-		OOE_Main_Client.terminateProgramm();
+		OOE_Main_Client.terminateProgramm(false);
 		
 	}
 	

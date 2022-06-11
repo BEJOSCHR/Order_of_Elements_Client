@@ -85,10 +85,10 @@ public class Label extends JLabel {
 			break;
 		}
 		
-		// MAA
+		// MAA - before animation
 		try {
 			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-				if (maa.isActiv()) {
+				if (maa.isActiv() && maa.isOverlapAnimations() == false) {;
 					maa.draw(g);
 				}
 			}
@@ -98,6 +98,15 @@ public class Label extends JLabel {
 		try {
 			for(Animation animation : AnimationHandler.getRunningAnimations()) {
 				animation.draw(g);
+			}
+		} catch (ConcurrentModificationException error) {}
+		
+		// MAA - after animation
+		try {
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isOverlapAnimations() == true) {;
+					maa.draw(g);
+				}
 			}
 		} catch (ConcurrentModificationException error) {}
 		

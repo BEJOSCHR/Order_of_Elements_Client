@@ -10,7 +10,7 @@ public class LoadingAnimation extends Animation {
 
 	protected boolean freezeAnimation = false;
 	protected String letters[] = {"O","r","d","e","r"," ","O","f"," ","E","l","e","m","e","n","t","s"}; //17 letters
-	protected int shouldWaitSteps = 20;
+	protected int shouldWaitSteps = 10;
 	protected int waitedSteps;
 	protected boolean fromLeft;
 	protected int currentPos = 0;
@@ -19,8 +19,8 @@ public class LoadingAnimation extends Animation {
 	protected int alphaSteps = 13;
 	
 	protected boolean textShown = true;
-	protected int textBlinkShouldWait = 10;
-	protected int textBlinkWait;
+//	protected int textBlinkShouldWait = 10;
+//	protected int textBlinkWait;
 	
 	protected String messageToDisplay;
 	protected int textSize;
@@ -99,7 +99,7 @@ public class LoadingAnimation extends Animation {
 //		}
 		
 		//ALPHA
-		if(this.getCurrentStep() >= 6) {
+		if(this.getCurrentStep() >= 6 && this.alpha < 255) {
 			this.alpha += this.alphaSteps;
 			if(this.alpha >= 255) {
 				this.alpha = 255;
@@ -150,6 +150,9 @@ public class LoadingAnimation extends Animation {
 	}
 	public boolean isDarkBackground() {
 		return darkBackground;
+	}
+	public boolean isFrozen() {
+		return freezeAnimation;
 	}
 	
 }

@@ -8,12 +8,16 @@ import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 
 public class LoadingAnimation extends Animation {
 
+	protected boolean freezeAnimation = false;
 	protected String letters[] = {"O","r","d","e","r"," ","O","f"," ","E","l","e","m","e","n","t","s"}; //17 letters
 	protected int shouldWaitSteps = 20;
 	protected int waitedSteps;
 	protected boolean fromLeft;
 	protected int currentPos = 0;
 
+	protected int alpha = 0;
+	protected int alphaSteps = 13;
+	
 	protected boolean textShown = true;
 	protected int textBlinkShouldWait = 10;
 	protected int textBlinkWait;
@@ -34,16 +38,21 @@ public class LoadingAnimation extends Animation {
 	@Override
 	protected void startAction() {
 		
+		this.alpha = 0;
 		this.fromLeft = false;
-		this.waitedSteps = this.shouldWaitSteps/2;
-		this.textBlinkWait = this.textBlinkShouldWait/2;
+		this.waitedSteps = this.shouldWaitSteps;
+//		this.textBlinkWait = this.textBlinkShouldWait/2;
 		
 	}
 	
 	@Override
 	protected void stepAction() {
 		
-		if(fromLeft) {
+		if(this.freezeAnimation == true) {
+			waitedSteps = shouldWaitSteps;
+			fromLeft = true;
+			this.currentPos = 0;
+		}else if(fromLeft) {
 			
 			if(this.currentPos == 17) {
 				//END
@@ -82,11 +91,19 @@ public class LoadingAnimation extends Animation {
 		}
 
 		//TEXTBLINK
-		if(textBlinkWait == 0) {
-			textBlinkWait = textBlinkShouldWait;
-			textShown = !textShown;
-		}else {
-			textBlinkWait--;
+//		if(textBlinkWait == 0) {
+//			textBlinkWait = textBlinkShouldWait;
+//			textShown = !textShown;
+//		}else {
+//			textBlinkWait--;
+//		}
+		
+		//ALPHA
+		if(this.getCurrentStep() >= 6) {
+			this.alpha += this.alphaSteps;
+			if(this.alpha >= 255) {
+				this.alpha = 255;
+			}
 		}
 		
 	}
@@ -104,10 +121,10 @@ public class LoadingAnimation extends Animation {
 			g.fillRect(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
 		}
 		
-		GraphicsHandler.drawCentralisedText(g, Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(62)), this.getAnimatedText(), GraphicsHandler.getWidth()/2, (GraphicsHandler.getHeight()/2)*1);
+		GraphicsHandler.drawCentralisedText(g, new Color(255, 255, 255, this.alpha), new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(62)), this.getAnimatedText(), GraphicsHandler.getWidth()/2, (GraphicsHandler.getHeight()/2)*1);
 		
 		if(this.textShown == true) {
-			GraphicsHandler.drawCentralisedText(g, Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(this.textSize)), this.messageToDisplay, GraphicsHandler.getWidth()/2, (GraphicsHandler.getHeight()/3)*2);	
+			GraphicsHandler.drawCentralisedText(g, new Color(255, 255, 255, this.alpha), new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(this.textSize)), this.messageToDisplay, GraphicsHandler.getWidth()/2, (GraphicsHandler.getHeight()/3)*2);	
 		}
 		
 	}
@@ -122,6 +139,9 @@ public class LoadingAnimation extends Animation {
 		return output;
 	}
 	
+	public void freezeAnimation() {
+		freezeAnimation = !freezeAnimation;
+	}
 	public void updateLoadingMessage(String newMessage) {
 		this.messageToDisplay = newMessage;
 	}

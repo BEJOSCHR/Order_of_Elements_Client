@@ -69,13 +69,20 @@ public class AnimationHandler {
 		loadingAnimation.updateLoadingMessage(newMessage);
 		
 	}
+	public static void freezeLoadingAnimation() {
+		
+		if(loadingAnimation == null) { return; }
+		
+		loadingAnimation.freezeAnimation();
+		
+	}
 	public static void stopLoadingAnimation() {
 		
 		if(loadingAnimation == null) { return; };
 		
 		if(loadingAnimation.isDarkBackground() == true) {
 			//WITH FADE
-			AnimationHandler.startAnimation(new FadeAnimation(55, 10, FadeType.FADEOUT));
+			AnimationHandler.startAnimation(new FadeAnimation(30, 10, FadeType.FADEOUT));
 		}
 		AnimationHandler.stopAnimation(loadingAnimation);
 		loadingAnimation = null;

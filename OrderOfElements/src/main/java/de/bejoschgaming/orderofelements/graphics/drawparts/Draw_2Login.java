@@ -8,6 +8,12 @@ import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 
 public class Draw_2Login {
 
+	public static void initMAAs() {
+		
+		
+		
+	}
+	
 	public static void draw(Graphics g) {
 		
 		g.setColor(Color.DARK_GRAY);

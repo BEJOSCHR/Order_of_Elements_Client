@@ -106,6 +106,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 				clickedMAA.performAction_RIGHT_RELEASE();
 			}
 		}
+		
 	}
 
 	@Override

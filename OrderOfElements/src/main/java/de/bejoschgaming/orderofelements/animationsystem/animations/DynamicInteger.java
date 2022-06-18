@@ -53,6 +53,17 @@ public class DynamicInteger extends Animation {
 	}
 	
 	public int getValue() {
+		if(this.startValue <= this.endValue) {
+			//POS STEPS (INCREASE)
+			if(this.value >= this.endValue) {
+				return this.endValue;
+			}
+		}else {
+			//NEG STEPS (DECREASE)
+			if(this.value <= this.endValue) {
+				return this.endValue;
+			}
+		}
 		return this.value;
 	}
 	

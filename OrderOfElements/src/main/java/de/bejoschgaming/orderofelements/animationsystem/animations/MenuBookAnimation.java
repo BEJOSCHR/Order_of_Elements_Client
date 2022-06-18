@@ -9,7 +9,7 @@ public class MenuBookAnimation extends Animation {
 	protected boolean forwards;
 	
 	public MenuBookAnimation(boolean forwards) {
-		super(20, 5);
+		super(25, 5);
 		
 		this.forwards = forwards;
 		

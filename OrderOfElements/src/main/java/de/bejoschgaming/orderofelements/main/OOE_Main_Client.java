@@ -7,9 +7,12 @@ import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.TickHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.FadeAnimation;
 import de.bejoschgaming.orderofelements.animationsystem.animations.FadeType;
+import de.bejoschgaming.orderofelements.componentssystem.TextAreaHandler;
+import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
+import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
@@ -31,9 +34,6 @@ public class OOE_Main_Client {
 		
 		ImageHandler.loadPreUsedImages();
 		
-		MouseActionAreaHandler.initMAAs();
-		
-		//TODO remove text animation and instead show loading animation while connecting to server after init logo bild+animation
 		AnimationHandler.startAnimation(new FadeAnimation(60, 5, FadeType.FADEOUT));
 		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		new Timer().schedule(new TimerTask() {
@@ -44,20 +44,21 @@ public class OOE_Main_Client {
 					@Override
 					protected void halfTimeAction() {
 						
+						ServerConnection.connectToServer();
 						GraphicsHandler.switchTo(DrawState.LOGIN);
 						
 					}
 					
 				});
-//				AnimationHandler.startLoadingAnimation("Connecting to server", 22, true);
-//				new Timer().schedule(new TimerTask() {
-//					@Override
-//					public void run() {
-//						ServerConnection.connectToServer();
-//					}
-//				}, (int) (1000*3.0));
 			}
-		}, (int) (1000*2.3));
+		}, (int) (1000*2.0));
+		
+		FontHandler.loadFonts();
+		
+		MouseActionAreaHandler.initMAAs();
+		
+		TextFieldHandler.loadTextFields();
+		TextAreaHandler.loadTextAreas();
 		
 		ImageHandler.loadImages();
 		

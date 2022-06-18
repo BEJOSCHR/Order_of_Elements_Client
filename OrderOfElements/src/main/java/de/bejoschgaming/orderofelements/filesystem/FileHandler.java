@@ -48,6 +48,7 @@ public class FileHandler {
 			saveDataInFile(file_Settings, "CONNECTION_Port", "6776");
 			saveDataInFile(file_Settings, "CONNECTION_Idletime", "10");
 			saveDataInFile(file_Settings, "CONNECTION_Packetdivider", "_:_");
+			saveDataInFile(file_Settings, "LOGIN_Name", "");
 			ConsoleHandler.printMessageInConsole("Created file '"+file_Settings.getAbsolutePath()+"' on first write", true);
 		}
 		

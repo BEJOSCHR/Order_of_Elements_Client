@@ -12,7 +12,11 @@ package de.bejoschgaming.orderofelements.maa;
 
 public enum MouseActionAreaType {
 
-	LOADINGSCREEN_SERVERCONFAILED_EXIT,
+	//LOGIN
+	LOGIN_Login,
+	LOGIN_Register,
+	Login_Cancle,
+	
 	MAA_TEST;
 
 }

@@ -1,16 +1,13 @@
 package de.bejoschgaming.orderofelements.connection;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
-import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 
 public class ConnectionEventHandler extends IoHandlerAdapter {
 
@@ -26,14 +23,7 @@ public class ConnectionEventHandler extends IoHandlerAdapter {
 		
 		ConsoleHandler.printMessageInConsole("Connected to server "+session.getRemoteAddress(), true);
 		ServerConnection.connectedToServer = true;
-		AnimationHandler.updateLoadingMessage("Successfully connect to server!");
-		GraphicsHandler.switchTo(DrawState.LOGIN);
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				AnimationHandler.stopLoadingAnimation();
-			}
-		}, (int) (1000*2.0));
+		ServerConnection.disconnecting = false;
 		
 	}
 	
@@ -42,6 +32,12 @@ public class ConnectionEventHandler extends IoHandlerAdapter {
 		
 		ConsoleHandler.printMessageInConsole("Disconnected from server "+session.getRemoteAddress(), true);
 		ServerConnection.connectedToServer = false;
+		if(ServerConnection.disconnecting == false) {
+			//NO PLANNED DISCONNECT
+			Draw_2Login.loginErrorCause = "Lost connection to server!";
+			GraphicsHandler.switchTo(DrawState.LOGIN);
+			ServerConnection.connectToServer();
+		}
 		
 	}
 	

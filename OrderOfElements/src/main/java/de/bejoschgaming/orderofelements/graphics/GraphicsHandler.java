@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 
 import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.DynamicInteger;
+import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
+import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
@@ -69,8 +71,8 @@ public class GraphicsHandler {
 	/**
 	 * Allgemeine Methode um einen beliebigen Text mit Parametern relativ zu einem
 	 * Punkt (x,y) mittig darzustellen
-	 * EXAMPLE: GraphicsHandler.drawCentralisedText(g, Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(11)), "Beispiel", x, y);
-	 * 
+	 * EXAMPLE: GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 50), "Order Of Elements", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*3)/7);
+	 *
 	 * @param g,        das Graphics object
 	 * @param color,    die Textfarbe
 	 * @param font, 	die Font in der der Text dargestellt werden soll
@@ -113,6 +115,10 @@ public class GraphicsHandler {
 			
 			break;
 		case LOGIN:
+			TextFieldHandler.LOGIN_Name.setText(FileHandler.readOutData(FileHandler.file_Settings, "LOGIN_Name"));;
+			TextFieldHandler.showTextField(TextFieldHandler.LOGIN_Name);
+			TextFieldHandler.showTextField(TextFieldHandler.LOGIN_Password);
+			TextFieldHandler.LOGIN_Name.requestFocus();
 			if(Draw_3Menu.backGroundAnimationFrame == null) {
 				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
 					
@@ -189,6 +195,10 @@ public class GraphicsHandler {
 			
 			break;
 		case LOGIN:
+			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Name);
+			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Password);
+			GraphicsHandler.getFrame().requestFocus();
+			FileHandler.saveDataInFile(FileHandler.file_Settings, "LOGIN_Name", TextFieldHandler.LOGIN_Name.getText());
 			if(newDrawState != DrawState.MENU) {
 				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
 				Draw_3Menu.backGroundAnimationFrame = null;

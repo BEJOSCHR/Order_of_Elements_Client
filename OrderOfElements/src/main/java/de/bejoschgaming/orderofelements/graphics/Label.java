@@ -17,8 +17,9 @@ import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_1Loadingscreen;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Ingame;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Aftergame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Credits;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Ingame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Aftergame;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
 
@@ -77,11 +78,14 @@ public class Label extends JLabel {
 		case DECKBUILDER:
 			Draw_4Deckbuilder.draw(g);
 			break;
+		case CREDITS:
+			Draw_5Credits.draw(g);
+			break;
 		case INGAME:
-			Draw_5Ingame.draw(g);
+			Draw_6Ingame.draw(g);
 			break;
 		case AFTERGAME:
-			Draw_6Aftergame.draw(g);
+			Draw_7Aftergame.draw(g);
 			break;
 		}
 		

@@ -71,7 +71,7 @@ public class Draw_2Login {
 				}
 			}
 		};
-		new MouseActionArea(6340, 6300, 1000, 530, MouseActionAreaType.Login_Cancle, "Exit", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(6340, 6300, 1000, 530, MouseActionAreaType.LOGIN_Cancle, "Exit", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.LOGIN;
@@ -85,10 +85,7 @@ public class Draw_2Login {
 	}
 	
 	public static void draw(Graphics g) {
-		
-//		g.setColor(Color.DARK_GRAY);
-//		g.fillRect(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
-		
+			
 		//BACKGROUND
 		if(Draw_3Menu.backGroundAnimationFrame != null) {
 			int backgroundFrame = Draw_3Menu.backGroundAnimationFrame.getValue();

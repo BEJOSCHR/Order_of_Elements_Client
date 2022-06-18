@@ -12,6 +12,7 @@ import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Credits;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.WindowHandler;
@@ -115,7 +116,8 @@ public class GraphicsHandler {
 			
 			break;
 		case LOGIN:
-			TextFieldHandler.LOGIN_Name.setText(FileHandler.readOutData(FileHandler.file_Settings, "LOGIN_Name"));;
+			TextFieldHandler.LOGIN_Name.setText(FileHandler.readOutData(FileHandler.file_Settings, "LOGIN_Name"));
+			TextFieldHandler.LOGIN_Password.setText("benno2001"); //TODO ONLY TEMP FOR TESTING!
 			TextFieldHandler.showTextField(TextFieldHandler.LOGIN_Name);
 			TextFieldHandler.showTextField(TextFieldHandler.LOGIN_Password);
 			TextFieldHandler.LOGIN_Name.requestFocus();
@@ -172,6 +174,27 @@ public class GraphicsHandler {
 				};
 			}
 			break;
+		case CREDITS:
+			if(Draw_3Menu.backGroundAnimationFrame == null) {
+				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
+					
+					@Override
+					protected void stepAction() {
+						
+						this.value += this.addPerStep;
+						
+						if(this.value > this.endValue) {
+							this.value = this.startValue;
+						}
+						
+					}
+					
+				};
+			}
+			if(Draw_5Credits.creditsScroll == null) {
+				Draw_5Credits.creditsScroll = new DynamicInteger(Draw_5Credits.scrollSpeed, 1, 0, 8000);
+			}
+			break;
 		case INGAME:
 			
 			break;
@@ -205,7 +228,7 @@ public class GraphicsHandler {
 			}
 			break;
 		case MENU:
-			if(newDrawState != DrawState.DECKBUILDER) {
+			if(newDrawState != DrawState.DECKBUILDER && newDrawState != DrawState.CREDITS) {
 				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
 				Draw_3Menu.backGroundAnimationFrame = null;
 			}
@@ -214,6 +237,16 @@ public class GraphicsHandler {
 			if(newDrawState != DrawState.MENU) {
 				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
 				Draw_3Menu.backGroundAnimationFrame = null;
+			}
+			break;
+		case CREDITS:
+			if(newDrawState != DrawState.MENU) {
+				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
+				Draw_3Menu.backGroundAnimationFrame = null;
+			}
+			if(Draw_5Credits.creditsScroll != null) {
+				AnimationHandler.stopAnimation(Draw_5Credits.creditsScroll);
+				Draw_5Credits.creditsScroll = null;
 			}
 			break;
 		case INGAME:

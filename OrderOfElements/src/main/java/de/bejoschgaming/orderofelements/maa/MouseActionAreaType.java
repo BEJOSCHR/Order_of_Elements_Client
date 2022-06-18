@@ -15,7 +15,19 @@ public enum MouseActionAreaType {
 	//LOGIN
 	LOGIN_Login,
 	LOGIN_Register,
-	Login_Cancle,
+	LOGIN_Cancle,
+	
+	//MENU
+	MENU_Play,
+	MENU_Deckbuilder,
+	MENU_Settings,
+	MENU_Credits,
+	MENU_Cancle,
+	
+	//DECKBUILDER
+	
+	//CREDITS
+	CREDITS_Back,
 	
 	MAA_TEST;
 

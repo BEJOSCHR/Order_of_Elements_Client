@@ -7,6 +7,7 @@ public enum DrawState {
 	LOGIN,
 	MENU,
 	DECKBUILDER,
+	CREDITS,
 	INGAME,
 	AFTERGAME;
 	

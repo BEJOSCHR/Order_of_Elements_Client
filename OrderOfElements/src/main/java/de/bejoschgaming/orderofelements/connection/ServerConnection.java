@@ -102,6 +102,7 @@ public class ServerConnection {
 			//CORRECT LOGIN
 			//Syntax: 100-PlayerID;Successfully logged in!
 			ClientData.setClientID(Integer.parseInt(data[0]));
+			ClientData.setClientName(TextFieldHandler.LOGIN_Name.getText());
 			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Name);
 			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Password);
 			AnimationHandler.startAnimation(new MenuBookAnimation(true) {

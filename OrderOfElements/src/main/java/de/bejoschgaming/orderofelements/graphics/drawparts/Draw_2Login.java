@@ -19,7 +19,7 @@ public class Draw_2Login {
 	
 	public static void initMAAs() {
 		
-		new MouseActionArea(5775, 5500, 1000, 530, MouseActionAreaType.LOGIN_Login, "Login", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(1130, 595, 160, 60, MouseActionAreaType.LOGIN_Login, "Login", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.LOGIN && ServerConnection.connectedToServer;
@@ -45,7 +45,7 @@ public class Draw_2Login {
 				}
 			}
 		};
-		new MouseActionArea(6915, 5500, 1000, 530, MouseActionAreaType.LOGIN_Register, "Register", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(1320, 595, 160, 60, MouseActionAreaType.LOGIN_Register, "Register", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.LOGIN && ServerConnection.connectedToServer;
@@ -71,7 +71,7 @@ public class Draw_2Login {
 				}
 			}
 		};
-		new MouseActionArea(6340, 6300, 1000, 530, MouseActionAreaType.LOGIN_Cancle, "Exit", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(1225, 680, 160, 60, MouseActionAreaType.LOGIN_Cancle, "Exit", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.LOGIN;

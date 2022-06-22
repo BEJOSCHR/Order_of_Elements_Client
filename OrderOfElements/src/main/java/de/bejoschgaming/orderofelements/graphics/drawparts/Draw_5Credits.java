@@ -21,7 +21,7 @@ public class Draw_5Credits {
 	
 	public static void initMAAs() {
 		
-		new MouseActionArea(0, 0, 10000, 10000, MouseActionAreaType.CREDITS_Back, "", 22, Color.BLACK, Color.ORANGE, false, false) {
+		new MouseActionArea(0, 0, 1920, 1080, MouseActionAreaType.CREDITS_Back, "", 22, Color.BLACK, Color.ORANGE, false, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.CREDITS;

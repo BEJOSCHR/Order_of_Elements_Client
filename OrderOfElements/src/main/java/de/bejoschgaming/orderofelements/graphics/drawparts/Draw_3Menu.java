@@ -21,7 +21,11 @@ public class Draw_3Menu {
 	
 	public static void initMAAs() {
 		
-		new MouseActionArea(2740, 3580, 1000, 530, MouseActionAreaType.MENU_Play, "Play", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		int x = 550, y = 380;
+		int width = 160, height = 60;
+		int distanceBetween = 22; 
+		
+		new MouseActionArea(x, y+0*(height+distanceBetween), width, height, MouseActionAreaType.MENU_Play, "Play", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.MENU;
@@ -31,7 +35,7 @@ public class Draw_3Menu {
 				//TODO
 			}
 		};
-		new MouseActionArea(2740, 4260, 1000, 530, MouseActionAreaType.MENU_Deckbuilder, "Deckbuilder", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(x, y+1*(height+distanceBetween), width, height, MouseActionAreaType.MENU_Deckbuilder, "Deckbuilder", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.MENU;
@@ -41,7 +45,7 @@ public class Draw_3Menu {
 				//TODO
 			}
 		};
-		new MouseActionArea(2740, 4940, 1000, 530, MouseActionAreaType.MENU_Settings, "Settings", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(x, y+2*(height+distanceBetween), width, height, MouseActionAreaType.MENU_Settings, "Settings", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.MENU;
@@ -51,7 +55,7 @@ public class Draw_3Menu {
 				//TODO
 			}
 		};
-		new MouseActionArea(2740, 5620, 1000, 530, MouseActionAreaType.MENU_Credits, "Credits", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(x, y+3*(height+distanceBetween), width, height, MouseActionAreaType.MENU_Credits, "Credits", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.MENU;
@@ -66,7 +70,7 @@ public class Draw_3Menu {
 				});
 			}
 		};
-		new MouseActionArea(2740, 6300, 1000, 530, MouseActionAreaType.MENU_Cancle, "Exit", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
+		new MouseActionArea(x, y+4*(height+distanceBetween), width, height, MouseActionAreaType.MENU_Cancle, "Exit", 22, Color.DARK_GRAY, Color.BLACK, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.MENU;

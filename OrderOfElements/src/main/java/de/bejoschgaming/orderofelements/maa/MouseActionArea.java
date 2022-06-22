@@ -30,10 +30,10 @@ public class MouseActionArea {
 	 * 
 	 * @param relX          - int - Startpunkt auf der x-Achse relativ zur
 	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      10000 an.
+	 *                      1920 an.
 	 * @param relY          - int - Startpunkt auf der y-Achse relativ zur
 	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      10000 an.
+	 *                      1080 an.
 	 * @param relWidth      - int - Breite der MAA relativ zur Bildschirmaufloesung.
 	 *                      Nimmt einen Wert zwischen 0 und 10000 an.
 	 * @param relHeight     - int - Hoehe der MAA relativ zur Bildschirmaufloesung.
@@ -56,29 +56,29 @@ public class MouseActionArea {
 
 		if (relX < 0)
 			this.relX = 0;
-		else if (relX > 10000)
-			this.relX = 10000;
+		else if (relX > 1920)
+			this.relX = 1920;
 		else
 			this.relX = relX;
 
 		if (relY < 0)
 			this.relY = 0;
-		else if (relY > 10000)
-			this.relY = 10000;
+		else if (relY > 1080)
+			this.relY = 1080;
 		else
 			this.relY = relY;
 
 		if (relWidth < 0)
 			this.relWidth = 0;
-		else if (relWidth > 10000)
-			this.relWidth = 10000;
+		else if (relWidth > 1920)
+			this.relWidth = 1920;
 		else
 			this.relWidth = relWidth;
 
 		if (relHeight < 0)
 			this.relHeight = 0;
-		else if (relHeight > 10000)
-			this.relHeight = 10000;
+		else if (relHeight > 1080)
+			this.relHeight = 1080;
 		else
 			this.relHeight = relHeight;
 
@@ -90,8 +90,6 @@ public class MouseActionArea {
 		this.showBox = showBox;
 
 		this.refreshPosition();
-
-		MouseActionAreaHandler.getMAAs().add(this);
 
 		// SICHERSTELLEN, DASS KEINE NEBENLAEUFIGE FEHLER DAS HINZUFUEGEN VERHINDERN
 		while (!MouseActionAreaHandler.getMAAs().contains(this)) {
@@ -107,10 +105,10 @@ public class MouseActionArea {
 	 * und der Bildschirmaufloesung.
 	 */
 	public void refreshPosition() {
-		x = (int) ((((double) relX / 10000.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		y = (int) ((((double) relY / 10000.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
-		width = (int) ((((double) relWidth / 10000.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
-		height = (int) ((((double) relHeight / 10000.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		x = (int) ((((double) relX / 1920.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		y = (int) ((((double) relY / 1080.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
+		width = (int) ((((double) relWidth / 1920.0) * (double) GraphicsHandler.frame.getWidth()) + 0.5);
+		height = (int) ((((double) relHeight / 1080.0) * (double) GraphicsHandler.frame.getHeight()) + 0.5);
 
 		// TODO: Allgemeinere Schreibweise. Weg von der 1080 Basis.
 		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.frame.getHeight() + 0.5);
@@ -229,8 +227,6 @@ public class MouseActionArea {
 	 * Loescht diese MAA.
 	 **/
 	public void remove() {
-
-		MouseActionAreaHandler.getMAAs().remove(this);
 
 		// SICHERSTELLEN, DASS KEINE NEBENLAEUFIGE FEHLER DAS LOESCHEN VERHINDERN
 		while (MouseActionAreaHandler.getMAAs().contains(this)) {

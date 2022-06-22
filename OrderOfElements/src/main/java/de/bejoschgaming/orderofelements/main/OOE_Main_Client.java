@@ -25,7 +25,7 @@ public class OOE_Main_Client {
 		MouseActionAreaHandler.initMAAs();
 		
 		ConsoleHandler.printMessageInConsole("FieldSize: "+MapData.FIELD_SIZE, true);
-		MapData.map = new Map();
+		//MapData.map = new Map();
 		
 		ServerConnection.connectToServer();
 		

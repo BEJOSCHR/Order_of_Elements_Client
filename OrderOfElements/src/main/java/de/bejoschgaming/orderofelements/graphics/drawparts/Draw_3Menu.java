@@ -7,8 +7,6 @@ import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.DynamicInteger;
 import de.bejoschgaming.orderofelements.animationsystem.animations.FadeAnimation;
 import de.bejoschgaming.orderofelements.animationsystem.animations.FadeType;
-import de.bejoschgaming.orderofelements.animationsystem.animations.MenuBookAnimation;
-import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;

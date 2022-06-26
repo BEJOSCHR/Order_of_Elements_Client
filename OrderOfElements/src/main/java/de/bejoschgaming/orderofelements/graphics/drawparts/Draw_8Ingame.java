@@ -2,7 +2,7 @@ package de.bejoschgaming.orderofelements.graphics.drawparts;
 
 import java.awt.Graphics;
 
-public class Draw_7Aftergame {
+public class Draw_8Ingame {
 
 	public static void initMAAs() {
 		

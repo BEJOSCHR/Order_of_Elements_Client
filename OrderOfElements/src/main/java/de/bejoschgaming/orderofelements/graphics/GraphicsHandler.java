@@ -12,7 +12,7 @@ import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Credits;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Credits;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.WindowHandler;
@@ -107,7 +107,6 @@ public class GraphicsHandler {
 		
 		leaveState(getDrawState(), newDrawState);
 		
-		int backgroundAnimationTempo = 15;
 		switch (newDrawState) {
 		case PROGRAMMSTART:
 			//WILL NEVER HAPPEN!
@@ -121,78 +120,24 @@ public class GraphicsHandler {
 			TextFieldHandler.showTextField(TextFieldHandler.LOGIN_Name);
 			TextFieldHandler.showTextField(TextFieldHandler.LOGIN_Password);
 			TextFieldHandler.LOGIN_Name.requestFocus();
-			if(Draw_3Menu.backGroundAnimationFrame == null) {
-				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
-					
-					@Override
-					protected void stepAction() {
-						
-						this.value += this.addPerStep;
-						
-						if(this.value > this.endValue) {
-							this.value = this.startValue;
-						}
-						
-					}
-					
-				};
-			}
+			Draw_3Menu.startBackgroundAnimation();
 			break;
 		case MENU:
-			if(Draw_3Menu.backGroundAnimationFrame == null) {
-				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
-					
-					@Override
-					protected void stepAction() {
-						
-						this.value += this.addPerStep;
-						
-						if(this.value > this.endValue) {
-							this.value = this.startValue;
-						}
-						
-					}
-					
-				};
-			}
+			Draw_3Menu.startBackgroundAnimation();
 			break;
 		case DECKBUILDER:
-			if(Draw_3Menu.backGroundAnimationFrame == null) {
-				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
-					
-					@Override
-					protected void stepAction() {
-						
-						this.value += this.addPerStep;
-						
-						if(this.value > this.endValue) {
-							this.value = this.startValue;
-						}
-						
-					}
-					
-				};
-			}
+			Draw_3Menu.startBackgroundAnimation();
+			break;
+		case FRIENDLIST:
+			Draw_3Menu.startBackgroundAnimation();
+			break;
+		case MATCHHISTORY:
+			Draw_3Menu.startBackgroundAnimation();
 			break;
 		case CREDITS:
-			if(Draw_3Menu.backGroundAnimationFrame == null) {
-				Draw_3Menu.backGroundAnimationFrame = new DynamicInteger(backgroundAnimationTempo, 1, 0, 6) {
-					
-					@Override
-					protected void stepAction() {
-						
-						this.value += this.addPerStep;
-						
-						if(this.value > this.endValue) {
-							this.value = this.startValue;
-						}
-						
-					}
-					
-				};
-			}
-			if(Draw_5Credits.creditsScroll == null) {
-				Draw_5Credits.creditsScroll = new DynamicInteger(Draw_5Credits.scrollSpeed, 1, 0, 8000);
+			Draw_3Menu.startBackgroundAnimation();
+			if(Draw_7Credits.creditsScroll == null) {
+				Draw_7Credits.creditsScroll = new DynamicInteger(Draw_7Credits.scrollSpeed, 1, 0, 8000);
 			}
 			break;
 		case INGAME:
@@ -223,30 +168,36 @@ public class GraphicsHandler {
 			GraphicsHandler.getFrame().requestFocus();
 			FileHandler.saveDataInFile(FileHandler.file_Settings, "LOGIN_Name", TextFieldHandler.LOGIN_Name.getText());
 			if(newDrawState != DrawState.MENU) {
-				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
-				Draw_3Menu.backGroundAnimationFrame = null;
+				Draw_3Menu.stopBackgroundAnimation();
 			}
 			break;
 		case MENU:
-			if(newDrawState != DrawState.DECKBUILDER && newDrawState != DrawState.CREDITS) {
-				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
-				Draw_3Menu.backGroundAnimationFrame = null;
+			if(newDrawState != DrawState.DECKBUILDER && newDrawState != DrawState.CREDITS  && newDrawState != DrawState.FRIENDLIST && newDrawState != DrawState.MATCHHISTORY) {
+				Draw_3Menu.stopBackgroundAnimation();
 			}
 			break;
 		case DECKBUILDER:
 			if(newDrawState != DrawState.MENU) {
-				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
-				Draw_3Menu.backGroundAnimationFrame = null;
+				Draw_3Menu.stopBackgroundAnimation();
+			}
+			break;
+		case FRIENDLIST:
+			if(newDrawState != DrawState.MENU) {
+				Draw_3Menu.stopBackgroundAnimation();
+			}
+			break;
+		case MATCHHISTORY:
+			if(newDrawState != DrawState.MENU) {
+				Draw_3Menu.stopBackgroundAnimation();
 			}
 			break;
 		case CREDITS:
 			if(newDrawState != DrawState.MENU) {
-				AnimationHandler.stopAnimation(Draw_3Menu.backGroundAnimationFrame);
-				Draw_3Menu.backGroundAnimationFrame = null;
+				Draw_3Menu.stopBackgroundAnimation();
 			}
-			if(Draw_5Credits.creditsScroll != null) {
-				AnimationHandler.stopAnimation(Draw_5Credits.creditsScroll);
-				Draw_5Credits.creditsScroll = null;
+			if(Draw_7Credits.creditsScroll != null) {
+				AnimationHandler.stopAnimation(Draw_7Credits.creditsScroll);
+				Draw_7Credits.creditsScroll = null;
 			}
 			break;
 		case INGAME:

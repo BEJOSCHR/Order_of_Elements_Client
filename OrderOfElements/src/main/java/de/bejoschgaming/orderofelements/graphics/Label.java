@@ -17,9 +17,11 @@ import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_1Loadingscreen;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Credits;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Ingame;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Aftergame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Friendlist;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Matchhistory;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Credits;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_8Ingame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_9Aftergame;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
 
@@ -78,14 +80,20 @@ public class Label extends JLabel {
 		case DECKBUILDER:
 			Draw_4Deckbuilder.draw(g);
 			break;
+		case FRIENDLIST:
+			Draw_5Friendlist.draw(g);
+			break;
+		case MATCHHISTORY:
+			Draw_6Matchhistory.draw(g);
+			break;
 		case CREDITS:
-			Draw_5Credits.draw(g);
+			Draw_7Credits.draw(g);
 			break;
 		case INGAME:
-			Draw_6Ingame.draw(g);
+			Draw_8Ingame.draw(g);
 			break;
 		case AFTERGAME:
-			Draw_7Aftergame.draw(g);
+			Draw_9Aftergame.draw(g);
 			break;
 		}
 		

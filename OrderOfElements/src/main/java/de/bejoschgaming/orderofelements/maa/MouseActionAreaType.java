@@ -23,8 +23,17 @@ public enum MouseActionAreaType {
 	MENU_Settings,
 	MENU_Credits,
 	MENU_Cancle,
+	MENU_Friendlist,
+	MENU_Matchhistory,
 	
 	//DECKBUILDER
+	DECKBUILDER_Back,
+	
+	//FRIENDLIST
+	FRIENDLIST_Back,
+	
+	//MATCHHISTORY
+	MATCHHISTORY_Back,
 	
 	//CREDITS
 	CREDITS_Back,

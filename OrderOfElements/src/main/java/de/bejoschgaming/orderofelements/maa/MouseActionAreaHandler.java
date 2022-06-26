@@ -16,9 +16,11 @@ import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_1Loadingscreen;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Credits;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Ingame;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Aftergame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Friendlist;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Matchhistory;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Credits;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_8Ingame;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_9Aftergame;
 
 public class MouseActionAreaHandler {
 
@@ -36,9 +38,11 @@ public class MouseActionAreaHandler {
 		Draw_2Login.initMAAs();
 		Draw_3Menu.initMAAs();
 		Draw_4Deckbuilder.initMAAs();
-		Draw_5Credits.initMAAs();
-		Draw_6Ingame.initMAAs();
-		Draw_7Aftergame.initMAAs();
+		Draw_5Friendlist.initMAAs();
+		Draw_6Matchhistory.initMAAs();
+		Draw_7Credits.initMAAs();
+		Draw_8Ingame.initMAAs();
+		Draw_9Aftergame.initMAAs();
 		
 	}
 

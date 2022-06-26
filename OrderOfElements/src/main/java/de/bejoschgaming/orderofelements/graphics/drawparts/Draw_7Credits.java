@@ -14,7 +14,7 @@ import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
 
-public class Draw_5Credits {
+public class Draw_7Credits {
 
 	public static int scrollSpeed = 3;
 	public static DynamicInteger creditsScroll = null;
@@ -28,7 +28,7 @@ public class Draw_5Credits {
 			}
 			@Override
 			public void performAction_LEFT_RELEASE() {
-				AnimationHandler.startAnimation(new FadeAnimation(95, 6, FadeType.FADEINANDOUT) {
+				AnimationHandler.startAnimation(new FadeAnimation(85, 6, FadeType.FADEINANDOUT) {
 					@Override
 					protected void halfTimeAction() {
 						GraphicsHandler.switchTo(DrawState.MENU);

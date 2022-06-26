@@ -25,6 +25,7 @@ public enum MouseActionAreaType {
 	MENU_Cancle,
 	MENU_Friendlist,
 	MENU_Matchhistory,
+	MENU_PatchnotesScroll,
 	
 	//DECKBUILDER
 	DECKBUILDER_Back,

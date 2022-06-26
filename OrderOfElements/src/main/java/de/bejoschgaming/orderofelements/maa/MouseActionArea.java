@@ -97,8 +97,7 @@ public class MouseActionArea {
 		while (!MouseActionAreaHandler.getMAAs().contains(this)) {
 			try {
 				MouseActionAreaHandler.getMAAs().add(this);
-			} catch (ConcurrentModificationException error) {
-			}
+			} catch (ConcurrentModificationException error) {}
 		}
 	}
 
@@ -191,6 +190,13 @@ public class MouseActionArea {
 	 **/
 	public void performAction_RIGHT_RELEASE() {
 	}
+	
+	/**
+	 * Wird aufgerufen wenn innerhalb dieser MAA das Mausrad gedreht wird
+	 * (@Overwrite))
+	 **/
+	public void performAction_MOUSEWHEEL_TURN(int turns) {
+	}
 
 	/**
 	 * Der graphische Darstellungsteil jeder MAA. Wird nur aufgerufen, wenn die MAA
@@ -236,8 +242,7 @@ public class MouseActionArea {
 		while (MouseActionAreaHandler.getMAAs().contains(this)) {
 			try {
 				MouseActionAreaHandler.getMAAs().remove(this);
-			} catch (ConcurrentModificationException error) {
-			}
+			} catch (ConcurrentModificationException error) {}
 		}
 	}
 

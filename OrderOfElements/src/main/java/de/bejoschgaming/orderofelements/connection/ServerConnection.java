@@ -22,6 +22,7 @@ import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
 import de.bejoschgaming.orderofelements.profile.ClientData;
 
 public class ServerConnection {
@@ -123,6 +124,13 @@ public class ServerConnection {
 			String invalidCause = message;
 			Draw_2Login.loginErrorCause = invalidCause;
 			ConsoleHandler.printMessageInConsole("Login invalid! Cause: "+invalidCause, true);
+			break;
+		case 180:
+			//PATCHNOTES
+			//Syntax: 180-PatchnotesData
+			String patchnotesData = message;
+			Draw_3Menu.patchnotesData = patchnotesData;
+			ConsoleHandler.printMessageInConsole("Set patchnotes: "+patchnotesData, true);
 			break;
 		}
 		

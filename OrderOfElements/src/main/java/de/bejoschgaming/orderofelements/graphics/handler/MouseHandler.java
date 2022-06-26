@@ -18,8 +18,19 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		// TODO Auto-generated method stub
-
+		
+		int turns = e.getWheelRotation();
+		
+		List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+		for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+			if (maa.isActiv() && maa.isHovered()) {
+				clickedMAAs.add(maa);
+			}
+		}
+		for (MouseActionArea clickedMAA : clickedMAAs) {
+			clickedMAA.performAction_MOUSEWHEEL_TURN(turns);
+		}
+		
 	}
 
 	@Override

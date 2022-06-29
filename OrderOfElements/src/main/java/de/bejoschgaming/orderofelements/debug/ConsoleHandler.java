@@ -8,7 +8,7 @@ import java.util.TimerTask;
 
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
-import de.bejoschgaming.orderofelements.profile.ClientData;
+import de.bejoschgaming.orderofelements.profilesystem.ClientData;
 
 public class ConsoleHandler {
 

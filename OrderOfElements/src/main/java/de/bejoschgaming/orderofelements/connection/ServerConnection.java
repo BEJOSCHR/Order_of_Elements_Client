@@ -23,7 +23,8 @@ import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
-import de.bejoschgaming.orderofelements.profile.ClientData;
+import de.bejoschgaming.orderofelements.profilesystem.ClientData;
+import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
 
 public class ServerConnection {
 
@@ -131,6 +132,17 @@ public class ServerConnection {
 			String patchnotesData = message;
 			Draw_3Menu.patchnotesData = patchnotesData;
 			ConsoleHandler.printMessageInConsole("Set patchnotes: "+patchnotesData, true);
+			break;
+		case 200:
+			//RECEIVE OWN CLIENT DATA
+			//Syntax: 200-PlayerStats Syntax
+			String ownStats[] = data;
+			//TODO save in client data
+			break;
+		case 201:
+			//RECEIVE OTHER CLIENT DATA
+			//Syntax: 201-PlayerStatsSyntax
+			ProfileHandler.updateProfileData(message);
 			break;
 		}
 		

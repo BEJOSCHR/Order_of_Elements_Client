@@ -1,4 +1,4 @@
-package de.bejoschgaming.orderofelements.profile;
+package de.bejoschgaming.orderofelements.profilesystem;
 
 public class ClientData {
 

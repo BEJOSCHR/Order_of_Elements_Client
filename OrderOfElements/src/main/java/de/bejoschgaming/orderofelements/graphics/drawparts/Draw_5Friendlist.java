@@ -11,6 +11,7 @@ import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
 
 public class Draw_5Friendlist {
 
@@ -50,7 +51,10 @@ public class Draw_5Friendlist {
 		
 		
 		//DRAW RIGHT PAGE
-		
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 25), ProfileHandler.getProfileData(1).getName(), (GraphicsHandler.getWidth()*66)/100, (GraphicsHandler.getHeight()*30)/100);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 25), ProfileHandler.getProfileData(2).getName(), (GraphicsHandler.getWidth()*66)/100, (GraphicsHandler.getHeight()*35)/100);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 25), ProfileHandler.getProfileData(3).getName(), (GraphicsHandler.getWidth()*66)/100, (GraphicsHandler.getHeight()*40)/100);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 25), ProfileHandler.getProfileData(4).getName(), (GraphicsHandler.getWidth()*66)/100, (GraphicsHandler.getHeight()*45)/100);
 		
 	}
 	

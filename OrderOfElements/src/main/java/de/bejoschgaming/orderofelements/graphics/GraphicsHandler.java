@@ -51,9 +51,9 @@ public class GraphicsHandler {
 //		    ConsoleHandler.print("Couldn't load window icon!", MessageType.BACKEND);
 //		}
 
-//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //		frame.setSize(1280, 720);
-		frame.setSize(2480, 1080);
+//		frame.setSize(2480, 1080);
 		
 		width = frame.getWidth();
 		height = frame.getHeight();

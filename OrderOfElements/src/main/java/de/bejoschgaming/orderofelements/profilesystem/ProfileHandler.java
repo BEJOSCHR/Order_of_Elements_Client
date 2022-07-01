@@ -6,14 +6,15 @@ import java.util.List;
 public class ProfileHandler {
 
 	public static final int lifeTimeOfProfileData_sek = 5*60; //THE TIME UNTIL DATA WILL BE RELOADED FROM SERVER UNTIL LAST LOAD
+	public static final int delayBetweenDataRequests_sek = 5; //THE TIME UNTIL DATA WILL BE REQUESTED AGAIN AFTE THE LAST REQUEST
 	
 	private static List<LoadedProfile> loadedProfiles = new ArrayList<LoadedProfile>();
 	
-	public static LoadedProfile getProfile(int playerID) {
+	public static LoadedProfile getProfileData(int playerID) {
 		
 		for(LoadedProfile loadedProfile : loadedProfiles) {
 			if(loadedProfile.getPlayerID() == playerID) {
-				if(loadedProfile.isStillUpToDate()) {
+				if(loadedProfile.isUpToDate()) {
 					return loadedProfile;
 				}else {
 					loadedProfile.requestDataUpdate();
@@ -22,11 +23,11 @@ public class ProfileHandler {
 			}
 		}
 		//NOT LOADED YET
-		return loadProfile(playerID);
+		return loadProfileData(playerID);
 		
 	}
 	
-	public static LoadedProfile loadProfile(int playerID) {
+	public static LoadedProfile loadProfileData(int playerID) {
 		
 		LoadedProfile loadedProfile = new LoadedProfile(playerID);
 		loadedProfiles.add(loadedProfile);
@@ -43,6 +44,17 @@ public class ProfileHandler {
 			}
 		}
 		
+	}
+	
+	public static LoadedProfile getProfileByListPos(int pos) {
+		if(pos < 0 || pos >= getLoadedProfileCount()) {
+			return null;
+		}else {
+			return loadedProfiles.get(pos);
+		}
+	}
+	public static int getLoadedProfileCount() {
+		return loadedProfiles.size();
 	}
 	
 }

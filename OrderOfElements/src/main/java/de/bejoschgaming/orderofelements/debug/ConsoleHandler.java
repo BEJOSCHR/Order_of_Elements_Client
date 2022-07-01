@@ -9,6 +9,8 @@ import java.util.TimerTask;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
 import de.bejoschgaming.orderofelements.profilesystem.ClientData;
+import de.bejoschgaming.orderofelements.profilesystem.LoadedProfile;
+import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
 
 public class ConsoleHandler {
 
@@ -90,6 +92,9 @@ public class ConsoleHandler {
 							case "/packets":
 								sendCommand_packets(inputs);
 								break;
+							case "/profiles":
+								sendCommand_profiles(inputs);
+								break;
 							case "/overview":
 								sendCommand_overview(inputs);
 								break;
@@ -147,6 +152,7 @@ public class ConsoleHandler {
 		
 		printMessageInConsole("Choose one of these commands:", true);
 		printMessageInConsole("'/packets ' - Join the packet session so you see the traffic of packets", true);
+		printMessageInConsole("'/profiles ' - See all loaded profiles and there TTL", true);
 		printMessageInConsole("'/overview ' - Gives a general overview about everything interesting", true);
 		printMessageInConsole("'/exit ' - Stoppes the whole program", true);
 		
@@ -168,6 +174,19 @@ public class ConsoleHandler {
 		printMessageInConsole("Joined packets session", true);
 		printBlankLineInConsole();
 		focusDebugID = 0;
+		
+	}
+	
+	private static void sendCommand_profiles(List<String> inputs) {
+		
+		if(ProfileHandler.getLoadedProfileCount() == 0) {
+			ConsoleHandler.printMessageInConsole("There are no profiles loaded yet!", true);
+		}else {
+			for(int i = 0 ; i < ProfileHandler.getLoadedProfileCount() ; i++) {
+				LoadedProfile profile = ProfileHandler.getProfileByListPos(i);
+				ConsoleHandler.printMessageInConsole((i+1)+". "+profile.getPlayerID()+"-"+profile.getName()+"-"+profile.getStatus()+" ("+profile.isUpToDate()+"-"+profile.getOutdatedMillis()+"<"+ProfileHandler.lifeTimeOfProfileData_sek*1000+")", true);
+			}
+		}
 		
 	}
 	

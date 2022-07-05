@@ -161,7 +161,7 @@ public class ConsoleHandler {
 	private static void sendCommand_overview(List<String> inputs) {
 		
 		printMessageInConsole("Running OrderOfElements-Client", true);
-		printMessageInConsole("Logged in as "+ClientData.getClientID()+" - "+ClientData.getClientName(), true);
+		printMessageInConsole("Logged in as "+ClientData.getThisProfile().getPlayerID()+" - "+ClientData.getThisProfile().getName(), true);
 		printMessageInConsole("Connected to server: "+ServerConnection.connectedToServer, true);
 		printMessageInConsole("Send packets: "+ServerConnection.sendPackets.size(), true);
 		printMessageInConsole("Running game: "+-1, true);
@@ -179,8 +179,15 @@ public class ConsoleHandler {
 	
 	private static void sendCommand_profiles(List<String> inputs) {
 		
+		if(ClientData.getThisProfile() != null) {
+			LoadedProfile profile = ClientData.getThisProfile();
+			ConsoleHandler.printMessageInConsole("This clientData: "+profile.getPlayerID()+"-"+profile.getName()+"-"+profile.getStatus()+" ("+profile.isUpToDate()+")", true);
+		}else {
+			ConsoleHandler.printMessageInConsole("This Client has not received his data yet!", true);
+		}
+		
 		if(ProfileHandler.getLoadedProfileCount() == 0) {
-			ConsoleHandler.printMessageInConsole("There are no profiles loaded yet!", true);
+			ConsoleHandler.printMessageInConsole("There are no other profiles loaded yet!", true);
 		}else {
 			for(int i = 0 ; i < ProfileHandler.getLoadedProfileCount() ; i++) {
 				LoadedProfile profile = ProfileHandler.getProfileByListPos(i);

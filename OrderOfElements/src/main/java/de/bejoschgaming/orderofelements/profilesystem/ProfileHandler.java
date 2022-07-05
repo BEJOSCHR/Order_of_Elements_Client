@@ -29,7 +29,7 @@ public class ProfileHandler {
 	
 	public static LoadedProfile loadProfileData(int playerID) {
 		
-		LoadedProfile loadedProfile = new LoadedProfile(playerID);
+		LoadedProfile loadedProfile = new LoadedProfile(playerID, true);
 		loadedProfiles.add(loadedProfile);
 		return loadedProfile;
 		

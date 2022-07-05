@@ -103,8 +103,7 @@ public class ServerConnection {
 		case 100:
 			//CORRECT LOGIN
 			//Syntax: 100-PlayerID;Successfully logged in!
-			ClientData.setClientID(Integer.parseInt(data[0]));
-			ClientData.setClientName(TextFieldHandler.LOGIN_Name.getText());
+			ClientData.setThisID(Integer.parseInt(data[0]));
 			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Name);
 			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Password);
 			AnimationHandler.startAnimation(new MenuBookAnimation(true) {
@@ -117,7 +116,7 @@ public class ServerConnection {
 				}
 				
 			});
-			ConsoleHandler.printMessageInConsole("Valid login! ClientID: "+ClientData.getClientID()+" - ClientName: "+ClientData.getClientName(), true);
+			ConsoleHandler.printMessageInConsole("Valid login! ClientID: "+ClientData.getThisID(), true);
 			break;
 		case 101:
 			//INVALID LOGIN
@@ -135,14 +134,29 @@ public class ServerConnection {
 			break;
 		case 200:
 			//RECEIVE OWN CLIENT DATA
-			//Syntax: 200-PlayerStats Syntax
-			String ownStats[] = data;
-			//TODO save in client data
+			//Syntax: 200-PlayerStatsSyntax
+			ClientData.setThisProfile(message);
+			ConsoleHandler.printMessageInConsole("Set clientData: "+message, true);
 			break;
 		case 201:
 			//RECEIVE OTHER CLIENT DATA
 			//Syntax: 201-PlayerStatsSyntax
 			ProfileHandler.updateProfileData(message);
+			break;
+		case 205:
+			//ONLINE INFO FOR FRIEND 
+			//Syntax: 205-PlayerID
+			
+			break;
+		case 206:
+			//OFFLINE INFO FOR FRIEND
+			//Syntax: 206-PlayerID
+			
+			break;
+		case 207:
+			//STATUS CHANGE FOR FRIEND
+			//Syntax: 206-PlayerID;Status
+			
 			break;
 		}
 		

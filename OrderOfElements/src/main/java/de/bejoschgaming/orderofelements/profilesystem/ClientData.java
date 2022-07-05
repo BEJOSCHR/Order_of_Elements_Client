@@ -2,20 +2,24 @@ package de.bejoschgaming.orderofelements.profilesystem;
 
 public class ClientData {
 
-	private static int clientID = -1;
-	private static String name = "";
+	private static int thisID = -1;
+	private static LoadedProfile thisProfile;
 	
-	public static void setClientID(int clientID_) {
-		clientID = clientID_;
+	
+	public static void setThisProfile(String profileDataString) {
+		
+		thisProfile = new LoadedProfile(thisID, false);
+		thisProfile.updateData(profileDataString);
+		
 	}
-	public static void setClientName(String name_) {
-		name = name_;
+	public static void setThisID(int thisID_) {
+		thisID = thisID_;
 	}
 	
-	public static int getClientID() {
-		return clientID;
+	public static int getThisID() {
+		return thisID;
 	}
-	public static String getClientName() {
-		return name;
+	public static LoadedProfile getThisProfile() {
+		return thisProfile;
 	}
 }

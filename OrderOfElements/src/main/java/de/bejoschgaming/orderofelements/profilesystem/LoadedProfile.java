@@ -21,10 +21,12 @@ public class LoadedProfile {
 	
 	private String status = "Offline";
 	
-	public LoadedProfile(int playerID) {
+	public LoadedProfile(int playerID, boolean autoUpdate) {
 		
 		this.playerID = playerID;
-		this.requestDataUpdate();
+		if(autoUpdate == true) {
+			this.requestDataUpdate();
+		}
 		
 	}
 
@@ -41,12 +43,16 @@ public class LoadedProfile {
 	public void updateStatus(String newStatus) { 
 		
 		this.status = newStatus;
+		if(ClientData.getThisID() == this.playerID) {
+			//IS LOCAL CLIENT LOADEDPROFILE, SO UPDATE SERVER ABOUT STATUS CHANGE
+			ServerConnection.sendPacket(207, newStatus);
+		}
 		
 	}
 	
 	public void updateData(String playerStatsSyntaxData) {
 		
-		//ID-NAME-..;..;..;
+		//ID-NAME-..;..;..; (see for syntax details on the server create functions)
 		String firstSplit[] = playerStatsSyntaxData.split("-");
 		
 		this.playerID = Integer.parseInt(firstSplit[0]);
@@ -64,7 +70,9 @@ public class LoadedProfile {
 		this.crowns = Integer.parseInt(secondSplit[7]);
 		this.displayColor = Color.getColor(secondSplit[8]);
 		this.titel = secondSplit[9];
-		this.status = secondSplit[10];
+		if(this.status != "Offline") {
+			this.status = secondSplit[10];
+		}
 		
 		this.loadedTime = System.currentTimeMillis();
 		

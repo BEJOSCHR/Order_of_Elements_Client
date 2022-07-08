@@ -32,6 +32,10 @@ public enum MouseActionAreaType {
 	
 	//FRIENDLIST
 	FRIENDLIST_Back,
+	FRIENDLIST_RequestSend,
+	FRIENDLIST_RequestAccept,
+	FRIENDLIST_RequestDecline,
+	FRIENDLIST_RequestDisplay,
 	
 	//MATCHHISTORY
 	MATCHHISTORY_Back,

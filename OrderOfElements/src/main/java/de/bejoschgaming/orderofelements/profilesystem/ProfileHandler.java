@@ -10,7 +10,7 @@ public class ProfileHandler {
 	
 	private static List<LoadedProfile> loadedProfiles = new ArrayList<LoadedProfile>();
 	
-	public static LoadedProfile getProfileData(int playerID) {
+	public static LoadedProfile getProfile(int playerID) {
 		
 		for(LoadedProfile loadedProfile : loadedProfiles) {
 			if(loadedProfile.getPlayerID() == playerID) {
@@ -27,7 +27,7 @@ public class ProfileHandler {
 		
 	}
 	
-	public static LoadedProfile loadProfileData(int playerID) {
+	private static LoadedProfile loadProfileData(int playerID) {
 		
 		LoadedProfile loadedProfile = new LoadedProfile(playerID, true);
 		loadedProfiles.add(loadedProfile);

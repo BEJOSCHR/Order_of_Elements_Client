@@ -130,6 +130,7 @@ public class GraphicsHandler {
 			break;
 		case FRIENDLIST:
 			Draw_3Menu.startBackgroundAnimation();
+			TextFieldHandler.showTextField(TextFieldHandler.FRIENDLIST_RequestName);
 			break;
 		case MATCHHISTORY:
 			Draw_3Menu.startBackgroundAnimation();
@@ -182,6 +183,7 @@ public class GraphicsHandler {
 			}
 			break;
 		case FRIENDLIST:
+			TextFieldHandler.hideTextField(TextFieldHandler.FRIENDLIST_RequestName);
 			if(newDrawState != DrawState.MENU) {
 				Draw_3Menu.stopBackgroundAnimation();
 			}

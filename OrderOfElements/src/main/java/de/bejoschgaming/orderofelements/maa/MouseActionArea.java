@@ -251,6 +251,9 @@ public class MouseActionArea {
 	public void setStandardColor(Color c) {
 		standardColor = c;
 	}
+	public void setHoverColor(Color hoverColor) {
+		this.hoverColor = hoverColor;
+	}
 
 	// GETTER
 

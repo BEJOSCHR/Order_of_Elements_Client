@@ -146,17 +146,43 @@ public class ServerConnection {
 		case 205:
 			//ONLINE INFO FOR FRIEND 
 			//Syntax: 205-PlayerID
-			
+			int friendOnlineID = Integer.parseInt(message);
+			ClientData.updateFriend(friendOnlineID, true);
 			break;
 		case 206:
 			//OFFLINE INFO FOR FRIEND
 			//Syntax: 206-PlayerID
-			
+			int friendOfflineID = Integer.parseInt(message);
+			ClientData.updateFriend(friendOfflineID, false);
 			break;
 		case 207:
 			//STATUS CHANGE FOR FRIEND
 			//Syntax: 206-PlayerID;Status
-			
+			int friendStatusID = Integer.parseInt(data[0]);
+			String newStatus = data[1];
+			ProfileHandler.getProfile(friendStatusID).updateStatus(newStatus);
+			break;
+		case 241:
+			//FRIENDREQUEST ADD
+			//SEND: 241-playerTargetName
+			//SYNTAX: 241-playerRequestID;playerRequestName
+			int playerWhoWantsToBeYourFriend_ID = Integer.parseInt(data[0]);
+			String playerWhoWantsToBeYourFriend_Name = data[1];
+			ClientData.addFriendRequest(playerWhoWantsToBeYourFriend_ID, playerWhoWantsToBeYourFriend_Name);
+			break;
+		case 242:
+			//ONLY SEND: FRIENDREQUEST ACCEPT
+			//SYNTAX: 242-acceptedID
+			break;
+		case 243:
+			//ONLY SEND: FRIENDREQUEST DECLINE
+			//SYNTAX: 243-deniedID
+			break;
+		case 244:
+			//FRIEND REMOVE
+			//SYNTAX: 244-removeFriendID
+			int removedFriendID = Integer.parseInt(message);
+			ClientData.removeFriend(removedFriendID);
 			break;
 		}
 		

@@ -111,7 +111,7 @@ public class Draw_2Login {
 		
 	}
 	
-	private static String checkForValidUsername(String username) {
+	public static String checkForValidUsername(String username) {
 		
 		if(username.length() < 4) {
 			return "The username is to short!";
@@ -125,7 +125,7 @@ public class Draw_2Login {
 
 	}
 	
-	private static String checkForValidPassword(String password) {
+	public static String checkForValidPassword(String password) {
 		
 		if(password.length() < 6) {
 			return "The password is to short!";

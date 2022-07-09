@@ -84,4 +84,18 @@ public class ClientData {
 	public static List<Integer> getOfflineFriendList() {
 		return friendList_offline;
 	}
+	public static int getTotalFriendAmount() {
+		return friendList_online.size()+friendList_offline.size();
+	}
+	public static int getFriendByOverallPos(int pos) {
+		
+		if(pos < friendList_online.size()) {
+			return friendList_online.get(pos);
+		}else if(pos < getTotalFriendAmount()) {
+			return friendList_offline.get(pos-friendList_online.size());
+		}else {
+			return -1;
+		}
+		
+	}
 }

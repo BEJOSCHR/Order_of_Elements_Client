@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_5Friendlist;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
 
 public class ImageHandler {
@@ -18,6 +19,7 @@ public class ImageHandler {
 	//MENU
 	public static Image menu_book[] = new Image[7];
 	public static Image menu_natur[] = new Image[7];
+	public static Image menu_icon_friendChallenge, menu_icon_friendSpectate, menu_icon_friendProfile, menu_icon_friendRemove;
 	
 	public static void loadPreUsedImages() {
 		
@@ -36,6 +38,10 @@ public class ImageHandler {
 		for(int i = 0 ; i < 7 ; i++) {
 			menu_natur[i] = loadImageFromName("menu/natur_"+i+".png", GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
 		}
+		menu_icon_friendChallenge = loadImageFromName("menu/MenuIcon_friendChallenge.png", Draw_5Friendlist.iconSize, Draw_5Friendlist.iconSize);
+		menu_icon_friendSpectate = loadImageFromName("menu/MenuIcon_friendSpectate.png", Draw_5Friendlist.iconSize, Draw_5Friendlist.iconSize);
+		menu_icon_friendProfile = loadImageFromName("menu/MenuIcon_friendProfile.png", Draw_5Friendlist.iconSize, Draw_5Friendlist.iconSize);
+		menu_icon_friendRemove = loadImageFromName("menu/MenuIcon_friendRemove.png", Draw_5Friendlist.iconSize, Draw_5Friendlist.iconSize);
 		
 	}
 	

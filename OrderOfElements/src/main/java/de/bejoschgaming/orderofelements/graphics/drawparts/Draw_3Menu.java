@@ -130,7 +130,7 @@ public class Draw_3Menu {
 				});
 			}
 		};
-		new MouseActionArea(((1920*55)/100)-20, (1080*22)/100-30, (1920*30)/100-40, (1080*55)/100-60, MouseActionAreaType.MENU_PatchnotesScroll, "", -1, Color.DARK_GRAY, Color.DARK_GRAY, true, false) {
+		new MouseActionArea(1036, 207, 536, 534, MouseActionAreaType.MENU_PatchnotesScroll, "", -1, Color.DARK_GRAY, Color.DARK_GRAY, true, false) {
 			@Override
 			public boolean isActiv() {
 				return GraphicsHandler.getDrawState() == DrawState.MENU;

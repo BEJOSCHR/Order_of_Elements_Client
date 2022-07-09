@@ -1,12 +1,14 @@
 package de.bejoschgaming.orderofelements.graphics.drawparts;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.MenuBookAnimation;
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
+import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
@@ -14,6 +16,8 @@ import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 import de.bejoschgaming.orderofelements.maa.MouseActionArea;
 import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
 import de.bejoschgaming.orderofelements.profilesystem.ClientData;
+import de.bejoschgaming.orderofelements.profilesystem.LoadedProfile;
+import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
 
 public class Draw_5Friendlist {
 
@@ -112,7 +116,169 @@ public class Draw_5Friendlist {
 			}
 		};
 		
+		//CREATE BOX MAAs - use textsize as pos
+		for(int i = 0 ; i < totalAmountOfBoxes ; i++) {
+			new MouseActionArea(startX, startY+(heightPerBox*i), widthPerBox, heightPerBox-1, MouseActionAreaType.FRIENDLIST_DisplayBox_, "", i, Color.DARK_GRAY, Color.DARK_GRAY, true, false) {
+				@Override
+				public boolean isActiv() {
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					if(friendID == -1) { return false; }
+					return GraphicsHandler.getDrawState() == DrawState.FRIENDLIST;
+				}
+				@Override
+				public void drawCustomParts(Graphics g) {
+					
+					LoadedProfile displayFriend = ProfileHandler.getProfile(Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize()));
+					String displayedName = displayFriend.getName();
+					String displayedStatus = displayFriend.getStatus();
+					
+					int textSize = (int) (((double) Draw_5Friendlist.textSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
+					Font fontName = FontHandler.getFont(FontHandler.medievalSharp_regular, textSize+2);
+					GraphicsHandler.drawCentralisedText(g, Color.BLACK, fontName, (this.getRelTextSize()+scrollValue+1)+".", this.getX()+(this.getWidth()*3)/100, this.getY()+(this.getHeight()/2));
+					Font fontStatus = FontHandler.getFont(FontHandler.medievalSharp_regular, textSize);
+					int nameWidth = g.getFontMetrics(fontName).stringWidth(displayedName);
+					int statusWidth = g.getFontMetrics(fontStatus).stringWidth(displayedStatus);
+					GraphicsHandler.drawCentralisedText(g, Color.BLACK, fontName, displayedName, this.getX()+(nameWidth/2)+(this.getWidth()*10)/100, this.getY()+(this.getHeight()/2));
+					GraphicsHandler.drawCentralisedText(g, Draw_5Friendlist.getStatusColor(displayedStatus), fontStatus, displayedStatus, this.getX()+(this.getWidth()*40)/100+(statusWidth/2), this.getY()+(this.getHeight()/2));
+					
+				}
+			};
+			new MouseActionArea(startX+widthPerBox-3*(iconSize+(widthPerBox*3)/100), startY+(heightPerBox*i)+(heightPerBox-iconSize)/2, iconSize+2, iconSize+2, MouseActionAreaType.FRIENDLIST_Challenge_, "", i, Color.DARK_GRAY, Color.WHITE, true, false) {
+				@Override
+				public boolean isActiv() {
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					if(friendID == -1) { return false; }
+					LoadedProfile friendProfile = ProfileHandler.getProfile(friendID);
+					//NICHT INGAME UND NICHT OFFLINE
+					return GraphicsHandler.getDrawState() == DrawState.FRIENDLIST && friendProfile.getStatus().contains("InGame") == false && friendProfile.getStatus().equalsIgnoreCase("Offline") == false;
+				}
+				@Override
+				public void drawCustomParts(Graphics g) {
+					
+					g.drawImage(ImageHandler.menu_icon_friendChallenge, this.getX()+1, this.getY()+1, null);
+					
+				}
+				@Override
+				public void performAction_LEFT_RELEASE() {
+					
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//TODO
+					
+				}
+			};
+			new MouseActionArea(startX+widthPerBox-3*(iconSize+(widthPerBox*3)/100), startY+(heightPerBox*i)+(heightPerBox-iconSize)/2, iconSize+2, iconSize+2, MouseActionAreaType.FRIENDLIST_Spectate_, "", i, Color.DARK_GRAY, Color.WHITE, true, false) {
+				@Override
+				public boolean isActiv() {
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					if(friendID == -1) { return false; }
+					LoadedProfile friendProfile = ProfileHandler.getProfile(friendID);
+					//INGAME
+					return GraphicsHandler.getDrawState() == DrawState.FRIENDLIST && friendProfile.getStatus().contains("InGame") == true;
+				}
+				@Override
+				public void drawCustomParts(Graphics g) {
+					
+					g.drawImage(ImageHandler.menu_icon_friendSpectate, this.getX()+1, this.getY()+1, null);
+					
+				}
+				@Override
+				public void performAction_LEFT_RELEASE() {
+					
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//TODO
+					
+				}
+			};
+			new MouseActionArea(startX+widthPerBox-2*(iconSize+(widthPerBox*3)/100), startY+(heightPerBox*i)+(heightPerBox-iconSize)/2, iconSize+2, iconSize+2, MouseActionAreaType.FRIENDLIST_Profile_, "", i, Color.DARK_GRAY, Color.WHITE, true, false) {
+				@Override
+				public boolean isActiv() {
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					if(friendID == -1) { return false; }
+					return GraphicsHandler.getDrawState() == DrawState.FRIENDLIST;
+				}
+				@Override
+				public void drawCustomParts(Graphics g) {
+					
+					g.drawImage(ImageHandler.menu_icon_friendProfile, this.getX()+1, this.getY()+1, null);
+					
+				}
+				@Override
+				public void performAction_LEFT_RELEASE() {
+					
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//TODO
+					
+				}
+			};
+			new MouseActionArea(startX+widthPerBox-1*(iconSize+(widthPerBox*3)/100), startY+(heightPerBox*i)+(heightPerBox-iconSize)/2, iconSize+2, iconSize+2, MouseActionAreaType.FRIENDLIST_Remove_, "", i, Color.DARK_GRAY, Color.WHITE, true, false) {
+				@Override
+				public boolean isActiv() {
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					if(friendID == -1) { return false; }
+					return GraphicsHandler.getDrawState() == DrawState.FRIENDLIST;
+				}
+				@Override
+				public void drawCustomParts(Graphics g) {
+					
+					g.drawImage(ImageHandler.menu_icon_friendRemove, this.getX()+1, this.getY()+1, null);
+					
+				}
+				@Override
+				public void performAction_LEFT_RELEASE() {
+					
+					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//TODO
+					
+				}
+			};	
+		}
+		
+		//CREATE SCROLL OVER BOXES
+		new MouseActionArea(startX, startY, widthPerBox, totalAmountOfBoxes*heightPerBox, MouseActionAreaType.FRIENDLIST_Scroll, "", -1, Color.PINK, Color.PINK, false, false) {
+			@Override
+			public boolean isActiv() {
+				return GraphicsHandler.getDrawState() == DrawState.FRIENDLIST;
+			}
+			@Override
+			public void performAction_MOUSEWHEEL_TURN(int turns) {
+				
+				if(turns > 0) {
+					//SCROLL DOWN SO +1
+					if(scrollValue+totalAmountOfBoxes < ClientData.getTotalFriendAmount()) {
+						scrollValue++;
+					}
+				}else if(turns < 0) {
+					//SCROLL UP SO -1
+					if(scrollValue > 0) {
+						scrollValue--;
+					}
+				}
+			}
+		};
+		
 	}
+	
+	//MAA USED FUNCTS:
+	public static int getDisplayedFriendID(int pos) {
+		return ClientData.getFriendByOverallPos(pos+scrollValue);
+	}
+	public static Color getStatusColor(String status) {
+		if(status.equalsIgnoreCase("Offline")) {
+			return Color.DARK_GRAY;
+		}else if(status.contains("InGame")) {
+			return Color.BLUE;
+		}else {
+			return Color.GREEN.darker();
+		}
+	}
+	
+	//FRIENDLIST PARAMATERS
+	private static int startX = 1030, startY = 200; //FIXED VALUES BACAUSE MAAs SCALE AUTO WITH SCREENSIZE
+	private static int scrollValue = 0;
+	private static int heightPerBox = 50, widthPerBox = 536;
+	private static int totalAmountOfBoxes = 13; //13
+	public static int textSize = 21;
+	public static int iconSize = (heightPerBox*60)/100;
 	
 	public static void draw(Graphics g) {
 		
@@ -126,7 +292,7 @@ public class Draw_5Friendlist {
 		
 		//DRAW LEFT PAGE
 		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 50), "Friendlist", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*30)/100);
-		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You have "+ClientData.getOnlineFriendList().size()+"/"+(ClientData.getOnlineFriendList().size()+ClientData.getOfflineFriendList().size())+" friends online", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*37)/100);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You have "+ClientData.getOnlineFriendList().size()+"/"+ClientData.getTotalFriendAmount()+" friends online", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*37)/100);
 		
 		int y = (GraphicsHandler.getHeight()*66)/100;
 		g.setColor(Color.BLACK);
@@ -138,7 +304,7 @@ public class Draw_5Friendlist {
 		}
 		
 		//DRAW RIGHT PAGE
-		
+		//Boaxes via MAAs
 		
 	}
 	

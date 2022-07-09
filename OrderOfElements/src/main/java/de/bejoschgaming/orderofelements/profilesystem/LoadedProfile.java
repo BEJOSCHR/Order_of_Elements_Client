@@ -70,7 +70,8 @@ public class LoadedProfile {
 		this.crowns = Integer.parseInt(secondSplit[7]);
 		this.displayColor = Color.getColor(secondSplit[8]);
 		this.titel = secondSplit[9];
-		if(this.status != "Offline") {
+		//ONLY SET IF STILL DEFAULT STATUS... otherwise it was already updated by 207 packet
+		if(this.status.equalsIgnoreCase("Offline")) {
 			this.status = secondSplit[10];
 		}
 		

@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
-import de.bejoschgaming.orderofelements.maa.MouseActionArea;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaHandler;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
+import de.bejoschgaming.orderofelements.mwsystem.mws.MultiWindow;
 
 public class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener {
 
@@ -21,15 +23,31 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 		
 		int turns = e.getWheelRotation();
 		
-		List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
-		for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-			if (maa.isActiv() && maa.isHovered()) {
-				clickedMAAs.add(maa);
+		MultiWindow clickedMW = null;
+		for (MultiWindow mw : MultiWindowHandler.getMws()) {
+			if (mw.isHovered()) {
+				clickedMW = mw;
+				break;
 			}
 		}
-		for (MouseActionArea clickedMAA : clickedMAAs) {
-			clickedMAA.performAction_MOUSEWHEEL_TURN(turns);
+		
+		if(clickedMW != null) {
+			//MW CLICKED
+			clickedMW.performAction_MOUSEWHEEL_TURN(turns);
+		}else {
+			//NO MW
+			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isHovered()) {
+					clickedMAAs.add(maa);
+				}
+			}
+			for (MouseActionArea clickedMAA : clickedMAAs) {
+				clickedMAA.performAction_MOUSEWHEEL_TURN(turns);
+			}
 		}
+		
+		
 		
 	}
 
@@ -66,36 +84,68 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 	@Override
 	public void mousePressed(MouseEvent e) {
 		int buttonCode = e.getButton();
-		if (buttonCode == MouseEvent.BUTTON1) {
-			// LEFT
-			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
-			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-				if (maa.isActiv() && maa.isHovered()) {
-					clickedMAAs.add(maa);
-				}
-			}
-			for (MouseActionArea clickedMAA : clickedMAAs) {
-				clickedMAA.performAction_LEFT_PRESS();
-			}
-		} else if (buttonCode == MouseEvent.BUTTON3) {
-			// RIGHT
-			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
-			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-				if (maa.isActiv() && maa.isHovered()) {
-					clickedMAAs.add(maa);
-				}
-			}
-			for (MouseActionArea clickedMAA : clickedMAAs) {
-				clickedMAA.performAction_RIGHT_PRESS();
+		
+		MultiWindow clickedMW = null;
+		for (MultiWindow mw : MultiWindowHandler.getMws()) {
+			if (mw.isHovered()) {
+				clickedMW = mw;
+				break;
 			}
 		}
+		
+		if(clickedMW != null) {
+			//MW CLICKED
+			if (buttonCode == MouseEvent.BUTTON1) {
+				//LEFT
+				clickedMW.performAction_LEFT_PRESS();
+			} else if (buttonCode == MouseEvent.BUTTON3) {
+				//RIGHT
+				clickedMW.performAction_RIGHT_PRESS();
+			}
+		}else {
+			//NO MW
+			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
+			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
+				if (maa.isActiv() && maa.isHovered()) {
+					clickedMAAs.add(maa);
+				}
+			}
+			for (MouseActionArea clickedMAA : clickedMAAs) {
+				if (buttonCode == MouseEvent.BUTTON1) {
+					//LEFT
+					clickedMAA.performAction_LEFT_PRESS();
+				} else if (buttonCode == MouseEvent.BUTTON3) {
+					//RIGHT
+					clickedMAA.performAction_RIGHT_PRESS();
+				}
+			}
+		}
+		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		int buttonCode = e.getButton();
-		if (buttonCode == MouseEvent.BUTTON1) {
-			// LEFT
+		
+		MultiWindow clickedMW = null;
+		for (MultiWindow mw : MultiWindowHandler.getMws()) {
+			if (mw.isHovered()) {
+				clickedMW = mw;
+				break;
+			}
+		}
+		
+		if(clickedMW != null) {
+			//MW CLICKED
+			if (buttonCode == MouseEvent.BUTTON1) {
+				//LEFT
+				clickedMW.performAction_LEFT_PRESS();
+			} else if (buttonCode == MouseEvent.BUTTON3) {
+				//RIGHT
+				clickedMW.performAction_RIGHT_RELEASE();
+			}
+		}else {
+			//NO MW
 			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
 			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
 				if (maa.isActiv() && maa.isHovered()) {
@@ -103,18 +153,13 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 				}
 			}
 			for (MouseActionArea clickedMAA : clickedMAAs) {
-				clickedMAA.performAction_LEFT_RELEASE();
-			}
-		} else if (buttonCode == MouseEvent.BUTTON3) {
-			// RIGHT
-			List<MouseActionArea> clickedMAAs = new ArrayList<MouseActionArea>();
-			for (MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-				if (maa.isActiv() && maa.isHovered()) {
-					clickedMAAs.add(maa);
+				if (buttonCode == MouseEvent.BUTTON1) {
+					//LEFT
+					clickedMAA.performAction_LEFT_RELEASE();
+				} else if (buttonCode == MouseEvent.BUTTON3) {
+					//RIGHT
+					clickedMAA.performAction_RIGHT_RELEASE();
 				}
-			}
-			for (MouseActionArea clickedMAA : clickedMAAs) {
-				clickedMAA.performAction_RIGHT_RELEASE();
 			}
 		}
 		

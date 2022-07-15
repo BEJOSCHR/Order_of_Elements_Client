@@ -8,8 +8,8 @@ import de.bejoschgaming.orderofelements.animationsystem.animations.MenuBookAnima
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maa.MouseActionArea;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
 
 public class Draw_4Deckbuilder {
 

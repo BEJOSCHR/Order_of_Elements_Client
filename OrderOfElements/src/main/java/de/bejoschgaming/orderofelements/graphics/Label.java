@@ -22,8 +22,9 @@ import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_6Matchhistory;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Credits;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_8Ingame;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_9Aftergame;
-import de.bejoschgaming.orderofelements.maa.MouseActionArea;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaHandler;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
 
 
 @SuppressWarnings("serial")
@@ -100,10 +101,15 @@ public class Label extends JLabel {
 		// MAA - before animation
 		try {
 			for(MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-				if (maa.isActiv() && maa.isOverlapAnimations() == false) {;
+				if (maa.isActiv() && maa.isOverlappingAnimations() == false) {;
 					maa.draw(g);
 				}
 			}
+		} catch (ConcurrentModificationException error) {}
+		
+		// MWS
+		try {
+			MultiWindowHandler.drawMWs(g);
 		} catch (ConcurrentModificationException error) {}
 		
 		// ANIMATIONS
@@ -116,7 +122,7 @@ public class Label extends JLabel {
 		// MAA - after animation
 		try {
 			for(MouseActionArea maa : MouseActionAreaHandler.getMAAs()) {
-				if (maa.isActiv() && maa.isOverlapAnimations() == true) {;
+				if (maa.isActiv() && maa.isOverlappingAnimations() == true) {;
 					maa.draw(g);
 				}
 			}

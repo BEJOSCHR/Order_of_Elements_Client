@@ -7,7 +7,7 @@
  * Diese Klasse dient zur Erstellung von Maus-Buttons,
  * inklusive graphischer Darstellung und Funktionalitaet.
  */
-package de.bejoschgaming.orderofelements.maa;
+package de.bejoschgaming.orderofelements.maasystem;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,6 +16,7 @@ import java.util.ConcurrentModificationException;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
+import de.bejoschgaming.orderofelements.mwsystem.mws.MultiWindow;
 
 public class MouseActionArea {
 
@@ -24,65 +25,21 @@ public class MouseActionArea {
 	private MouseActionAreaType type;
 	private String displayText;
 	private Color standardColor, hoverColor;
-	private boolean showBox, overlapAnimations;
+	private boolean showBox, overlapAnimations = false, mwMAA;
+	private MultiWindow mw;
 
 	/**
-	 * Konstruktor fuer MouseActionArea. Erstellt ein MAA Objekt.
-	 * 
-	 * @param relX          - int - Startpunkt auf der x-Achse relativ zur
-	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      1920 an.
-	 * @param relY          - int - Startpunkt auf der y-Achse relativ zur
-	 *                      Bildschirmaufloesung. Nimmt einen Wert zwischen 0 und
-	 *                      1080 an.
-	 * @param relWidth      - int - Breite der MAA relativ zur Bildschirmaufloesung.
-	 *                      Nimmt einen Wert zwischen 0 und 1920 an.
-	 * @param relHeight     - int - Hoehe der MAA relativ zur Bildschirmaufloesung.
-	 *                      Nimmt einen Wert zwischen 0 und 1080 an.
-	 * @param type          - MouseActionAreaType - Zuordnung des MAA-Typen dieses
-	 *                      Objekts.
-	 * @param displayText   - String - Text, welcher in dem MAA angezeigt werden
-	 *                      soll.
-	 * @param relTextSize   - int - Schriftgroesse des Textes relativ zur
-	 *                      Bildschirmaufloesung, also relativ zu einer 1080er höhe.
-	 * @param standardColor - Color - Farbe der MAA, welche standardmaessig zu sehen
-	 *                      ist.
-	 * @param hoverColor    - Color - Farbe der MAA, welche zu sehen ist, wenn die
-	 *                      Maus ueber das MAA schwebt.
-	 * @param showBox       - Boolean - Bestimmt, ob das Standard-Rechteck der MAA
-	 *                      angezeigt werden soll.
+	 * Normal MAA Constructor
 	 */
 	public MouseActionArea(int relX, int relY, int relWidth, int relHeight, MouseActionAreaType type,
 			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox, boolean overlapAnimations) {
 
-		if (relX < 0)
-			this.relX = 0;
-		else if (relX > 1920)
-			this.relX = 1920;
-		else
-			this.relX = relX;
-
-		if (relY < 0)
-			this.relY = 0;
-		else if (relY > 1080)
-			this.relY = 1080;
-		else
-			this.relY = relY;
-
-		if (relWidth < 0)
-			this.relWidth = 0;
-		else if (relWidth > 1920)
-			this.relWidth = 1920;
-		else
-			this.relWidth = relWidth;
-
-		if (relHeight < 0)
-			this.relHeight = 0;
-		else if (relHeight > 1080)
-			this.relHeight = 1080;
-		else
-			this.relHeight = relHeight;
-
+		this.mwMAA = false;
+		
+		this.relX = relX;
+		this.relY = relY;
+		this.relWidth = relWidth;
+		this.relHeight = relHeight;
 		this.type = type;
 		this.displayText = displayText;
 		this.relTextSize = relTextSize;
@@ -90,6 +47,8 @@ public class MouseActionArea {
 		this.hoverColor = hoverColor;
 		this.showBox = showBox;
 		this.overlapAnimations = overlapAnimations;
+		
+		this.mw = null;
 		
 		this.refreshPosition();
 
@@ -100,10 +59,35 @@ public class MouseActionArea {
 			} catch (ConcurrentModificationException error) {}
 		}
 	}
+	/**
+	 * MW MAA Constructor
+	 */
+	public MouseActionArea(int relX, int relY, int relWidth, int relHeight, MouseActionAreaType type,
+			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox, MultiWindow mw) {
+
+		this.mwMAA = true;
+		
+		this.relX = relX;
+		this.relY = relY;
+		this.relWidth = relWidth;
+		this.relHeight = relHeight;
+		this.type = type;
+		this.displayText = displayText;
+		this.relTextSize = relTextSize;
+		this.standardColor = standardColor;
+		this.hoverColor = hoverColor;
+		this.showBox = showBox;
+		
+		this.mw = mw;
+		
+		this.refreshPosition();
+
+		//DONT BE ADDED TO LIST, IS IN MW LIST
+	}
 
 	/**
 	 * Aktualisiert die Position des MAA mit Hilfe der Daten zur relativen Position
-	 * und der Bildschirmaufloesung.
+	 * und der Bildschirmaufloesung
 	 */
 	public void refreshPosition() {
 		
@@ -112,7 +96,6 @@ public class MouseActionArea {
 		width = (int) ((((double) relWidth / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
 		height = (int) ((((double) relHeight / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
 	
-		// TODO: Allgemeinere Schreibweise. Weg von der 1080 Basis
 		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
 		
 	}
@@ -313,11 +296,18 @@ public class MouseActionArea {
 		return hoverColor;
 	}
 	
+	public MultiWindow getMW() {
+		return mw;
+	}
+	
 	public boolean isShowBox() {
 		return showBox;
 	}
 	
-	public boolean isOverlapAnimations() {
+	public boolean isOverlappingAnimations() {
 		return overlapAnimations;
+	}
+	public boolean isMwMAA() {
+		return mwMAA;
 	}
 }

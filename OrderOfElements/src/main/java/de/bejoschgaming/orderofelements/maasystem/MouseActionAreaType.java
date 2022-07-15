@@ -8,7 +8,7 @@
  * Dient der erleichterten Identifikation.
  */
 
-package de.bejoschgaming.orderofelements.maa;
+package de.bejoschgaming.orderofelements.maasystem;
 
 public enum MouseActionAreaType {
 

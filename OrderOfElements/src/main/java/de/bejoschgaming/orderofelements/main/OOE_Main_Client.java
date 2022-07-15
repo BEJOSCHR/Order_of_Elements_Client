@@ -16,7 +16,7 @@ import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaHandler;
 
 public class OOE_Main_Client {
 	

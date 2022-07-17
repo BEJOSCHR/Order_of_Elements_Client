@@ -3,6 +3,8 @@ package de.bejoschgaming.orderofelements.graphics.handler;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
+
 public class WindowHandler implements WindowListener {
 
 	@Override
@@ -43,7 +45,8 @@ public class WindowHandler implements WindowListener {
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
+		
+		MultiWindowHandler.stopDraggingMW();
 		
 	}
 

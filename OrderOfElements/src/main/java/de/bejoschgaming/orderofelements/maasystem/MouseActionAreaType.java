@@ -14,6 +14,11 @@ public enum MouseActionAreaType {
 
 	// _ at the end means that there will be more then one maa with this type
 	
+	//MW
+	MW_Close_,
+	MW_DesicionWindow_Accept_,
+	MW_DesicionWindow_Decline_,
+	
 	//LOGIN
 	LOGIN_Login,
 	LOGIN_Register,

@@ -24,7 +24,8 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 		int turns = e.getWheelRotation();
 		
 		MultiWindow clickedMW = null;
-		for (MultiWindow mw : MultiWindowHandler.getMws()) {
+		for(int i = 0 ; i < MultiWindowHandler.getMws().size() ; i++) {
+			MultiWindow mw = MultiWindowHandler.getMws().get(i);
 			if (mw.isHovered()) {
 				clickedMW = mw;
 				break;
@@ -78,7 +79,6 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -86,7 +86,8 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 		int buttonCode = e.getButton();
 		
 		MultiWindow clickedMW = null;
-		for (MultiWindow mw : MultiWindowHandler.getMws()) {
+		for(int i = 0 ; i < MultiWindowHandler.getMws().size() ; i++) {
+			MultiWindow mw = MultiWindowHandler.getMws().get(i);
 			if (mw.isHovered()) {
 				clickedMW = mw;
 				break;
@@ -127,8 +128,17 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 	public void mouseReleased(MouseEvent e) {
 		int buttonCode = e.getButton();
 		
+		if (buttonCode == MouseEvent.BUTTON1) {
+			//LEFT
+			MultiWindowHandler.stopDraggingMW(e.getX(), e.getY());
+		}else if (buttonCode == MouseEvent.BUTTON3) {
+			//RIGHT
+			MultiWindowHandler.stopDraggingMW();
+		}
+		
 		MultiWindow clickedMW = null;
-		for (MultiWindow mw : MultiWindowHandler.getMws()) {
+		for(int i = 0 ; i < MultiWindowHandler.getMws().size() ; i++) {
+			MultiWindow mw = MultiWindowHandler.getMws().get(i);
 			if (mw.isHovered()) {
 				clickedMW = mw;
 				break;
@@ -139,7 +149,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 			//MW CLICKED
 			if (buttonCode == MouseEvent.BUTTON1) {
 				//LEFT
-				clickedMW.performAction_LEFT_PRESS();
+				clickedMW.performAction_LEFT_RELEASE();
 			} else if (buttonCode == MouseEvent.BUTTON3) {
 				//RIGHT
 				clickedMW.performAction_RIGHT_RELEASE();

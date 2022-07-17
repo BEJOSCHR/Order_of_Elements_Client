@@ -128,6 +128,9 @@ public class Label extends JLabel {
 			}
 		} catch (ConcurrentModificationException error) {}
 		
+		// DRAW DRAGGED MW PREVIEW
+		MultiWindowHandler.drawDraggedMW(g);
+		
 		// DRAW FPS
 		if(showFPS == true) {
 		    g.setColor(Color.WHITE);

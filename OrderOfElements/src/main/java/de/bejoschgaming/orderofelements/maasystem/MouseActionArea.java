@@ -238,6 +238,52 @@ public class MouseActionArea {
 		this.hoverColor = hoverColor;
 	}
 
+	// MW SETTER / UPDATER
+	
+//	/**
+//	 * Only useable if mw maa
+//	 */
+//	public void setDim(int width, int height) {
+//		
+//		if(this.mwMAA == false) { return; }
+//		
+//		this.width = width;
+//		this.height = height;
+//		
+//	}
+	/**
+	 * Only useable if mw maa
+	 */
+	public void setMW(MultiWindow mw) {
+		
+		if(this.mwMAA == false) { return; }
+		
+		this.mw = mw;
+		
+	}
+	/**
+	 * Only useable if mw maa
+	 */
+	public void setPos(int x, int y) {
+		
+		if(this.mwMAA == false) { return; }
+		
+		this.x = x;
+		this.y = y;
+		
+	}
+	/**
+	 * Only useable if mw maa
+	 */
+	public void updatePos(int xAdd, int yAdd) {
+		
+		if(this.mwMAA == false) { return; }
+		
+		this.x += xAdd;
+		this.y += yAdd;
+		
+	}
+	
 	// GETTER
 
 	public int getX() {

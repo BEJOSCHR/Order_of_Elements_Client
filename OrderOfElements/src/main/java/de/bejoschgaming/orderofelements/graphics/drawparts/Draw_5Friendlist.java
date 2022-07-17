@@ -14,6 +14,8 @@ import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
 import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
+import de.bejoschgaming.orderofelements.mwsystem.mws.MW_DesicionWindow;
 import de.bejoschgaming.orderofelements.profilesystem.ClientData;
 import de.bejoschgaming.orderofelements.profilesystem.LoadedProfile;
 import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
@@ -160,7 +162,7 @@ public class Draw_5Friendlist {
 				@Override
 				public void performAction_LEFT_RELEASE() {
 					
-					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
 					//TODO
 					
 				}
@@ -183,7 +185,7 @@ public class Draw_5Friendlist {
 				@Override
 				public void performAction_LEFT_RELEASE() {
 					
-					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
 					//TODO
 					
 				}
@@ -204,7 +206,7 @@ public class Draw_5Friendlist {
 				@Override
 				public void performAction_LEFT_RELEASE() {
 					
-					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
 					//TODO
 					
 				}
@@ -226,7 +228,25 @@ public class Draw_5Friendlist {
 				public void performAction_LEFT_RELEASE() {
 					
 					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
-					//TODO
+					MultiWindowHandler.openMW(new MW_DesicionWindow(
+							"Do you realy want to remove "+ProfileHandler.getProfile(friendID).getName()+" from your friendlist?", 
+							FontHandler.getFont(FontHandler.medievalSharp_regular, 22), 
+							new MouseActionArea(-1, -1, 115, 35, MouseActionAreaType.MW_DesicionWindow_Accept_, "Remove ", 22, Color.WHITE, Color.RED.darker(), true, null) {
+								private int removeID = friendID;
+								@Override
+								public void performAction_LEFT_RELEASE() {
+									ServerConnection.sendPacket(244, ""+this.removeID);
+									ClientData.removeFriend(this.removeID);
+									MultiWindowHandler.closeMW(this.getMW());
+								}
+							}, 
+							new MouseActionArea(-1, -1, 115, 35, MouseActionAreaType.MW_DesicionWindow_Decline_, "Cancel ", 22, Color.WHITE, Color.LIGHT_GRAY, true, null) {
+								@Override
+								public void performAction_LEFT_RELEASE() {
+									MultiWindowHandler.closeMW(this.getMW());
+								}
+							},
+							Color.WHITE, Color.DARK_GRAY));
 					
 				}
 			};	

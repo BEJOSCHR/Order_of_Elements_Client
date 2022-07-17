@@ -12,7 +12,7 @@ import de.bejoschgaming.orderofelements.mwsystem.MultiWindowType;
 
 public class MW_DesicionWindow extends MultiWindow {
 
-	private final int sideBorder = 34, topDownBetweenBorder = 20, spaceBetweenMAAs = 40;
+	private final int sideBorder = 34, topDownBetweenBorder = 25, spaceBetweenMAAs = 40;
 	
 	private String question;
 	private int textWidth, textHeight;
@@ -20,7 +20,7 @@ public class MW_DesicionWindow extends MultiWindow {
 	private MouseActionArea acceptMAA, declineMAA;
 	
 	public MW_DesicionWindow(String question, Font font, MouseActionArea acceptMAA, MouseActionArea declineMAA, Color foregroundColor, Color backgroundColor) {
-		super(MultiWindowType.MW_DesicionWindow_, foregroundColor, backgroundColor, false, false);
+		super(MultiWindowType.MW_DesicionWindow_, foregroundColor, backgroundColor, false, false, true);
 		
 		this.question = question;
 		this.font = font;

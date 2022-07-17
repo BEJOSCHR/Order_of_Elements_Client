@@ -17,16 +17,17 @@ public class MultiWindow {
 	protected int x = 1920/2-200, y = 1080/2-100, width = 400, height = 200;
 	protected MultiWindowType type;
 	protected Color backgroundColor, foregroundColor;
-	protected boolean moveable = true, closeable = true;
+	protected boolean moveable = true, closeable = true, blocking = false;;
 	protected List<MouseActionArea> maas = new ArrayList<MouseActionArea>();
 	
-	public MultiWindow(MultiWindowType type, Color foregroundColor, Color backgroundColor, boolean moveable, boolean closeable) {
+	public MultiWindow(MultiWindowType type, Color foregroundColor, Color backgroundColor, boolean moveable, boolean closeable, boolean blocking) {
 		
 		this.type = type;
 		this.foregroundColor = foregroundColor;
 		this.backgroundColor = backgroundColor;
 		this.moveable = moveable;
 		this.closeable = closeable;
+		this.blocking = blocking;
 		this.initMAAs();
 		this.performOpenAction();
 		
@@ -212,6 +213,10 @@ public class MultiWindow {
 	
 	public boolean isMoveable() {
 		return moveable;
+	}
+	
+	public boolean isBlocking() {
+		return blocking;
 	}
 	
 }

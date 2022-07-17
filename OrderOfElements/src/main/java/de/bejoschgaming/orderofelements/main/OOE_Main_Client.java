@@ -1,6 +1,5 @@
 package de.bejoschgaming.orderofelements.main;
 
-import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,13 +16,7 @@ import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
 import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaHandler;
-import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
-import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
-import de.bejoschgaming.orderofelements.mwsystem.MultiWindowType;
-import de.bejoschgaming.orderofelements.mwsystem.mws.MW_DesicionWindow;
-import de.bejoschgaming.orderofelements.mwsystem.mws.MultiWindow;
 
 public class OOE_Main_Client {
 	
@@ -68,28 +61,6 @@ public class OOE_Main_Client {
 		TextAreaHandler.loadTextAreas();
 		
 		ImageHandler.loadImages();
-		
-		MultiWindowHandler.openMW(new MW_DesicionWindow(
-				"Do you like this multiwindow system?", 
-				FontHandler.getFont(FontHandler.medievalSharp_regular, 22), 
-				new MouseActionArea(-1, -1, 74, 34, MouseActionAreaType.MW_DesicionWindow_Accept_, "Yes", 22, Color.WHITE, Color.GREEN.darker(), true, null) {
-					@Override
-					public void performAction_LEFT_RELEASE() {
-						ConsoleHandler.printMessageInConsole("NICE! I like this mw system as well", true);
-						MultiWindowHandler.closeMW(this.getMW());
-					}
-				}, 
-				new MouseActionArea(-1, -1, 74, 34, MouseActionAreaType.MW_DesicionWindow_Decline_, "No", 22, Color.WHITE, Color.RED, true, null) {
-					@Override
-					public void performAction_LEFT_RELEASE() {
-						ConsoleHandler.printMessageInConsole("Why not? I like it!", true);
-						MultiWindowHandler.closeMW(this.getMW());
-					}
-				},
-				Color.WHITE, Color.DARK_GRAY));
-		MultiWindowHandler.openMW(new MultiWindow(MultiWindowType.MW_Test, Color.WHITE, Color.DARK_GRAY, true, true));
-		MultiWindowHandler.openMW(new MultiWindow(MultiWindowType.MW_Test, Color.WHITE, Color.DARK_GRAY, true, true));
-		
 		
 		ConsoleHandler.printMessageInConsole("Startup finished!", true);
 		

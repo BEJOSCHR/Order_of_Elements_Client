@@ -16,6 +16,7 @@ import java.util.ConcurrentModificationException;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
 import de.bejoschgaming.orderofelements.mwsystem.mws.MultiWindow;
 
 public class MouseActionArea {
@@ -119,6 +120,7 @@ public class MouseActionArea {
 		} else {
 			return false;
 		}
+		
 	}
 
 	/**
@@ -128,7 +130,25 @@ public class MouseActionArea {
 	 *         Input.
 	 **/
 	public boolean isHovered() {
+		
+		if(MultiWindowHandler.isMWBlocking() == true) {
+			if(this.mwMAA == false) {
+				//MW IS BLOCKING AND THIS IS NOT A MW MAA
+				return false;
+			}else {
+				//BLOCKING BUT THIS IS A MW MAA
+				if(this.mw != null) {
+					//MW IS SET
+					if(this.mw.isBlocking() == false) {
+						//THIS MW MAA IS NOT ON A BLOCKING MW
+						return false;
+					}
+				}
+			}
+		}
+		
 		return checkArea(MouseHandler.getMouseX(), MouseHandler.getMouseY());
+		
 	}
 
 	/**

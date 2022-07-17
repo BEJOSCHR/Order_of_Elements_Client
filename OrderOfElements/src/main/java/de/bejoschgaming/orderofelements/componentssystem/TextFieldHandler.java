@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
 
 public class TextFieldHandler {
 
@@ -20,6 +21,7 @@ public class TextFieldHandler {
 		LOGIN_Password = createTextField(FontHandler.getFont(FontHandler.medievalSharp_regular, 22));
 		FRIENDLIST_RequestName = createTextField(FontHandler.getFont(FontHandler.medievalSharp_regular, 22));
 		updateAllPositions();
+		setNormalColorsForAll();
 		
 	}
 	
@@ -36,10 +38,8 @@ public class TextFieldHandler {
 		
 		JTextField textField = new JTextField();
 		textField.setVisible(false);
-		textField.setBackground(Color.WHITE);
-		textField.setForeground(Color.BLACK);
 		textField.setHorizontalAlignment(JTextField.CENTER);
-		textField.setVisible(false);
+		textField.setBorder(null);
 		textField.setFont(font);
 		
 		GraphicsHandler.getLabel().add(textField);
@@ -53,11 +53,10 @@ public class TextFieldHandler {
 		int width = (int) ((((double) relWidth / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
 		int height = (int) ((((double) relHeight / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
 		if(centerCords == true) {
-			textField.setLocation(x-(width/2), y-(height/2));
+			textField.setBounds(x-(width/2), y-(height/2), width, height);
 		}else {
-			textField.setLocation(x, y);
+			textField.setBounds(x, y, width, height);
 		}
-		textField.setSize(width, height);
 		
 	}
 
@@ -71,5 +70,24 @@ public class TextFieldHandler {
 		textfield.setVisible(false);
 		
 	}
-	
+	public static void setNormalColorsForAll() {
+		
+		LOGIN_Name.setBackground(Color.WHITE);
+		LOGIN_Name.setForeground(Color.BLACK);
+		LOGIN_Password.setBackground(Color.WHITE);
+		LOGIN_Password.setForeground(Color.BLACK);
+		FRIENDLIST_RequestName.setBackground(Color.WHITE);
+		FRIENDLIST_RequestName.setForeground(Color.BLACK);
+		
+	}
+	public static void setCamoflageColorsForAll() {
+		
+		LOGIN_Name.setBackground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		LOGIN_Name.setForeground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		LOGIN_Password.setBackground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		LOGIN_Password.setForeground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		FRIENDLIST_RequestName.setBackground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		FRIENDLIST_RequestName.setForeground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		
+	}
 }

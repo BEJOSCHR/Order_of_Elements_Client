@@ -231,7 +231,7 @@ public class Draw_5Friendlist {
 					MultiWindowHandler.openMW(new MW_DesicionWindow(
 							"Do you realy want to remove "+ProfileHandler.getProfile(friendID).getName()+" from your friendlist?", 
 							FontHandler.getFont(FontHandler.medievalSharp_regular, 22), 
-							new MouseActionArea(-1, -1, 115, 35, MouseActionAreaType.MW_DesicionWindow_Accept_, "Remove ", 22, Color.WHITE, Color.RED.darker(), true, null) {
+							new MouseActionArea(115, 35, MouseActionAreaType.MW_DesicionWindow_Accept_, "Remove ", 22, Color.WHITE, Color.RED.darker(), true) {
 								private int removeID = friendID;
 								@Override
 								public void performAction_LEFT_RELEASE() {
@@ -240,7 +240,7 @@ public class Draw_5Friendlist {
 									MultiWindowHandler.closeMW(this.getMW());
 								}
 							}, 
-							new MouseActionArea(-1, -1, 115, 35, MouseActionAreaType.MW_DesicionWindow_Decline_, "Cancel ", 22, Color.WHITE, Color.LIGHT_GRAY, true, null) {
+							new MouseActionArea(115, 35, MouseActionAreaType.MW_DesicionWindow_Decline_, "Cancel ", 22, Color.WHITE, Color.LIGHT_GRAY, true) {
 								@Override
 								public void performAction_LEFT_RELEASE() {
 									MultiWindowHandler.closeMW(this.getMW());

@@ -1,8 +1,10 @@
 package de.bejoschgaming.orderofelements.filesystem;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,6 +29,22 @@ public class FileHandler {
 	private static File ordner = new File("rsc");
 	public static File file_Settings = new File(ordner+"/Settings.xml");
 
+//==========================================================================================================
+	
+	public static boolean openBrowserLink(String url) {
+		
+	    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+	        try {
+	            desktop.browse(new URI(url));
+	            return true;
+	        } catch (Exception error) {
+	        	error.printStackTrace();
+	        }
+	    }
+	    return false;
+		
+	}
 	
 //==========================================================================================================
 	/**

@@ -28,8 +28,8 @@ public class MultiWindow {
 		this.moveable = moveable;
 		this.closeable = closeable;
 		this.blocking = blocking;
-		this.initMAAs();
 		this.performOpenAction();
+		//MAA INIT VIA FIRSTPOS SET
 		
 	}
 
@@ -39,6 +39,7 @@ public class MultiWindow {
 		this.y = (int) ((((double) relY / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
 		this.width = (int) ((((double) relWidth / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
 		this.height = (int) ((((double) relHeight / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+		this.initMAAs();
 		
 	}
 
@@ -47,7 +48,7 @@ public class MultiWindow {
 	 */
 	protected void initMAAs() {
 		if(this.closeable) {
-			this.maas.add(new MouseActionArea(this.x+this.width-10-20, this.y+10, 20, 20, MouseActionAreaType.MW_Close_, "", -1, this.foregroundColor, Color.ORANGE, false, this) {
+			MouseActionArea closeCrossMAA = new MouseActionArea(20, 20, MouseActionAreaType.MW_Close_, "", -1, this.foregroundColor, Color.ORANGE, false) {
 				@Override
 				public void drawCustomParts(Graphics g) {
 					if(this.isHovered()) {
@@ -62,7 +63,10 @@ public class MultiWindow {
 				public void performAction_LEFT_RELEASE() {
 					MultiWindowHandler.closeMW(this.getMW());
 				}
-			});
+			};
+			closeCrossMAA.setMW(this);
+			closeCrossMAA.setPos(this.x+this.width-10-20, this.y+10);
+			this.maas.add(closeCrossMAA);
 		}
 	}
 	/**

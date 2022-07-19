@@ -1,5 +1,6 @@
 package de.bejoschgaming.orderofelements.connection;
 
+import java.awt.Color;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -19,10 +20,15 @@ import de.bejoschgaming.orderofelements.animationsystem.animations.MenuBookAnima
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
+import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
+import de.bejoschgaming.orderofelements.mwsystem.mws.MW_InfoWindow;
 import de.bejoschgaming.orderofelements.profilesystem.ClientData;
 import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
 
@@ -31,7 +37,7 @@ public class ServerConnection {
 	private static String hostname = FileHandler.readOutData(FileHandler.file_Settings, "CONNECTION_IP"); // "ipcwup.no-ip.biz"
 	private static int port = Integer.parseInt(FileHandler.readOutData(FileHandler.file_Settings, "CONNECTION_Port"));
 	private static int connectionTimeout = Integer.parseInt(FileHandler.readOutData(FileHandler.file_Settings, "CONNECTION_Idletime"))*1000; //IN MS
-	public static int maxConnectionTries = 3;
+	public static int maxConnectionTries = 2;
 	public static int connectionTry = 0;
 	
 	private static NioSocketConnector socketConnector;
@@ -76,6 +82,15 @@ public class ServerConnection {
 				if(connectionTry == maxConnectionTries) {
 					//NOT CONNECTED
 					ConsoleHandler.printMessageInConsole("Connecting to server ended with no result! (Try: "+maxConnectionTries+"/"+maxConnectionTries+" failed)", true);
+					TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Name);
+					TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Password);
+					String[] message = {"No serverconnection could be established!", "Please try again later", "", "For more information take a look at the 'BejoschGaming' discord channel"};
+					MouseActionArea maa = new MouseActionArea(120, 50, MouseActionAreaType.MW_InfoWindow_, "Discord ", 22, Color.WHITE, Color.ORANGE, true) {
+						public void performAction_LEFT_RELEASE() {
+							FileHandler.openBrowserLink("https://discord.gg/nBxwBnNGVz");
+						};
+					};
+					MultiWindowHandler.openMW(new MW_InfoWindow(message, FontHandler.getFont(FontHandler.medievalSharp_regular, 22), Color.WHITE, Color.DARK_GRAY, maa));
 					this.cancel();
 					return;
 				}

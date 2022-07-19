@@ -18,6 +18,7 @@ public enum MouseActionAreaType {
 	MW_Close_,
 	MW_DesicionWindow_Accept_,
 	MW_DesicionWindow_Decline_,
+	MW_InfoWindow_,
 	
 	//LOGIN
 	LOGIN_Login,

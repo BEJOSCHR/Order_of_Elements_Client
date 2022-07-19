@@ -59,17 +59,18 @@ public class MouseActionArea {
 				MouseActionAreaHandler.getMAAs().add(this);
 			} catch (ConcurrentModificationException error) {}
 		}
+		
 	}
 	/**
 	 * MW MAA Constructor
 	 */
-	public MouseActionArea(int relX, int relY, int relWidth, int relHeight, MouseActionAreaType type,
-			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox, MultiWindow mw) {
+	public MouseActionArea(int relWidth, int relHeight, MouseActionAreaType type,
+			String displayText, int relTextSize, Color standardColor, Color hoverColor, boolean showBox) {
 
 		this.mwMAA = true;
 		
-		this.relX = relX;
-		this.relY = relY;
+		this.relX = -1;
+		this.relY = -1;
 		this.relWidth = relWidth;
 		this.relHeight = relHeight;
 		this.type = type;
@@ -79,11 +80,10 @@ public class MouseActionArea {
 		this.hoverColor = hoverColor;
 		this.showBox = showBox;
 		
-		this.mw = mw;
-		
 		this.refreshPosition();
 
 		//DONT BE ADDED TO LIST, IS IN MW LIST
+		
 	}
 
 	/**

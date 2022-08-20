@@ -21,6 +21,10 @@ import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitCategory;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitHandler;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitTargetPattern;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_2Login;
@@ -139,6 +143,21 @@ public class ServerConnection {
 			String invalidCause = message;
 			Draw_2Login.loginErrorCause = invalidCause;
 			ConsoleHandler.printMessageInConsole("Login invalid! Cause: "+invalidCause, true);
+			break;
+		case 170:
+			//ONLY Receive: UNIT CATEGORIES
+			//SYNTAX: 170-CategoryData
+			UnitHandler.register(new UnitCategory(message));
+			break;
+		case 171:
+			//ONLY Receive: UNIT TARGETPATTERN
+			//SYNTAX: 171-PatternData
+			UnitHandler.register(new UnitTargetPattern(message));
+			break;
+		case 172:
+			//ONLY Receive: UNIT
+			//SYNTAX: 172-UnitData
+			UnitHandler.register(new Unit(message));
 			break;
 		case 180:
 			//PATCHNOTES

@@ -2,6 +2,8 @@ package de.bejoschgaming.orderofelements.graphics.drawparts;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
@@ -36,7 +38,15 @@ public class Draw_2Login {
 					String passwordCheck = checkForValidPassword(password);
 					if(passwordCheck == null) {
 						//VALID
-						ServerConnection.sendPacket(100, username+";"+password); //LOGIN 100
+						try {
+							MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+							messageDigest.update(password.getBytes());
+							String passwordHash = new String(messageDigest.digest());
+							ServerConnection.sendPacket(100, username+";"+passwordHash); //LOGIN 100
+						} catch (NoSuchAlgorithmException error) {
+							error.printStackTrace();
+							Draw_2Login.loginErrorCause = "The password is invalid!";
+						}
 					}else {
 						Draw_2Login.loginErrorCause = passwordCheck;
 					}
@@ -62,7 +72,15 @@ public class Draw_2Login {
 					String passwordCheck = checkForValidPassword(password);
 					if(passwordCheck == null) {
 						//VALID
-						ServerConnection.sendPacket(101, username+";"+password); //REGISTER 101
+						try {
+							MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+							messageDigest.update(password.getBytes());
+							String passwordHash = new String(messageDigest.digest());
+							ServerConnection.sendPacket(101, username+";"+passwordHash); //REGISTER 101
+						} catch (NoSuchAlgorithmException error) {
+							error.printStackTrace();
+							Draw_2Login.loginErrorCause = "The password is invalid!";
+						}
 					}else {
 						Draw_2Login.loginErrorCause = passwordCheck;
 					}

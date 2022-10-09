@@ -1,18 +1,29 @@
 package de.bejoschgaming.orderofelements.gamesystem.unitsystem;
 
+import java.awt.Image;
+
+import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
+import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
+
 public class Unit {
 
+	private String rawUnitData;
+	
 	private int id;
 	private String name;
 	private int cost;
 	private UnitCategory category;
 	private int health, armor, shield, damage;
 	private UnitTargetPattern type_attack, type_move, type_aura;
+	private Image icon, small_icon;
 	
 	private int startHealth;
 	private int x = 0, y = 0;
 	
 	public Unit(String unitData) {
+		
+		this.rawUnitData = unitData;
 		
 		String[] splitData = unitData.split(";");
 		
@@ -32,8 +43,20 @@ public class Unit {
 		this.y = 0;
 		this.startHealth = this.health;
 		
+		this.reloadImage();
+		
 	}
-
+	
+	@Override
+	public Unit clone() {
+		return new Unit(this.rawUnitData);
+	}
+	
+	public void reloadImage() {
+		this.icon = ImageHandler.loadImageFromName("game/units/"+this.name+".png", MapData.FIELD_SIZE, MapData.FIELD_SIZE);
+		this.small_icon = ImageHandler.loadImageFromName("game/units/"+this.name+".png", Draw_4Deckbuilder.iconSize, Draw_4Deckbuilder.iconSize);
+	}
+	
 	//GETTER
 	
 	public int getId() {
@@ -78,6 +101,13 @@ public class Unit {
 	}
 	public int getY() {
 		return y;
+	}
+	
+	public Image getIcon() {
+		return this.icon;
+	}
+	public Image getSmall_icon() {
+		return small_icon;
 	}
 
 	//SETTER

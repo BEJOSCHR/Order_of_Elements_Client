@@ -133,7 +133,7 @@ public class Draw_5Friendlist {
 					String displayedName = displayFriend.getName();
 					String displayedStatus = displayFriend.getStatus();
 					
-					int textSize = (int) (((double) Draw_5Friendlist.textSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
+					int textSize = GraphicsHandler.getRelativTextSize(Draw_5Friendlist.textSize);
 					Font fontName = FontHandler.getFont(FontHandler.medievalSharp_regular, textSize+2);
 					GraphicsHandler.drawCentralisedText(g, Color.BLACK, fontName, (this.getRelTextSize()+scrollValue+1)+".", this.getX()+(this.getWidth()*3)/100, this.getY()+(this.getHeight()/2));
 					Font fontStatus = FontHandler.getFont(FontHandler.medievalSharp_regular, textSize);

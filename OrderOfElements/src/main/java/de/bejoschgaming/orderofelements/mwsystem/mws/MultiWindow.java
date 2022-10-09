@@ -223,4 +223,11 @@ public class MultiWindow {
 		return blocking;
 	}
 	
+	
+	public void setMoveable(boolean moveable) {
+		this.moveable = moveable;
+	}
+	public void setBlocking(boolean blocking) {
+		this.blocking = blocking;
+	}
 }

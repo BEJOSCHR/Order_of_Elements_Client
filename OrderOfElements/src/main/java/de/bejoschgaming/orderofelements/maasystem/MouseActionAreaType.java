@@ -36,6 +36,10 @@ public enum MouseActionAreaType {
 	MENU_PatchnotesScroll,
 	
 	//DECKBUILDER
+	DECKBUILDER_Overview_,
+	DECKBUILDER_Selected,
+	DECKBUILDER_Edit,
+	DECKBUILDER_Delete,
 	DECKBUILDER_Back,
 	
 	//FRIENDLIST

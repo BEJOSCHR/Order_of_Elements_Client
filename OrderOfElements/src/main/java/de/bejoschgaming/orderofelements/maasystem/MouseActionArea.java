@@ -92,8 +92,21 @@ public class MouseActionArea {
 	 */
 	public void refreshPosition() {
 		
-		x = (int) ((((double) relX / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
-		y = (int) ((((double) relY / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+		if(this.relX != -1) {
+			if(relX == 0) {
+				x = 0;
+			}else {
+				x = (int) ((((double) relX / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
+			}
+		}
+		if(this.relY != -1) {
+			if(relY == 0) {
+				y = 0;
+			}else {
+				y = (int) ((((double) relY / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+			}
+		}
+		
 		width = (int) ((((double) relWidth / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
 		height = (int) ((((double) relHeight / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
 	

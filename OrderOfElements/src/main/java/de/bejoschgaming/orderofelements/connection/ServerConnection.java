@@ -19,6 +19,8 @@ import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.MenuBookAnimation;
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
+import de.bejoschgaming.orderofelements.decksystem.Deck;
+import de.bejoschgaming.orderofelements.decksystem.DeckHandler;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
@@ -126,14 +128,10 @@ public class ServerConnection {
 			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Name);
 			TextFieldHandler.hideTextField(TextFieldHandler.LOGIN_Password);
 			AnimationHandler.startAnimation(new MenuBookAnimation(true) {
-				
 				@Override
 				protected void halfTimeAction() {
-					
 					GraphicsHandler.switchTo(DrawState.MENU);
-					
 				}
-				
 			});
 			ConsoleHandler.printMessageInConsole("Valid login! ClientID: "+ClientData.getThisID(), true);
 			break;
@@ -196,6 +194,21 @@ public class ServerConnection {
 			String newStatus = data[1];
 			ProfileHandler.getProfile(friendStatusID).updateStatus(newStatus);
 			break;
+		case 220:
+			//DECK DATA RECEIVE
+			//SYNTAX: 220-DeckID;DeckOwnerID;DeckName;DeckData
+			int deckID = Integer.parseInt(data[0]);
+			int ownerID = Integer.parseInt(data[1]);
+			DeckHandler.addDeck(new Deck(deckID, ownerID, data[2], data[3]));
+			break;
+		case 221:
+			//ONLY SEND: SAVE DECK
+			//SYNTAX: 221-DeckID;DeckName;DeckData
+			//IF DeckID is -1 its a new created deck else its an update
+			break;
+		case 222:
+			//ONLY SEND: DELETE DECK
+			//SYNTAX: 222-DeckID
 		case 241:
 			//FRIENDREQUEST ADD
 			//SEND: 241-playerTargetName

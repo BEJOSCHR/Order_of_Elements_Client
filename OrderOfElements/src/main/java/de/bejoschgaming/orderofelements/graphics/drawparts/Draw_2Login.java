@@ -113,8 +113,9 @@ public class Draw_2Login {
 		g.drawImage(ImageHandler.menu_book[0], 0, 0, null);
 		
 		//DRAW LEFT PAGE
-		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 50), "Order Of Elements", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*3)/7);
-		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_regular, 26), "By BejoschGaming", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*4)/7);
+		g.drawImage(ImageHandler.menu_ooeIcon_withText_transparent, ((GraphicsHandler.getWidth()*32)/100)-ImageHandler.iconSize/2, (GraphicsHandler.getHeight()*2)/6-ImageHandler.iconSize/2, null);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 50), "Order Of Elements", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*3)/6);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_regular, 26), "By BejoschGaming", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*4)/6);
 		
 		//DRAW RIGHT PAGE
 		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 42), "Login", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*3)/10);

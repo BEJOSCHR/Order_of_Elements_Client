@@ -198,7 +198,7 @@ public class ConsoleHandler {
 			}
 		}else {
 			printMessageInConsole("For more infos: /units [category|pattern] ", true);
-			List<Unit> units = UnitHandler.getUnits();
+			List<Unit> units = UnitHandler.getUnitTemplates();
 			printMessageInConsole("Units overview (Total "+units.size()+"): ", true);
 			for(int i = 0 ; i < units.size() ; i++) {
 				Unit unit = units.get(i);

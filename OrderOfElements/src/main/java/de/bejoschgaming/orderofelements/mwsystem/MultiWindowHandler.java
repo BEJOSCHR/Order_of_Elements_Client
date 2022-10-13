@@ -78,8 +78,8 @@ public class MultiWindowHandler {
 			ConsoleHandler.printMessageInConsole("Try to drag mw, but there is already a dragged mw! ("+mw.getType()+")", true);
 		}else {
 			draggedMW = mw;
-			draggingStartX = MouseHandler.mouseX;
-			draggingStartY = MouseHandler.mouseY;
+			draggingStartX = MouseHandler.getMouseX();
+			draggingStartY = MouseHandler.getMouseY();
 		}
 		
 	}

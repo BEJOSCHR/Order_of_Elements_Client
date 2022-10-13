@@ -34,7 +34,6 @@ public class Deck {
 		this.ownerID = ownerID;
 		
 		this.name = deckName;
-		this.data = deckData;
 		
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -45,11 +44,17 @@ public class Deck {
 		
 	}
 	
-	private void readOutData(String deckData) {
+	public void readOutData(String deckData) {
 		
 		if(deckData == null || deckData.contains(":") == false || deckData.contains("-") == false) {
+			this.data = "";
 			return;
 		}
+		
+		this.data = deckData;
+		this.totalCost = 0;
+		this.units.clear();
+		this.unitsAmountMap.clear();
 		
 		for(String unitData : deckData.split(":")) {
 			String[] splitData = unitData.split("-");
@@ -61,11 +66,11 @@ public class Deck {
 			newUnit.setY(unitY);
 			this.units.add(newUnit);
 			this.totalCost += newUnit.getCost();
-			if(unitsAmountMap.containsKey(newUnit.getId())) {
-				int current = unitsAmountMap.get(newUnit.getId());
-				unitsAmountMap.put(newUnit.getId(), current+1);
+			if(this.unitsAmountMap.containsKey(newUnit.getId())) {
+				int current = this.unitsAmountMap.get(newUnit.getId());
+				this.unitsAmountMap.put(newUnit.getId(), current+1);
 			}else {
-				unitsAmountMap.put(newUnit.getId(), 1);
+				this.unitsAmountMap.put(newUnit.getId(), 1);
 			}
 		}
 		
@@ -137,6 +142,10 @@ public class Deck {
 	}
 	public String getData() {
 		return data;
+	}
+	
+	public int getTotalCost() {
+		return totalCost;
 	}
 	
 }

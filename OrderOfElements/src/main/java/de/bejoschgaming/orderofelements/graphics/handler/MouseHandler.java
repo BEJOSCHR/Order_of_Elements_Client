@@ -8,7 +8,10 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.bejoschgaming.orderofelements.deckbuildersystem.DeckBuilder_Data;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
+import de.bejoschgaming.orderofelements.graphics.DrawState;
+import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
 import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaHandler;
 import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
@@ -16,7 +19,7 @@ import de.bejoschgaming.orderofelements.mwsystem.mws.MultiWindow;
 
 public class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener {
 
-	public static int mouseX = 0, mouseY = 0;
+	private static int mouseX = 0, mouseY = 0;
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
@@ -43,8 +46,22 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 					clickedMAAs.add(maa);
 				}
 			}
-			for (MouseActionArea clickedMAA : clickedMAAs) {
-				clickedMAA.performAction_MOUSEWHEEL_TURN(turns);
+			if(clickedMAAs.isEmpty() == false) {
+				//MAAs
+				for (MouseActionArea clickedMAA : clickedMAAs) {
+					clickedMAA.performAction_MOUSEWHEEL_TURN(turns);
+				}
+			}else {
+				//NO MAAs
+				if(GraphicsHandler.getDrawState() == DrawState.DECKBUILDER) {
+					
+					
+					
+				}else if(GraphicsHandler.getDrawState() == DrawState.INGAME) {
+					
+					
+					
+				}
 			}
 		}
 		
@@ -58,8 +75,18 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 		mouseX = e.getX();
 		mouseY = e.getY();
 
-		if (MapData.map != null) {
-			MapData.map.updateHoverField();
+		if(GraphicsHandler.getDrawState() == DrawState.DECKBUILDER) {
+			
+			if(DeckBuilder_Data.layoutMap != null) {
+				DeckBuilder_Data.layoutMap.updateHoverField();
+			}
+			
+		}else if(GraphicsHandler.getDrawState() == DrawState.INGAME) {
+			
+			if(MapData.map != null) {
+				MapData.map.updateHoverField();
+			}
+			
 		}
 
 	}
@@ -70,8 +97,18 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 		mouseX = e.getX();
 		mouseY = e.getY();
 
-		if (MapData.map != null) {
-			MapData.map.updateHoverField();
+		if(GraphicsHandler.getDrawState() == DrawState.DECKBUILDER) {
+			
+			if(DeckBuilder_Data.layoutMap != null) {
+				DeckBuilder_Data.layoutMap.updateHoverField();
+			}
+			
+		}else if(GraphicsHandler.getDrawState() == DrawState.INGAME) {
+			
+			if(MapData.map != null) {
+				MapData.map.updateHoverField();
+			}
+			
 		}
 
 	}
@@ -111,13 +148,35 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 					clickedMAAs.add(maa);
 				}
 			}
-			for (MouseActionArea clickedMAA : clickedMAAs) {
-				if (buttonCode == MouseEvent.BUTTON1) {
-					//LEFT
-					clickedMAA.performAction_LEFT_PRESS();
-				} else if (buttonCode == MouseEvent.BUTTON3) {
-					//RIGHT
-					clickedMAA.performAction_RIGHT_PRESS();
+			if(clickedMAAs.isEmpty() == false) {
+				//MAAs
+				for (MouseActionArea clickedMAA : clickedMAAs) {
+					if (buttonCode == MouseEvent.BUTTON1) {
+						//LEFT
+						clickedMAA.performAction_LEFT_PRESS();
+					} else if (buttonCode == MouseEvent.BUTTON3) {
+						//RIGHT
+						clickedMAA.performAction_RIGHT_PRESS();
+					}
+				}
+			}else {
+				//NO MAAs
+				if(GraphicsHandler.getDrawState() == DrawState.DECKBUILDER) {
+					
+					if(DeckBuilder_Data.layoutMap != null) {
+						if (buttonCode == MouseEvent.BUTTON1) {
+							//LEFT
+							DeckBuilder_Data.layoutMap.handleLeftPress();
+						} else if (buttonCode == MouseEvent.BUTTON3) {
+							//RIGHT
+							DeckBuilder_Data.layoutMap.handleRightPress();
+						}
+					}
+					
+				}else if(GraphicsHandler.getDrawState() == DrawState.INGAME) {
+					
+					
+					
 				}
 			}
 		}
@@ -162,13 +221,35 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
 					clickedMAAs.add(maa);
 				}
 			}
-			for (MouseActionArea clickedMAA : clickedMAAs) {
-				if (buttonCode == MouseEvent.BUTTON1) {
-					//LEFT
-					clickedMAA.performAction_LEFT_RELEASE();
-				} else if (buttonCode == MouseEvent.BUTTON3) {
-					//RIGHT
-					clickedMAA.performAction_RIGHT_RELEASE();
+			if(clickedMAAs.isEmpty() == false) {
+				//MAAs
+				for (MouseActionArea clickedMAA : clickedMAAs) {
+					if (buttonCode == MouseEvent.BUTTON1) {
+						//LEFT
+						clickedMAA.performAction_LEFT_RELEASE();
+					} else if (buttonCode == MouseEvent.BUTTON3) {
+						//RIGHT
+						clickedMAA.performAction_RIGHT_RELEASE();
+					}
+				}
+			}else {
+				//NO MAAs
+				if(GraphicsHandler.getDrawState() == DrawState.DECKBUILDER) {
+					
+					if(DeckBuilder_Data.layoutMap != null) {
+						if (buttonCode == MouseEvent.BUTTON1) {
+							//LEFT
+							DeckBuilder_Data.layoutMap.handleLeftRelease();;
+						} else if (buttonCode == MouseEvent.BUTTON3) {
+							//RIGHT
+							DeckBuilder_Data.layoutMap.handleRightRelease();;
+						}
+					}
+					
+				}else if(GraphicsHandler.getDrawState() == DrawState.INGAME) {
+					
+					
+					
 				}
 			}
 		}

@@ -1,31 +1,22 @@
-package de.bejoschgaming.orderofelements.gamesystem.map.fields;
+package de.bejoschgaming.orderofelements.deckbuildersystem;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 
-public class Field {
+public class DeckBuilder_Field {
 
 	private int x, y;
-	private FieldType type;
-//	private Image img;
+	private boolean unplaceable = false;
 	
-	public Field(int x_, int y_, FieldType type_) {
+	public DeckBuilder_Field(int x, int y, boolean unplaceable) {
 		
-		this.x = x_;
-		this.y = y_;
-		this.changeType(type_);
-		
-	}
-	
-	public void changeType(FieldType newType) {
-		
-		this.type = newType;
-//		this.img = loadImage;
+		this.x = x;
+		this.y = y;
+		this.unplaceable = unplaceable;
 		
 	}
 	
@@ -35,7 +26,7 @@ public class Field {
 	public void draw(Graphics g, Color color) {
 		
 		//This size is the length of one part of the 6-Eck as well as the distance from the center to each point
-		int masterLength = MapData.FIELD_SIZE;
+		int masterLength = DeckBuilder_Data.displayFieldSize;
 		
 		int centerX = getCenterX();
 		int centerY = getCenterY();
@@ -53,18 +44,23 @@ public class Field {
 		
 		Polygon polygon = new Polygon(listX, listY, 6);
 		
-		g.setColor(FieldType.getColor(this.type));
+		if(this.unplaceable == true) {
+			g.setColor(Color.DARK_GRAY);
+		}else {
+			g.setColor(Color.LIGHT_GRAY);
+		}
 		g.fillPolygon(polygon);
 		
 		g.setColor(color);
 		g.drawPolygon(polygon);
 		
 		//MITTELPUNKT
-		g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
-		
-		//CORDS
-		if(this.isMoveable() == true) {
-			GraphicsHandler.drawCentralisedText(g, Color.WHITE, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(11)), this.x+":"+this.y, p4_x, p4_y-12);
+		if(DeckBuilder_Data.showFieldCenterPoints == true) {
+			g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
+		}
+			
+		if(DeckBuilder_Data.showFieldCords == true) {
+			GraphicsHandler.drawCentralisedText(g, Color.DARK_GRAY, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(10)), this.x+":"+this.y, p4_x, p4_y-12);
 		}
 		
 	}
@@ -76,20 +72,13 @@ public class Field {
 		return y;
 	}
 	public int getCenterX() {
-		return this.x * MapData.FIELD_SIZE;
+		return this.x * DeckBuilder_Data.displayFieldSize + DeckBuilder_Data.map_offset_X;
 	}
 	public int getCenterY() {
-		return this.y * (int) (MapData.FIELD_SIZE*3.0/2.0);
+		return this.y * (int) (DeckBuilder_Data.displayFieldSize*3.0/2.0) + DeckBuilder_Data.map_offset_Y;
 	}
-	public FieldType getType() {
-		return type;
-	}
-	public boolean isMoveable() {
-		if(this.getType() != FieldType.BORDER && this.getType() != FieldType.OBSTRUCTION) {
-			return true;
-		}else {
-			return false;
-		}
+	public boolean isUnplaceable() {
+		return unplaceable;
 	}
 	
 }

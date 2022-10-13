@@ -104,8 +104,8 @@ public class MultiWindow {
 	 * DON'T overwritte normaly
 	 */
 	public void drawDraggingPreview(Graphics g, int startX, int startY) {
-		int xDiff = MouseHandler.mouseX-startX;
-		int yDiff = MouseHandler.mouseY-startY;
+		int xDiff = MouseHandler.getMouseX()-startX;
+		int yDiff = MouseHandler.getMouseY()-startY;
 		if(Math.abs(xDiff) <= 3 && Math.abs(yDiff) <= 3) { return; }
 		g.setColor(new Color(100, 100, 100, 130));
 		g.fillRect(this.x+xDiff, this.y+yDiff, this.width, this.height);

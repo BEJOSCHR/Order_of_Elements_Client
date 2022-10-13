@@ -1,26 +1,25 @@
-package de.bejoschgaming.orderofelements.gamesystem.map;
+package de.bejoschgaming.orderofelements.deckbuildersystem;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
-import de.bejoschgaming.orderofelements.gamesystem.map.fields.Field;
-import de.bejoschgaming.orderofelements.gamesystem.map.fields.FieldType;
 import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
+import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 
-public class Map {
+public class DeckBuilder_Map {
 
 	private int width, height;
 	
-	private List<Field> fields = new ArrayList<>();
+	private List<DeckBuilder_Field> fields = new ArrayList<>();
 	private List<Unit> units = new ArrayList<>();
 	
-	private Field hoveredField = null;
+	private DeckBuilder_Field hoveredField = null;
 	
 	
-	public Map(int width, int height) {
+	public DeckBuilder_Map(int width, int height) {
 		
 		this.width = width;
 		this.height = height;
@@ -37,10 +36,10 @@ public class Map {
 		for(int x = 0 ; x <= this.width ; x += 1) {
 			for(int y = 0 ; y <= this.height ; y +=1 ) {
 				if(x % 2 == y % 2) {
-					if(x == 0 || x == this.width || y == 0 || y == this.height) {
-						fields.add(new Field(x, y, FieldType.BORDER));
+					if(x == 0 || x == 1 || x == this.width || x == this.width-1 || y == 0 || y == 1 || y == this.height || y == this.height-1) {
+						fields.add(new DeckBuilder_Field(x, y, true));
 					}else {
-						fields.add(new Field(x, y, FieldType.DEFAULT));
+						fields.add(new DeckBuilder_Field(x, y, false));
 					}
 				}
 			}
@@ -50,18 +49,45 @@ public class Map {
 	
 	public void draw(Graphics g) {
 		
-		for(Field field : this.fields) {
+		for(DeckBuilder_Field field : this.fields) {
 			field.draw(g);
 		}
 		
 		if(getHoveredField() != null) {
-			for(Field surrounder : getSurroundingFields(getHoveredField())) {
-				surrounder.draw(g, Color.ORANGE);
-			}
+//			for(Field surrounder : getSurroundingFields(getHoveredField())) {
+//				surrounder.draw(g, Color.ORANGE);
+//			}
 			getHoveredField().draw(g, Color.RED);
 //			g.setColor(Color.ORANGE);
 //			g.drawLine(MouseHandler.mouseX, MouseHandler.mouseY, this.hoveredField.getCenterX(), this.hoveredField.getCenterY());
 		}
+		
+		if(DeckBuilder_Data.startDragPoint != null) {
+			g.setColor(Color.BLACK);
+			g.drawLine((int) DeckBuilder_Data.startDragPoint.getX(), (int) DeckBuilder_Data.startDragPoint.getY(), MouseHandler.getMouseX(), MouseHandler.getMouseY());
+		}
+		
+	}
+	
+	public void handleLeftPress() {
+		
+		DeckBuilder_Data.startDragPoint = new Point(MouseHandler.getMouseX(), MouseHandler.getMouseY());
+		
+	}
+	public void handleLeftRelease() {
+		
+		//DO STH
+		DeckBuilder_Data.startDragPoint = null;
+		
+	}
+	public void handleRightPress() {
+		
+		
+		
+	}
+	public void handleRightRelease() {
+		
+		
 		
 	}
 	
@@ -71,12 +97,12 @@ public class Map {
 		
 	}
 	
-	private Field getNextFieldToCoords(int x, int y) {
+	private DeckBuilder_Field getNextFieldToCoords(int x, int y) {
 		
-		double closestDistance = MapData.FIELD_SIZE*1.0+5.0;
-		Field closestField = null;
+		double closestDistance = DeckBuilder_Data.displayFieldSize*1.0+5.0;
+		DeckBuilder_Field closestField = null;
 		
-		for(Field field : this.fields) {
+		for(DeckBuilder_Field field : this.fields) {
 			double distanceToCoords = Math.sqrt( Math.pow(field.getCenterX()-x, 2) + Math.pow(field.getCenterY()-y, 2) );
 			if(distanceToCoords < closestDistance) {
 				closestDistance = distanceToCoords;
@@ -88,12 +114,12 @@ public class Map {
 		
 	}
 	
-	public List<Field> getSurroundingFields(Field center) {
+	public List<DeckBuilder_Field> getSurroundingFields(DeckBuilder_Field center) {
 		
-		List<Field> neighbours = new ArrayList<>();
+		List<DeckBuilder_Field> neighbours = new ArrayList<>();
 		int x = center.getX(), y = center.getY();
 		
-		for(Field field : this.fields) {
+		for(DeckBuilder_Field field : this.fields) {
 			if(field.getX() == x-2 && field.getY() == y) {
 				neighbours.add(field);
 			}else if(field.getX() == x+2 && field.getY() == y) {
@@ -113,10 +139,10 @@ public class Map {
 		
 	}
 	
-	public List<Field> getFields() {
+	public List<DeckBuilder_Field> getFields() {
 		return fields;
 	}
-	public Field getHoveredField() {
+	public DeckBuilder_Field getHoveredField() {
 		return hoveredField;
 	}
 	public List<Unit> getUnits() {

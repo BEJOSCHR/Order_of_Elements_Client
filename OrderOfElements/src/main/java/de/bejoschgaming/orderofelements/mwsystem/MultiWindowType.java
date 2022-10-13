@@ -6,6 +6,7 @@ public enum MultiWindowType {
 	
 	MW_DesicionWindow_,
 	MW_InfoWindow_,
+	MW_DeckRename,
 	
 	MW_Test;
 	

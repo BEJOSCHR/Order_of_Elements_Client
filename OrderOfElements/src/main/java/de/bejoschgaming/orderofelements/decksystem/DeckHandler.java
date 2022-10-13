@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
+import de.bejoschgaming.orderofelements.deckbuildersystem.DeckBuilder_Data;
 
 public class DeckHandler {
 
@@ -35,7 +35,7 @@ public class DeckHandler {
 			if(deck.getDeckID() == deckID) {
 				loadedDecks.remove(deck);
 				ServerConnection.sendPacket(222, ""+deck.getDeckID());;
-				Draw_4Deckbuilder.selectedDeck = null; //UPDATE SO REMOVED ONE IS NOT SELECTED
+				DeckBuilder_Data.selectedDeck = null; //UPDATE SO REMOVED ONE IS NOT SELECTED
 				return;
 			}
 		}

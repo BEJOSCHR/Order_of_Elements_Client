@@ -40,6 +40,10 @@ public enum MouseActionAreaType {
 	DECKBUILDER_Selected,
 	DECKBUILDER_Edit,
 	DECKBUILDER_Delete,
+	DECKBUILDER_Rename,
+	DECKBUILDER_Save,
+	DECKBUILDER_NameDisplay,
+	DECKBUILDER_CostDisplay,
 	DECKBUILDER_Back,
 	
 	//FRIENDLIST

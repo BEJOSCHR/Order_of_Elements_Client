@@ -11,10 +11,10 @@ import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.DynamicInteger;
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
+import de.bejoschgaming.orderofelements.deckbuildersystem.DeckBuilder_Data;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
-import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Credits;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
@@ -131,7 +131,7 @@ public class GraphicsHandler {
 			break;
 		case DECKBUILDER:
 			Draw_3Menu.startBackgroundAnimation();
-			Draw_4Deckbuilder.selectedDeck = null;
+			DeckBuilder_Data.selectedDeck = null;
 			break;
 		case FRIENDLIST:
 			Draw_3Menu.startBackgroundAnimation();

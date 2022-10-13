@@ -14,12 +14,14 @@ public class TextFieldHandler {
 	public static JTextField LOGIN_Name;
 	public static JTextField LOGIN_Password;
 	public static JTextField FRIENDLIST_RequestName;
+	public static JTextField DECKBUILDER_Rename;
 	
 	public static void loadTextFields() {
 		
 		LOGIN_Name = createTextField(FontHandler.getFont(FontHandler.medievalSharp_regular, 22));
 		LOGIN_Password = createTextField(FontHandler.getFont(FontHandler.medievalSharp_regular, 22));
 		FRIENDLIST_RequestName = createTextField(FontHandler.getFont(FontHandler.medievalSharp_regular, 22));
+		DECKBUILDER_Rename = createTextField(FontHandler.getFont(FontHandler.medievalSharp_regular, 22));
 		updateAllPositions();
 		setNormalColorsForAll();
 		
@@ -31,6 +33,7 @@ public class TextFieldHandler {
 		updatePosition(LOGIN_Name, 1305, 454, width, height, true);
 		updatePosition(LOGIN_Password, 1305, 540, width, height, true);
 		updatePosition(FRIENDLIST_RequestName, 365, 745, width, height, false);
+		updatePosition(DECKBUILDER_Rename, GraphicsHandler.getWidth()/2, GraphicsHandler.getHeight()/2-30, width, height-8, true);
 		
 	}
 	
@@ -78,6 +81,8 @@ public class TextFieldHandler {
 		LOGIN_Password.setForeground(Color.BLACK);
 		FRIENDLIST_RequestName.setBackground(Color.WHITE);
 		FRIENDLIST_RequestName.setForeground(Color.BLACK);
+		DECKBUILDER_Rename.setBackground(Color.WHITE);
+		DECKBUILDER_Rename.setForeground(Color.BLACK);
 		
 	}
 	public static void setCamoflageColorsForAll() {
@@ -88,6 +93,8 @@ public class TextFieldHandler {
 		LOGIN_Password.setForeground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
 		FRIENDLIST_RequestName.setBackground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
 		FRIENDLIST_RequestName.setForeground(MultiWindowHandler.MW_BLOCKING_BACKGROUNDCOLOR);
+		DECKBUILDER_Rename.setBackground(Color.WHITE);
+		DECKBUILDER_Rename.setForeground(Color.BLACK);
 		
 	}
 }

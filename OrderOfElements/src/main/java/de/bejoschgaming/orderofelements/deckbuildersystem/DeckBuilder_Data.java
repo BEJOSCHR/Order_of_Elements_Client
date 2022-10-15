@@ -1,9 +1,8 @@
 package de.bejoschgaming.orderofelements.deckbuildersystem;
 
-import java.awt.Point;
-
 import de.bejoschgaming.orderofelements.decksystem.Deck;
 import de.bejoschgaming.orderofelements.decksystem.DeckbuilderType;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
 
 public class DeckBuilder_Data {
 
@@ -14,9 +13,13 @@ public class DeckBuilder_Data {
 	
 	public static DeckbuilderType displayType = DeckbuilderType.OVERVIEW;
 	public static Deck selectedDeck = null;
+	public static String deckName = "";
+	public static int deckCost = 0;
 	
 	public static DeckBuilder_Map layoutMap = null;
-	public static Point startDragPoint = null;
+	public static Unit draggedUnit = null;
+	
+	public static int unitListScroll = 0; //NOT PIXEL, INDEX SCROLL!
 	
 	//NOT USED YET:
 	public static boolean showFieldCords = false;

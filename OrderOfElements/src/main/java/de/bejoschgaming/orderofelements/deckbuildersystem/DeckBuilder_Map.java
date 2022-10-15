@@ -2,11 +2,11 @@ package de.bejoschgaming.orderofelements.deckbuildersystem;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 
 public class DeckBuilder_Map {
@@ -19,13 +19,36 @@ public class DeckBuilder_Map {
 	private DeckBuilder_Field hoveredField = null;
 	
 	
-	public DeckBuilder_Map(int width, int height) {
+	public DeckBuilder_Map(List<Unit> units, int width, int height) {
 		
+		this.units = units;
 		this.width = width;
 		this.height = height;
 		
-		units.clear();
 		fillMap();
+		
+	}
+	
+	public String getUnitDataAsString() {
+		
+		String output = null;
+		for(Unit unit : this.units) {
+			if(output == null) {
+				output = unit.getId()+DeckBuilder_Data.smallSplit+unit.getX()+DeckBuilder_Data.smallSplit+unit.getY();
+			}else {
+				output += DeckBuilder_Data.bigSplit+unit.getId()+DeckBuilder_Data.smallSplit+unit.getX()+DeckBuilder_Data.smallSplit+unit.getY();
+			}
+		}
+		return output;
+		
+	}
+	
+	public void unregisterSavedUnits() {
+		
+		for(Unit unit : this.units) {
+			UnitHandler.removeNewUnit(unit);
+		}
+		this.units.clear();
 		
 	}
 	
@@ -33,8 +56,8 @@ public class DeckBuilder_Map {
 		
 		fields.clear();
 		
-		for(int x = 0 ; x <= this.width ; x += 1) {
-			for(int y = 0 ; y <= this.height ; y +=1 ) {
+		for(int y = this.height-1 ; y >= 0 ; y -=1 ) {
+			for(int x = 0 ; x <= this.width ; x += 1) {
 				if(x % 2 == y % 2) {
 					if(x == 0 || x == 1 || x == this.width || x == this.width-1 || y == 0 || y == 1 || y == this.height || y == this.height-1) {
 						fields.add(new DeckBuilder_Field(x, y, true));
@@ -57,27 +80,38 @@ public class DeckBuilder_Map {
 //			for(Field surrounder : getSurroundingFields(getHoveredField())) {
 //				surrounder.draw(g, Color.ORANGE);
 //			}
-			getHoveredField().draw(g, Color.RED);
+			if(getHoveredField().isUnplaceable()) {
+				getHoveredField().draw(g, Color.RED);
+			}else {
+				getHoveredField().draw(g, Color.GREEN.darker());
+			}
 //			g.setColor(Color.ORANGE);
 //			g.drawLine(MouseHandler.mouseX, MouseHandler.mouseY, this.hoveredField.getCenterX(), this.hoveredField.getCenterY());
-		}
-		
-		if(DeckBuilder_Data.startDragPoint != null) {
-			g.setColor(Color.BLACK);
-			g.drawLine((int) DeckBuilder_Data.startDragPoint.getX(), (int) DeckBuilder_Data.startDragPoint.getY(), MouseHandler.getMouseX(), MouseHandler.getMouseY());
 		}
 		
 	}
 	
 	public void handleLeftPress() {
 		
-		DeckBuilder_Data.startDragPoint = new Point(MouseHandler.getMouseX(), MouseHandler.getMouseY());
+		
 		
 	}
 	public void handleLeftRelease() {
 		
-		//DO STH
-		DeckBuilder_Data.startDragPoint = null;
+		if(DeckBuilder_Data.draggedUnit != null && getHoveredField() != null && getHoveredField().isUnplaceable() == false && getUnitAtPos(getHoveredField()) == null) {
+			//HAS DRAGGED UNIT - HAS HOVERFIELD WHICH IS PLACABLE AND HAS NOT A UNIT ALREADY
+			
+			Unit newUnit = DeckBuilder_Data.draggedUnit.clone();
+			newUnit.setX(getHoveredField().getX());
+			newUnit.setY(getHoveredField().getY());
+			this.units.add(newUnit);
+			if(newUnit.getCost() != -1) {
+				DeckBuilder_Data.deckCost += newUnit.getCost();
+			}
+				
+		}
+		
+		DeckBuilder_Data.draggedUnit = null;
 		
 	}
 	public void handleRightPress() {
@@ -87,7 +121,20 @@ public class DeckBuilder_Map {
 	}
 	public void handleRightRelease() {
 		
+		if(DeckBuilder_Data.draggedUnit == null && getHoveredField() != null && getHoveredField().isUnplaceable() == false) {
+			
+			Unit unit = getUnitAtPos(getHoveredField());
+			if(unit != null) {
+				this.units.remove(unit);
+				if(unit.getCost() != -1) {
+					DeckBuilder_Data.deckCost -= unit.getCost();
+				}
+				UnitHandler.removeNewUnit(unit);
+			}
+			
+		}
 		
+		DeckBuilder_Data.draggedUnit = null;
 		
 	}
 	
@@ -136,6 +183,18 @@ public class DeckBuilder_Map {
 		}
 		
 		return neighbours;
+		
+	}
+	
+	public Unit getUnitAtPos(DeckBuilder_Field field) { return getUnitAtPos(field.getX(), field.getY()); }
+	public Unit getUnitAtPos(int x, int y) {
+		
+		for(Unit unit : this.units) {
+			if(unit.getX() == x && unit.getY() == y) {
+				return unit;
+			}
+		}
+		return null;
 		
 	}
 	

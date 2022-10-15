@@ -34,6 +34,7 @@ public class Deck {
 		this.ownerID = ownerID;
 		
 		this.name = deckName;
+		this.data = deckData;
 		
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -52,6 +53,11 @@ public class Deck {
 		}
 		
 		this.data = deckData;
+		if(this.units.isEmpty() == false) {
+			for(Unit u : this.units) {
+				UnitHandler.removeNewUnit(u);
+			}
+		}
 		this.totalCost = 0;
 		this.units.clear();
 		this.unitsAmountMap.clear();
@@ -65,7 +71,9 @@ public class Deck {
 			newUnit.setX(unitX);
 			newUnit.setY(unitY);
 			this.units.add(newUnit);
-			this.totalCost += newUnit.getCost();
+			if(newUnit.getCost() > 0) {
+				this.totalCost += newUnit.getCost();
+			}
 			if(this.unitsAmountMap.containsKey(newUnit.getId())) {
 				int current = this.unitsAmountMap.get(newUnit.getId());
 				this.unitsAmountMap.put(newUnit.getId(), current+1);
@@ -128,7 +136,7 @@ public class Deck {
 		this.name = name;
 	}
 	public void setData(String data) {
-		this.data = data;
+		this.readOutData(data);
 	}
 	
 	public int getDeckID() {

@@ -97,6 +97,17 @@ public class GraphicsHandler {
 	
 	}
 	
+	public static int getRelativX(int realX) {
+		
+		return (int) ((((double) realX / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
+		
+	}
+	public static int getRelativY(int realY) {
+		
+		return (int) ((((double) realY / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+		
+	}
+	
 	public static int getRelativTextSize(int textSize) {
 		
 		return (int) (((double) textSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);

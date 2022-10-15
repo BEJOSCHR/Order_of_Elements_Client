@@ -96,21 +96,21 @@ public class MouseActionArea {
 			if(relX == 0) {
 				x = 0;
 			}else {
-				x = (int) ((((double) relX / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
+				x = GraphicsHandler.getRelativX(relX);
 			}
 		}
 		if(this.relY != -1) {
 			if(relY == 0) {
 				y = 0;
 			}else {
-				y = (int) ((((double) relY / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+				y = GraphicsHandler.getRelativY(relY);;
 			}
 		}
 		
-		width = (int) ((((double) relWidth / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
-		height = (int) ((((double) relHeight / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+		width = GraphicsHandler.getRelativX(relWidth);
+		height = GraphicsHandler.getRelativY(relHeight);
 	
-		textSize = (int) (((double) relTextSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
+		textSize = GraphicsHandler.getRelativTextSize(relTextSize);
 		
 	}
 

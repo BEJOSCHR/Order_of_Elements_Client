@@ -5,7 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
+import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
 
 public class DeckBuilder_Field {
 
@@ -47,7 +50,18 @@ public class DeckBuilder_Field {
 		if(this.unplaceable == true) {
 			g.setColor(Color.DARK_GRAY);
 		}else {
-			g.setColor(Color.LIGHT_GRAY);
+			boolean hasUnit = false;
+			for(Unit unit : DeckBuilder_Data.layoutMap.getUnits()) {
+				if(unit.getX() == this.getX() && unit.getY() == this.getY()) {
+					hasUnit = true;
+					break;
+				}
+			}
+			if(hasUnit) {
+				g.setColor(Color.WHITE);
+			}else {
+				g.setColor(Color.LIGHT_GRAY);
+			}
 		}
 		g.fillPolygon(polygon);
 		
@@ -61,6 +75,20 @@ public class DeckBuilder_Field {
 			
 		if(DeckBuilder_Data.showFieldCords == true) {
 			GraphicsHandler.drawCentralisedText(g, Color.DARK_GRAY, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(10)), this.x+":"+this.y, p4_x, p4_y-12);
+		}
+		
+		for(Unit unit : DeckBuilder_Data.layoutMap.getUnits()) {
+			if(unit.getX() == this.getX() && unit.getY() == this.getY()) {
+				g.drawImage(unit.getSmall_icon(), this.getCenterX()-Draw_4Deckbuilder.iconSize/2, this.getCenterY()-Draw_4Deckbuilder.iconSize/2, null);
+				int textSize = 8;
+				if(DeckBuilder_Data.layoutMap.getHoveredField() != null && this.getX() == DeckBuilder_Data.layoutMap.getHoveredField().getX() && this.getY() == DeckBuilder_Data.layoutMap.getHoveredField().getY()) {
+					//IS HOVER FIELD
+					textSize = 13;
+				}
+				GraphicsHandler.drawCentralisedText(g, Color.WHITE, FontHandler.getFont(FontHandler.medievalSharp_regular, textSize), unit.getName(), this.getCenterX()+1, this.getCenterY()+(DeckBuilder_Data.displayFieldSize*5)/7+1);
+				GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.medievalSharp_regular, textSize), unit.getName(), this.getCenterX(), this.getCenterY()+(DeckBuilder_Data.displayFieldSize*5)/7);
+				break;
+			}
 		}
 		
 	}

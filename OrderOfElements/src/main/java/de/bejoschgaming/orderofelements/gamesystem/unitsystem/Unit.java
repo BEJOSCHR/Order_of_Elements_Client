@@ -1,13 +1,16 @@
 package de.bejoschgaming.orderofelements.gamesystem.unitsystem;
 
 import java.awt.Image;
+import java.util.Random;
 
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_4Deckbuilder;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 
 public class Unit {
-
+	
+	private int hashID = new Random().nextInt(10000, 100000);
+	
 	private String rawUnitData;
 	
 	private int id;
@@ -47,9 +50,18 @@ public class Unit {
 		
 	}
 	
+	//ONLY CALLED TO GET A RAW COPY OF THIS UNIT WITH NO CHANGED VARIABLES - USED AS UNITTEMPLATE CLONE
 	@Override
 	public Unit clone() {
 		return new Unit(this.rawUnitData);
+	}
+	@Override
+	public boolean equals(Object unit) {
+		if(unit instanceof Unit) {
+			return ((Unit)unit).getHashID() == this.hashID;
+		}else {
+			return false;
+		}
 	}
 	
 	public void reloadImage() {
@@ -59,6 +71,9 @@ public class Unit {
 	
 	//GETTER
 	
+	public int getHashID() {
+		return hashID;
+	}
 	public int getId() {
 		return id;
 	}

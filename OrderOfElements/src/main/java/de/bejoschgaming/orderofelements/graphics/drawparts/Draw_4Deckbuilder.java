@@ -363,6 +363,29 @@ public class Draw_4Deckbuilder {
 			}
 		};
 		
+		new MouseActionArea(unitSelect_startX, unitSelect_startY, unitSelect_width, unitSelect_height, MouseActionAreaType.DECKBUILDER_UnitScroll, "", 1, Color.WHITE, Color.ORANGE, false, false) {
+			@Override
+			public boolean isActiv() {
+				return GraphicsHandler.getDrawState() == DrawState.DECKBUILDER && DeckBuilder_Data.displayType == DeckbuilderType.EDIT;
+			}
+			@Override
+			public void performAction_MOUSEWHEEL_TURN(int turns) {
+				
+				if(turns > 0) {
+					//SCROLL DOWN SO +1
+					if(DeckBuilder_Data.unitListScroll < (UnitHandler.getUnitTemplates().size()/unitSelect_buttonNumberLR)) {
+						DeckBuilder_Data.unitListScroll++;
+					}
+				}else if(turns < 0) {
+					//SCROLL UP SO -1
+					if(DeckBuilder_Data.unitListScroll > 0) {
+						DeckBuilder_Data.unitListScroll--;
+					}
+				}
+				
+			}
+		};
+		
 		//UNIT SELECT - x:y via displayText
 		int cordX = unitSelect_startX+unitSelect_sideBorder;
 		int cordY = unitSelect_startY+unitSelect_extraTitelBorder+unitSelect_sideBorder;
@@ -470,6 +493,7 @@ public class Draw_4Deckbuilder {
 		
 		DeckBuilder_Data.layoutMap = new DeckBuilder_Map(DeckBuilder_Data.selectedDeck.getUnits(), MapData.MAP_WIDTH/2, MapData.MAP_HEIGHT);
 		DeckBuilder_Data.displayType = DeckbuilderType.EDIT;
+		DeckBuilder_Data.unitListScroll = 0;
 		
 		DeckBuilder_Data.deckName = DeckBuilder_Data.selectedDeck.getName();
 		DeckBuilder_Data.deckCost = DeckBuilder_Data.selectedDeck.getTotalCost();

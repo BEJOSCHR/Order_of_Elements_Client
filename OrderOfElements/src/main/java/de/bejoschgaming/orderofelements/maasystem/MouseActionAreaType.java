@@ -45,6 +45,7 @@ public enum MouseActionAreaType {
 	DECKBUILDER_NameDisplay,
 	DECKBUILDER_CostDisplay,
 	DECKBUILDER_UnitSelect_,
+	DECKBUILDER_UnitScroll,
 	DECKBUILDER_Back,
 	
 	//FRIENDLIST

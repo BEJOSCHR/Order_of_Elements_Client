@@ -22,7 +22,7 @@ public class DeckBuilder_Data {
 	public static int unitListScroll = 0; //NOT PIXEL, INDEX SCROLL!
 	
 	//NOT USED YET:
-	public static boolean showFieldCords = false;
+	public static boolean showFieldCords = true;
 	public static boolean showFieldCenterPoints = false;
 	public static int deckListScroll = 0;
 

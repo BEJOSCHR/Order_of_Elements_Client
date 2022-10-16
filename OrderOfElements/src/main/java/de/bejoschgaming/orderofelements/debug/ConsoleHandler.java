@@ -191,7 +191,7 @@ public class ConsoleHandler {
 				printMessageInConsole("UnitsTargetPattern overview (Total "+targetPatterns.size()+"): ", true);
 				for(int i = 0 ; i < targetPatterns.size() ; i++) {
 					UnitTargetPattern targetPattern = targetPatterns.get(i);
-					printMessageInConsole((i+1)+". Pattern: "+targetPattern.getPattern()+" - RelativeTargetPoints: "+targetPattern.getTargetRelatives().size(), true);
+					printMessageInConsole((i+1)+". Pattern: "+targetPattern.getPattern()+" - RelativeTargetPoints: "+targetPattern.getTargetRelatives().size()+" - Icon: "+(targetPattern.getIcon() != null ? "loaded" : "null"), true);
 				}
 			}else {
 				printMessageInConsole("'/units' or '/units [category|pattern]' ", true);

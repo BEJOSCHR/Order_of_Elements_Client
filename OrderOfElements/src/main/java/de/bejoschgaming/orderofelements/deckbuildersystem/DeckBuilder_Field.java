@@ -28,6 +28,8 @@ public class DeckBuilder_Field {
 	}
 	public void draw(Graphics g, Color color) {
 		
+		if(DeckBuilder_Data.layoutMap == null) { return; }
+		
 		//This size is the length of one part of the 6-Eck as well as the distance from the center to each point
 		int masterLength = DeckBuilder_Data.displayFieldSize;
 		
@@ -51,10 +53,12 @@ public class DeckBuilder_Field {
 			g.setColor(Color.DARK_GRAY);
 		}else {
 			boolean hasUnit = false;
-			for(Unit unit : DeckBuilder_Data.layoutMap.getUnits()) {
-				if(unit.getX() == this.getX() && unit.getY() == this.getY()) {
-					hasUnit = true;
-					break;
+			if(DeckBuilder_Data.layoutMap != null) {
+				for(Unit unit : DeckBuilder_Data.layoutMap.getUnits()) {
+					if(unit.getX() == this.getX() && unit.getY() == this.getY()) {
+						hasUnit = true;
+						break;
+					}
 				}
 			}
 			if(hasUnit) {
@@ -72,23 +76,26 @@ public class DeckBuilder_Field {
 		if(DeckBuilder_Data.showFieldCenterPoints == true) {
 			g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
 		}
-			
-		if(DeckBuilder_Data.showFieldCords == true) {
-			GraphicsHandler.drawCentralisedText(g, Color.DARK_GRAY, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(10)), this.x+":"+this.y, p4_x, p4_y-12);
-		}
 		
-		for(Unit unit : DeckBuilder_Data.layoutMap.getUnits()) {
-			if(unit.getX() == this.getX() && unit.getY() == this.getY()) {
-				g.drawImage(unit.getSmall_icon(), this.getCenterX()-Draw_4Deckbuilder.iconSize/2, this.getCenterY()-Draw_4Deckbuilder.iconSize/2, null);
-				int textSize = 8;
-				if(DeckBuilder_Data.layoutMap.getHoveredField() != null && this.getX() == DeckBuilder_Data.layoutMap.getHoveredField().getX() && this.getY() == DeckBuilder_Data.layoutMap.getHoveredField().getY()) {
-					//IS HOVER FIELD
-					textSize = 13;
+		boolean hasUnit = false;
+		if(DeckBuilder_Data.layoutMap != null) {
+			for(Unit unit : DeckBuilder_Data.layoutMap.getUnits()) {
+				if(unit.getX() == this.getX() && unit.getY() == this.getY()) {
+					g.drawImage(unit.getSmall_icon(), this.getCenterX()-Draw_4Deckbuilder.iconSize/2, this.getCenterY()-Draw_4Deckbuilder.iconSize/2, null);
+					int textSize = 8;
+					if(DeckBuilder_Data.layoutMap.getHoveredField() != null && this.getX() == DeckBuilder_Data.layoutMap.getHoveredField().getX() && this.getY() == DeckBuilder_Data.layoutMap.getHoveredField().getY()) {
+						//IS HOVER FIELD
+						textSize = 13;
+					}
+					GraphicsHandler.drawCentralisedText(g, Color.WHITE, FontHandler.getFont(FontHandler.medievalSharp_regular, textSize), unit.getName(), this.getCenterX()+1, this.getCenterY()+(DeckBuilder_Data.displayFieldSize*5)/7+1);
+					GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.medievalSharp_regular, textSize), unit.getName(), this.getCenterX(), this.getCenterY()+(DeckBuilder_Data.displayFieldSize*5)/7);
+					hasUnit = true;
+					break;
 				}
-				GraphicsHandler.drawCentralisedText(g, Color.WHITE, FontHandler.getFont(FontHandler.medievalSharp_regular, textSize), unit.getName(), this.getCenterX()+1, this.getCenterY()+(DeckBuilder_Data.displayFieldSize*5)/7+1);
-				GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.medievalSharp_regular, textSize), unit.getName(), this.getCenterX(), this.getCenterY()+(DeckBuilder_Data.displayFieldSize*5)/7);
-				break;
 			}
+		}
+		if(hasUnit == false && DeckBuilder_Data.showFieldCords == true) {
+			GraphicsHandler.drawCentralisedText(g, Color.DARK_GRAY, new Font("Arial", Font.BOLD, GraphicsHandler.getRelativTextSize(10)), this.x+":"+this.y, p4_x, p4_y-12);
 		}
 		
 	}

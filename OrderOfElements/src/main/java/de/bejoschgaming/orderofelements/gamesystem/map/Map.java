@@ -34,8 +34,8 @@ public class Map {
 		
 		fields.clear();
 		
-		for(int x = 0 ; x <= this.width ; x += 1) {
-			for(int y = 0 ; y <= this.height ; y +=1 ) {
+		for(int y = this.height ; y >= 0 ; y -=1 ) {
+			for(int x = 0 ; x <= this.width ; x += 1) {
 				if(x % 2 == y % 2) {
 					if(x == 0 || x == this.width || y == 0 || y == this.height) {
 						fields.add(new Field(x, y, FieldType.BORDER));

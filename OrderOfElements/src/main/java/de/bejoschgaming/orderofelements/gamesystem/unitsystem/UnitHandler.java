@@ -6,8 +6,8 @@ import java.util.List;
 
 import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 
-public class UnitHandler {
-
+public class UnitHandler { 
+	
 	private static List<UnitCategory> unitCategories = new ArrayList<UnitCategory>();
 	private static List<UnitTargetPattern> unitTargetPattern = new ArrayList<UnitTargetPattern>();
 	private static LinkedList<Unit> unitTemplates = new LinkedList<Unit>();

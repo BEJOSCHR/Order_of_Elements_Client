@@ -21,7 +21,13 @@ public class DeckBuilder_Map {
 	
 	public DeckBuilder_Map(List<Unit> units, int width, int height) {
 		
-		this.units = units;
+		//CLONE FOR UNLINKED COPY OF LIST
+		for(Unit u : units) {
+			Unit newUnit = u.clone();
+			newUnit.setX(u.getX());
+			newUnit.setY(u.getY());
+			this.units.add(newUnit);
+		}
 		this.width = width;
 		this.height = height;
 		
@@ -56,7 +62,7 @@ public class DeckBuilder_Map {
 		
 		fields.clear();
 		
-		for(int y = this.height-1 ; y >= 0 ; y -=1 ) {
+		for(int y = this.height ; y >= 0 ; y -=1 ) {
 			for(int x = 0 ; x <= this.width ; x += 1) {
 				if(x % 2 == y % 2) {
 					if(x == 0 || x == 1 || x == this.width || x == this.width-1 || y == 0 || y == 1 || y == this.height || y == this.height-1) {

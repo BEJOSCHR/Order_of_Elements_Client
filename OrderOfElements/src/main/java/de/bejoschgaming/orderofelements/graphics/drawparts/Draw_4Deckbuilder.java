@@ -286,11 +286,7 @@ public class Draw_4Deckbuilder {
 				AnimationHandler.startAnimation(new MenuBookAnimation(false) {
 					@Override
 					protected void halfTimeAction() {
-						DeckBuilder_Data.displayType = DeckbuilderType.OVERVIEW;
-						if(DeckBuilder_Data.selectedDeck.getDeckID() == -1) {
-							//NEW DECK SO WILL WONT BE UPDATED
-							DeckBuilder_Data.selectedDeck = null;
-						}
+						changeAwayFromEditMode();
 					}
 				});
 			}
@@ -347,7 +343,7 @@ public class Draw_4Deckbuilder {
 									AnimationHandler.startAnimation(new MenuBookAnimation(false) {
 										@Override
 										protected void halfTimeAction() {
-											DeckBuilder_Data.displayType = DeckbuilderType.OVERVIEW;
+											changeAwayFromEditMode();
 										}
 									});
 								}
@@ -383,6 +379,14 @@ public class Draw_4Deckbuilder {
 					}
 				}
 				
+			}
+			@Override
+			public void performAction_LEFT_RELEASE() {
+				DeckBuilder_Data.draggedUnit = null;
+			}
+			@Override
+			public void performAction_RIGHT_PRESS() {
+				DeckBuilder_Data.draggedUnit = null;
 			}
 		};
 		
@@ -499,6 +503,16 @@ public class Draw_4Deckbuilder {
 		DeckBuilder_Data.deckCost = DeckBuilder_Data.selectedDeck.getTotalCost();
 		
 	}
+	private static void changeAwayFromEditMode() {
+		
+		DeckBuilder_Data.displayType = DeckbuilderType.OVERVIEW;
+		if(DeckBuilder_Data.selectedDeck != null && DeckBuilder_Data.selectedDeck.getDeckID() == -1) {
+			DeckBuilder_Data.selectedDeck = null;
+		}
+		DeckBuilder_Data.layoutMap.unregisterSavedUnits();
+		DeckBuilder_Data.layoutMap = null;
+		
+	}
 	
 	private static void openRenameWindow() {
 		
@@ -603,14 +617,14 @@ public class Draw_4Deckbuilder {
 					}
 				}
 				if(kingqueen == 0) {
-					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You need a King or a Queen in your deck!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*76)/100);
+					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You need a King or a Queen in your deck!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*79)/100);
 				}else if(kingqueen == 2) {
-					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You can only have a King OR a Queen!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*76)/100);
+					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You can only have a King OR a Queen!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*79)/100);
 				}
 				if(wizardwitch == 0) {
-					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You need a Wizard or a Witch in your deck!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*80)/100);
+					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You need a Wizard or a Witch in your deck!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*82)/100);
 				}else if(wizardwitch == 2) {
-					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You can only have a Wizard OR a Witch!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*80)/100);
+					GraphicsHandler.drawCentralisedText(g, Color.RED, FontHandler.getFont(FontHandler.medievalSharp_regular, 28), "You can only have a Wizard OR a Witch!", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*82)/100);
 				}
 			}
 			

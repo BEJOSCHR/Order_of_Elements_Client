@@ -54,7 +54,7 @@ public class ClientData {
 	public static void removeFriend(int friendID) {
 		boolean hit = removeFromFriendList(friendID);
 		if(hit == false) {
-			ConsoleHandler.printMessageInConsole("Tried to remove friendship which doesn exist! ("+friendID+")", true);
+			ConsoleHandler.printMessageInConsole("Tried to remove friendship which doesnt exist! ("+friendID+")", true);
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class ClientData {
 		if(friendRequests.containsKey(friendID)) {
 			friendRequests.remove(friendID);
 		}else {
-			ConsoleHandler.printMessageInConsole("Tried to remove friendrequest which doesn exist! ("+friendID+")", true);
+			ConsoleHandler.printMessageInConsole("Tried to remove friendrequest which doesnt exist! ("+friendID+")", true);
 		}
 	}
 	public static Map<Integer, String> getFriendRequests() {

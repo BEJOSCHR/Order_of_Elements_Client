@@ -59,11 +59,6 @@ public class Field {
 		g.setColor(color);
 		g.drawPolygon(polygon);
 		
-		//MACH WÜRFEL DRAUß:
-//		g.drawLine(p2_x, p2_y, centerX, centerY);
-//		g.drawLine(p6_x, p6_y, centerX, centerY);
-//		g.drawLine(p4_x, p4_y, centerX, centerY);
-		
 		//MITTELPUNKT
 		g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
 		

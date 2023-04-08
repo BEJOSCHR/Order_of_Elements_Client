@@ -8,13 +8,14 @@ import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.MenuBookAnimation;
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
-import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
 import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maa.MouseActionArea;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.mwsystem.MultiWindowHandler;
+import de.bejoschgaming.orderofelements.mwsystem.mws.MW_DesicionWindow;
 import de.bejoschgaming.orderofelements.profilesystem.ClientData;
 import de.bejoschgaming.orderofelements.profilesystem.LoadedProfile;
 import de.bejoschgaming.orderofelements.profilesystem.ProfileHandler;
@@ -132,7 +133,7 @@ public class Draw_5Friendlist {
 					String displayedName = displayFriend.getName();
 					String displayedStatus = displayFriend.getStatus();
 					
-					int textSize = (int) (((double) Draw_5Friendlist.textSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
+					int textSize = GraphicsHandler.getRelativTextSize(Draw_5Friendlist.textSize);
 					Font fontName = FontHandler.getFont(FontHandler.medievalSharp_regular, textSize+2);
 					GraphicsHandler.drawCentralisedText(g, Color.BLACK, fontName, (this.getRelTextSize()+scrollValue+1)+".", this.getX()+(this.getWidth()*3)/100, this.getY()+(this.getHeight()/2));
 					Font fontStatus = FontHandler.getFont(FontHandler.medievalSharp_regular, textSize);
@@ -161,7 +162,7 @@ public class Draw_5Friendlist {
 				@Override
 				public void performAction_LEFT_RELEASE() {
 					
-					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
 					//TODO
 					
 				}
@@ -184,7 +185,7 @@ public class Draw_5Friendlist {
 				@Override
 				public void performAction_LEFT_RELEASE() {
 					
-					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
 					//TODO
 					
 				}
@@ -205,7 +206,7 @@ public class Draw_5Friendlist {
 				@Override
 				public void performAction_LEFT_RELEASE() {
 					
-					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
+					//int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
 					//TODO
 					
 				}
@@ -227,7 +228,25 @@ public class Draw_5Friendlist {
 				public void performAction_LEFT_RELEASE() {
 					
 					int friendID = Draw_5Friendlist.getDisplayedFriendID(this.getRelTextSize());
-					//TODO
+					MultiWindowHandler.openMW(new MW_DesicionWindow(
+							"Do you realy want to remove "+ProfileHandler.getProfile(friendID).getName()+" from your friendlist?", 
+							FontHandler.getFont(FontHandler.medievalSharp_regular, 22), 
+							new MouseActionArea(115, 35, MouseActionAreaType.MW_DesicionWindow_Accept_, "Remove ", 22, Color.WHITE, Color.RED.darker(), true) {
+								private int removeID = friendID;
+								@Override
+								public void performAction_LEFT_RELEASE() {
+									ServerConnection.sendPacket(244, ""+this.removeID);
+									ClientData.removeFriend(this.removeID);
+									MultiWindowHandler.closeMW(this.getMW());
+								}
+							}, 
+							new MouseActionArea(115, 35, MouseActionAreaType.MW_DesicionWindow_Decline_, "Cancel ", 22, Color.WHITE, Color.LIGHT_GRAY, true) {
+								@Override
+								public void performAction_LEFT_RELEASE() {
+									MultiWindowHandler.closeMW(this.getMW());
+								}
+							},
+							Color.WHITE, Color.DARK_GRAY));
 					
 				}
 			};	

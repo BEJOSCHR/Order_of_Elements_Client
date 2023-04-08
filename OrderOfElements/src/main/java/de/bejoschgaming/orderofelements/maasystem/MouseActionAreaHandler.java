@@ -7,7 +7,7 @@
  * Handler-Klasse, die alle MAAs organisiert. Sie werden hier erstellt und in einer Liste
  * gespeichert.
  */
-package de.bejoschgaming.orderofelements.maa;
+package de.bejoschgaming.orderofelements.maasystem;
 
 import java.util.ArrayList;
 import java.util.List;

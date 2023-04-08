@@ -7,6 +7,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitCategory;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitHandler;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.UnitTargetPattern;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
 import de.bejoschgaming.orderofelements.profilesystem.ClientData;
 import de.bejoschgaming.orderofelements.profilesystem.LoadedProfile;
@@ -95,6 +99,9 @@ public class ConsoleHandler {
 							case "/profiles":
 								sendCommand_profiles(inputs);
 								break;
+							case "/units":
+								sendCommand_units(inputs);
+								break;
 							case "/overview":
 								sendCommand_overview(inputs);
 								break;
@@ -153,6 +160,7 @@ public class ConsoleHandler {
 		printMessageInConsole("Choose one of these commands:", true);
 		printMessageInConsole("'/packets ' - Join the packet session so you see the traffic of packets", true);
 		printMessageInConsole("'/profiles ' - See all loaded profiles and there TTL", true);
+		printMessageInConsole("'/units [category|pattern] ' - Infos about units, unitCategories and unitTargetPattern", true);
 		printMessageInConsole("'/overview ' - Gives a general overview about everything interesting", true);
 		printMessageInConsole("'/exit ' - Stoppes the whole program", true);
 		
@@ -165,6 +173,38 @@ public class ConsoleHandler {
 		printMessageInConsole("Connected to server: "+ServerConnection.connectedToServer, true);
 		printMessageInConsole("Send packets: "+ServerConnection.sendPackets.size(), true);
 		printMessageInConsole("Running game: "+-1, true);
+		
+	}
+	
+	private static void sendCommand_units(List<String> inputs) {
+		
+		if(inputs.size() >= 2) {
+			if(inputs.get(1).equalsIgnoreCase("category") || inputs.get(1).equalsIgnoreCase("categories")) {
+				List<UnitCategory> categories = UnitHandler.getUnitCategories();
+				printMessageInConsole("UnitsCategory overview (Total "+categories.size()+"): ", true);
+				for(int i = 0 ; i < categories.size() ; i++) {
+					UnitCategory category = categories.get(i);
+					printMessageInConsole((i+1)+". Category: "+category.getCategory()+" - Description: "+category.getDescription().substring(0, 70)+"...", true);
+				}
+			}else if(inputs.get(1).equalsIgnoreCase("pattern")) {
+				List<UnitTargetPattern> targetPatterns = UnitHandler.getUnitTargetPattern();
+				printMessageInConsole("UnitsTargetPattern overview (Total "+targetPatterns.size()+"): ", true);
+				for(int i = 0 ; i < targetPatterns.size() ; i++) {
+					UnitTargetPattern targetPattern = targetPatterns.get(i);
+					printMessageInConsole((i+1)+". Pattern: "+targetPattern.getPattern()+" - RelativeTargetPoints: "+targetPattern.getTargetRelatives().size()+" - Icon: "+(targetPattern.getIcon() != null ? "loaded" : "null"), true);
+				}
+			}else {
+				printMessageInConsole("'/units' or '/units [category|pattern]' ", true);
+			}
+		}else {
+			printMessageInConsole("For more infos: /units [category|pattern] ", true);
+			List<Unit> units = UnitHandler.getUnitTemplates();
+			printMessageInConsole("Units overview (Total "+units.size()+"): ", true);
+			for(int i = 0 ; i < units.size() ; i++) {
+				Unit unit = units.get(i);
+				printMessageInConsole((i+1)+". ID: "+unit.getId()+" - Name: "+unit.getName()+" - Category: "+unit.getCategory().getCategory()+" ("+unit.getType_attack().getPattern()+"|"+unit.getType_move().getPattern()+"|"+unit.getType_aura().getPattern()+")", true);
+			}
+		}
 		
 	}
 	

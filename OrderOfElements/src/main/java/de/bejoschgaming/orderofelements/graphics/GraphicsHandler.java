@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import de.bejoschgaming.orderofelements.animationsystem.AnimationHandler;
 import de.bejoschgaming.orderofelements.animationsystem.animations.DynamicInteger;
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
+import de.bejoschgaming.orderofelements.debug.ConsoleHandler;
+import de.bejoschgaming.orderofelements.deckbuildersystem.DeckBuilder_Data;
 import de.bejoschgaming.orderofelements.filesystem.FileHandler;
 import de.bejoschgaming.orderofelements.gamesystem.map.MapData;
 import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_3Menu;
@@ -16,6 +19,7 @@ import de.bejoschgaming.orderofelements.graphics.drawparts.Draw_7Credits;
 import de.bejoschgaming.orderofelements.graphics.handler.KeyHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 import de.bejoschgaming.orderofelements.graphics.handler.WindowHandler;
+import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
 
 public class GraphicsHandler {
 
@@ -28,7 +32,7 @@ public class GraphicsHandler {
 	public static void initVisuals() {
 
 		frame = new JFrame();
-
+		
 		frame.setLocationRelativeTo(null);
 		frame.setLocation(0, 0);
 		frame.setUndecorated(true);
@@ -43,13 +47,13 @@ public class GraphicsHandler {
 		frame.addMouseMotionListener(new MouseHandler());
 		frame.addMouseWheelListener(new MouseHandler());
 		frame.addWindowListener(new WindowHandler());
-
-//		try {
-//		    frame.setIconImage(ImageIO.read(BomberfrauMain.class.getClassLoader()
-//			    .getResourceAsStream(ImageHandler.PATH + "Bomberman_Icon.png")));
-//		} catch (Exception error) {
-//		    ConsoleHandler.print("Couldn't load window icon!", MessageType.BACKEND);
-//		}
+		
+		try {
+		    frame.setIconImage(ImageIO.read(OOE_Main_Client.class.getResourceAsStream("../imagesystem/images/loadingscreen/Order_of_Elements_3.png")));
+		} catch (Exception error) {
+		    ConsoleHandler.printMessageInConsole("Couldn't load window icon!", true);
+		    error.printStackTrace();
+		}
 
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //		frame.setSize(1280, 720);
@@ -93,6 +97,17 @@ public class GraphicsHandler {
 	
 	}
 	
+	public static int getRelativX(int realX) {
+		
+		return (int) ((((double) realX / 1920.0) * (double) GraphicsHandler.getWidth()) + 0.5);
+		
+	}
+	public static int getRelativY(int realY) {
+		
+		return (int) ((((double) realY / 1080.0) * (double) GraphicsHandler.getHeight()) + 0.5);
+		
+	}
+	
 	public static int getRelativTextSize(int textSize) {
 		
 		return (int) (((double) textSize / 1080.0) * (double) GraphicsHandler.getHeight() + 0.5);
@@ -127,6 +142,7 @@ public class GraphicsHandler {
 			break;
 		case DECKBUILDER:
 			Draw_3Menu.startBackgroundAnimation();
+			DeckBuilder_Data.selectedDeck = null;
 			break;
 		case FRIENDLIST:
 			Draw_3Menu.startBackgroundAnimation();

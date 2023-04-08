@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
+import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
 
 public class FadeAnimation extends Animation {
 
 	protected int alpha = 0;
 	protected int darkingPerStep = 10;
 	protected FadeType fadeType = FadeType.FADEINANDOUT;
+	protected boolean withIcon = true;
 	
 	/**
 	 * 60 for totalsteps and 5 for darking with onlyFadeIn true as example
@@ -19,6 +21,18 @@ public class FadeAnimation extends Animation {
 		
 		this.darkingPerStep = darkingPerStep;
 		this.fadeType = fadeType;
+		this.withIcon = true;
+		
+	}
+	/**
+	 * 60 for totalsteps and 5 for darking with onlyFadeIn true as example
+	 */
+	public FadeAnimation(int totalSteps, int darkingPerStep, FadeType fadeType, boolean withIcon) {
+		super(3, totalSteps);
+		
+		this.darkingPerStep = darkingPerStep;
+		this.fadeType = fadeType;
+		this.withIcon = withIcon;
 		
 	}
 
@@ -76,6 +90,9 @@ public class FadeAnimation extends Animation {
 		g.setColor(new Color(0, 0, 0, this.alpha));
 		g.fillRect(0, 0, GraphicsHandler.getWidth(), GraphicsHandler.getHeight());
 		
+		if(this.withIcon && this.alpha > 80) {
+			g.drawImage(ImageHandler.menu_ooeIcon_clean_transparent, GraphicsHandler.getWidth()/2-ImageHandler.iconSize/2, GraphicsHandler.getHeight()/2-ImageHandler.iconSize/2, null);
+		}
 	}
 	
 }

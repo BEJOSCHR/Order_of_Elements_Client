@@ -16,7 +16,7 @@ import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaHandler;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaHandler;
 
 public class OOE_Main_Client {
 	
@@ -34,12 +34,12 @@ public class OOE_Main_Client {
 		
 		ImageHandler.loadPreUsedImages();
 		
-		AnimationHandler.startAnimation(new FadeAnimation(60, 5, FadeType.FADEOUT));
+		AnimationHandler.startAnimation(new FadeAnimation(60, 5, FadeType.FADEOUT, false));
 		GraphicsHandler.switchTo(DrawState.LOADINGSCREEN);
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				AnimationHandler.startAnimation(new FadeAnimation(108, 5, FadeType.FADEINANDOUT) {
+				AnimationHandler.startAnimation(new FadeAnimation(108, 5, FadeType.FADEINANDOUT, true) {
 					
 					@Override
 					protected void halfTimeAction() {

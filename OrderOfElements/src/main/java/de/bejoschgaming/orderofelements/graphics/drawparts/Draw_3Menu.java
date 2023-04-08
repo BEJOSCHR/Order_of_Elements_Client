@@ -13,8 +13,8 @@ import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maa.MouseActionArea;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
 
 public class Draw_3Menu {
@@ -169,7 +169,7 @@ public class Draw_3Menu {
 			
 			String dateSplit[] = patchnotesData.split("---");
 			
-			drawPatchnote(g, "Patchnotes", startX, y+10, Color.DARK_GRAY, FontHandler.bridgnorth_bold, 25);
+			drawPatchnote(g, "Patchnotes and Infos", startX, y+10, Color.DARK_GRAY, FontHandler.bridgnorth_bold, 25);
 			y += 25+g.getFontMetrics().getHeight() * 2 / 3;
 			
 			for(String date : dateSplit) {
@@ -236,9 +236,9 @@ public class Draw_3Menu {
 		}else {
 			
 			
-			drawPatchnote(g, "Patchnotes", startX, y+10, Color.DARK_GRAY, FontHandler.bridgnorth_bold, 25);
+			drawPatchnote(g, "Patchnotes and Infos", startX, y+10, Color.DARK_GRAY, FontHandler.bridgnorth_bold, 25);
 			y += 25+g.getFontMetrics().getHeight() * 2 / 3;
-			drawPatchnote(g, "No recent changes happend!", startX, y+10, Color.DARK_GRAY, FontHandler.medievalSharp_regular, 16);
+			drawPatchnote(g, "No infos or changes to display!", startX, y+10, Color.DARK_GRAY, FontHandler.medievalSharp_regular, 16);
 			
 		}
 		

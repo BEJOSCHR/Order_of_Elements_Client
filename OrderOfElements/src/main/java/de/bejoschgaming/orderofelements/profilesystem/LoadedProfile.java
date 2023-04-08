@@ -18,6 +18,7 @@ public class LoadedProfile {
 	private int crowns = 0;
 	private Color displayColor = Color.PINK;
 	private String titel = "Loading...";
+	private int maxDecks = 3;
 	
 	private String status = "Offline";
 	
@@ -70,9 +71,10 @@ public class LoadedProfile {
 		this.crowns = Integer.parseInt(secondSplit[7]);
 		this.displayColor = Color.getColor(secondSplit[8]);
 		this.titel = secondSplit[9];
+		this.maxDecks = Integer.parseInt(secondSplit[10]);
 		//ONLY SET IF STILL DEFAULT STATUS... otherwise it was already updated by 207 packet
 		if(this.status.equalsIgnoreCase("Offline")) {
-			this.status = secondSplit[10];
+			this.status = secondSplit[11];
 		}
 		
 		this.loadedTime = System.currentTimeMillis();
@@ -134,6 +136,10 @@ public class LoadedProfile {
 		return displayColor;
 	}
 
+	public int getMaxDecks() {
+		return maxDecks;
+	}
+	
 	public String getTitel() {
 		return titel;
 	}

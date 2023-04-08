@@ -8,26 +8,36 @@ import java.util.List;
 import de.bejoschgaming.orderofelements.graphics.handler.MouseHandler;
 import de.bejoschgaming.orderofelements.gamesystem.map.fields.Field;
 import de.bejoschgaming.orderofelements.gamesystem.map.fields.FieldType;
+import de.bejoschgaming.orderofelements.gamesystem.unitsystem.Unit;
 
 public class Map {
 
+	private int width, height;
+	
 	private List<Field> fields = new ArrayList<>();
+	private List<Unit> units = new ArrayList<>();
 	
 	private Field hoveredField = null;
 	
 	
-	public Map() {
+	public Map(int width, int height) {
 		
+		this.width = width;
+		this.height = height;
+		
+		units.clear();
 		fillMap();
 		
 	}
 	
 	private void fillMap() {
 		
-		for(int x = 0 ; x <= MapData.MAP_WIDTH ; x += 1) {
-			for(int y = 0 ; y <= MapData.MAP_HEIGHT ; y +=1 ) {
+		fields.clear();
+		
+		for(int y = this.height ; y >= 0 ; y -=1 ) {
+			for(int x = 0 ; x <= this.width ; x += 1) {
 				if(x % 2 == y % 2) {
-					if(x == 0 || x == MapData.MAP_WIDTH || y == 0 || y == MapData.MAP_HEIGHT) {
+					if(x == 0 || x == this.width || y == 0 || y == this.height) {
 						fields.add(new Field(x, y, FieldType.BORDER));
 					}else {
 						fields.add(new Field(x, y, FieldType.DEFAULT));
@@ -57,13 +67,13 @@ public class Map {
 	
 	public void updateHoverField() {
 		
-		this.hoveredField = getNextFieldToCoords(MouseHandler.mouseX, MouseHandler.mouseY);
+		this.hoveredField = getNextFieldToCoords(MouseHandler.getMouseX(), MouseHandler.getMouseY());
 		
 	}
 	
 	private Field getNextFieldToCoords(int x, int y) {
 		
-		double closestDistance = MapData.FIELD_SIZE*2.0+10.0;
+		double closestDistance = MapData.FIELD_SIZE*1.0+5.0;
 		Field closestField = null;
 		
 		for(Field field : this.fields) {
@@ -108,6 +118,9 @@ public class Map {
 	}
 	public Field getHoveredField() {
 		return hoveredField;
+	}
+	public List<Unit> getUnits() {
+		return units;
 	}
 	
 }

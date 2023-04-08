@@ -2,6 +2,8 @@ package de.bejoschgaming.orderofelements.graphics.drawparts;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import de.bejoschgaming.orderofelements.componentssystem.TextFieldHandler;
 import de.bejoschgaming.orderofelements.connection.ServerConnection;
@@ -9,8 +11,8 @@ import de.bejoschgaming.orderofelements.fontsystem.FontHandler;
 import de.bejoschgaming.orderofelements.graphics.DrawState;
 import de.bejoschgaming.orderofelements.graphics.GraphicsHandler;
 import de.bejoschgaming.orderofelements.imagesystem.ImageHandler;
-import de.bejoschgaming.orderofelements.maa.MouseActionArea;
-import de.bejoschgaming.orderofelements.maa.MouseActionAreaType;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionArea;
+import de.bejoschgaming.orderofelements.maasystem.MouseActionAreaType;
 import de.bejoschgaming.orderofelements.main.OOE_Main_Client;
 
 public class Draw_2Login {
@@ -36,7 +38,15 @@ public class Draw_2Login {
 					String passwordCheck = checkForValidPassword(password);
 					if(passwordCheck == null) {
 						//VALID
-						ServerConnection.sendPacket(100, username+";"+password); //LOGIN 100
+						try {
+							MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+							messageDigest.update(password.getBytes());
+							String passwordHash = new String(messageDigest.digest());
+							ServerConnection.sendPacket(100, username+";"+passwordHash); //LOGIN 100
+						} catch (NoSuchAlgorithmException error) {
+							error.printStackTrace();
+							Draw_2Login.loginErrorCause = "The password is invalid!";
+						}
 					}else {
 						Draw_2Login.loginErrorCause = passwordCheck;
 					}
@@ -62,7 +72,15 @@ public class Draw_2Login {
 					String passwordCheck = checkForValidPassword(password);
 					if(passwordCheck == null) {
 						//VALID
-						ServerConnection.sendPacket(101, username+";"+password); //REGISTER 101
+						try {
+							MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+							messageDigest.update(password.getBytes());
+							String passwordHash = new String(messageDigest.digest());
+							ServerConnection.sendPacket(101, username+";"+passwordHash); //REGISTER 101
+						} catch (NoSuchAlgorithmException error) {
+							error.printStackTrace();
+							Draw_2Login.loginErrorCause = "The password is invalid!";
+						}
 					}else {
 						Draw_2Login.loginErrorCause = passwordCheck;
 					}
@@ -95,8 +113,9 @@ public class Draw_2Login {
 		g.drawImage(ImageHandler.menu_book[0], 0, 0, null);
 		
 		//DRAW LEFT PAGE
-		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 50), "Order Of Elements", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*3)/7);
-		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_regular, 26), "By BejoschGaming", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*4)/7);
+		g.drawImage(ImageHandler.menu_ooeIcon_withText_transparent, ((GraphicsHandler.getWidth()*32)/100)-ImageHandler.iconSize/2, (GraphicsHandler.getHeight()*2)/6-ImageHandler.iconSize/2, null);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 50), "Order Of Elements", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*3)/6);
+		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_regular, 26), "By BejoschGaming", (GraphicsHandler.getWidth()*32)/100, (GraphicsHandler.getHeight()*4)/6);
 		
 		//DRAW RIGHT PAGE
 		GraphicsHandler.drawCentralisedText(g, Color.BLACK, FontHandler.getFont(FontHandler.bridgnorth_bold, 42), "Login", (GraphicsHandler.getWidth()*68)/100, (GraphicsHandler.getHeight()*3)/10);

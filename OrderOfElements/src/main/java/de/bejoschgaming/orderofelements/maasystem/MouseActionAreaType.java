@@ -8,11 +8,17 @@
  * Dient der erleichterten Identifikation.
  */
 
-package de.bejoschgaming.orderofelements.maa;
+package de.bejoschgaming.orderofelements.maasystem;
 
 public enum MouseActionAreaType {
 
 	// _ at the end means that there will be more then one maa with this type
+	
+	//MW
+	MW_Close_,
+	MW_DesicionWindow_Accept_,
+	MW_DesicionWindow_Decline_,
+	MW_InfoWindow_,
 	
 	//LOGIN
 	LOGIN_Login,
@@ -30,6 +36,16 @@ public enum MouseActionAreaType {
 	MENU_PatchnotesScroll,
 	
 	//DECKBUILDER
+	DECKBUILDER_Overview_,
+	DECKBUILDER_Selected,
+	DECKBUILDER_Edit,
+	DECKBUILDER_Delete,
+	DECKBUILDER_Rename,
+	DECKBUILDER_Save,
+	DECKBUILDER_NameDisplay,
+	DECKBUILDER_CostDisplay,
+	DECKBUILDER_UnitSelect_,
+	DECKBUILDER_UnitScroll,
 	DECKBUILDER_Back,
 	
 	//FRIENDLIST

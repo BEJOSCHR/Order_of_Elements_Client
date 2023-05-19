@@ -45,14 +45,18 @@ public class Field {
 		
 		Polygon polygon = new Polygon(listX, listY, 6);
 		
-		g.setColor(Field.DEFAULT_BACKROUND);
-		g.fillPolygon(polygon);
+		if(FrameEvents.isFillMap() == true) { 
+			g.setColor(Field.DEFAULT_BACKROUND);
+			g.fillPolygon(polygon);
+		}
 		
 		g.setColor(color);
 		g.drawPolygon(polygon);
 		
 		//MITTELPUNKT
-		g.drawRoundRect(centerX, centerY, 1, 1, 1, 1);
+		if(FrameEvents.isShowMapDetails() == true) { 
+			g.drawRoundRect(centerX, centerY, 1, 1, 1, 1); 
+		}
 		
 		//CORDS
 		OOE_Main_Client.drawCentralisedText(g, Color.WHITE, 10, this.x+":"+this.y, p4_x, p4_y-12);

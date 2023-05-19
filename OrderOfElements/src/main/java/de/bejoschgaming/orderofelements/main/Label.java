@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -19,12 +20,10 @@ public class Label extends JLabel {
     private int maxFPS = 120;
     private boolean showFPS = true;
 	
-	public Label(Frame frame) {
+	public Label(JFrame frame) {
 		
 		this.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		this.setVisible(true);
-		
-		frame.add(this);
 		
 	}
 
@@ -58,6 +57,15 @@ public class Label extends JLabel {
 		    g.setColor(Color.WHITE);
 		    g.setFont(new Font("Arial", Font.BOLD, (int) (12)));
 		    g.drawString("" + getCurrentFPSValue(), 0 + 2, 0 + 13);
+		}
+		
+		// DRAW MOUSE POS
+		if(FrameEvents.isShowMousePos() == true) {
+			g.setColor(Color.RED);
+			g.drawLine(0, FrameEvents.getMY(), this.getWidth(), FrameEvents.getMY());
+			g.drawLine(FrameEvents.getMX(), 0, FrameEvents.getMX(), this.getHeight());
+			g.setFont(new Font("Arial", Font.BOLD, (int) (12)));
+		    g.drawString(FrameEvents.getMX()+":"+FrameEvents.getMY(), FrameEvents.getMX() + 4, FrameEvents.getMY() - 5);
 		}
 		
 		// CALCULATE FPS

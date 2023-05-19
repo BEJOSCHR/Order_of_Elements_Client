@@ -57,19 +57,21 @@ public class Map {
 		}
 		
 		if(getHoveredField() != null) {
-			for(Field surrounder : getSurroundingFields(getHoveredField())) {
-				surrounder.draw(g, Color.ORANGE);
+			getHoveredField().draw(g, Color.WHITE);
+			if(FrameEvents.isShowMapDetails() == true) {
+				for(Field surrounder : getSurroundingFields(getHoveredField())) {
+					surrounder.draw(g, Color.ORANGE);
+				}
+				g.setColor(Color.BLACK);
+				g.drawLine(FrameEvents.getMX(), FrameEvents.getMY(), this.hoveredField.getCenterX(), this.hoveredField.getCenterY());
 			}
-			getHoveredField().draw(g, Color.RED);
-//			g.setColor(Color.ORANGE);
-//			g.drawLine(MouseHandler.mouseX, MouseHandler.mouseY, this.hoveredField.getCenterX(), this.hoveredField.getCenterY());
 		}
 		
 	}
 	
 	public void updateHoverField() {
 		
-//		this.hoveredField = getNextFieldToCoords(MouseHandler.getMouseX(), MouseHandler.getMouseY());
+		this.hoveredField = getNextFieldToCoords(FrameEvents.getMX(), FrameEvents.getMY());
 		
 	}
 	

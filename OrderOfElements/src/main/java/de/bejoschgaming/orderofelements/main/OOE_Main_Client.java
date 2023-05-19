@@ -6,10 +6,13 @@ import java.awt.Graphics;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JFrame;
+
 
 public class OOE_Main_Client {
 	
-	public static Frame frame = null;
+	public static JFrame frame = null;
+	public static Label label = null;
 	
 	public static Map map = null;
 	
@@ -17,11 +20,40 @@ public class OOE_Main_Client {
 		
 		ConsoleHandler.printMessageInConsole("Starting OrderOfElements_Client [OOE_C]", true);
 		
-		OOE_Main_Client.frame = new Frame();
+		initVisuals();
 		
 		map = new Map();
 		
 		ConsoleHandler.printMessageInConsole("Startup finished!", true);
+		
+	}
+	
+	private static void initVisuals() {
+		
+		frame = new JFrame();
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setName("Prototyp - V0.0");
+		frame.setLocationRelativeTo(null);
+		frame.setLocation(0, 0);
+		frame.setUndecorated(true);
+		frame.setResizable(false);
+		frame.setVisible(true);
+		
+		frame.addMouseListener(new FrameEvents());
+		frame.addMouseMotionListener(new FrameEvents());
+		frame.addMouseWheelListener(new FrameEvents());
+		frame.addWindowListener(new FrameEvents());
+		frame.addKeyListener(new FrameEvents());
+		
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//frame.setSize(1280, 720);
+		
+		label = new Label(frame);
+		frame.add(label);
+		
+		label.requestFocus();
+		frame.requestFocus();
 		
 	}
 	
